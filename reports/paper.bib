@@ -1,0 +1,1320 @@
+
+@article{draguns_residual_2021,
+	title = {Residual {Shuffle}-{Exchange} {Networks} for {Fast} {Processing} of {Long} {Sequences}},
+	url = {http://arxiv.org/abs/2004.04662},
+	abstract = {Attention is a commonly used mechanism in sequence processing, but it is of O(n{\textasciicircum}2) complexity which prevents its application to long sequences. The recently introduced neural Shuffle-Exchange network offers a computation-efficient alternative, enabling the modelling of long-range dependencies in O(n log n) time. The model, however, is quite complex, involving a sophisticated gating mechanism derived from the Gated Recurrent Unit. In this paper, we present a simple and lightweight variant of the Shuffle-Exchange network, which is based on a residual network employing GELU and Layer Normalization. The proposed architecture not only scales to longer sequences but also converges faster and provides better accuracy. It surpasses the Shuffle-Exchange network on the LAMBADA language modelling task and achieves state-of-the-art performance on the MusicNet dataset for music transcription while being efficient in the number of parameters. We show how to combine the improved Shuffle-Exchange network with convolutional layers, establishing it as a useful building block in long sequence processing applications.},
+	urldate = {2021-04-03},
+	journal = {arXiv:2004.04662 [cs, eess]},
+	author = {Draguns, Andis and Ozoliņš, Emīls and Šostaks, Agris and Apinis, Matīss and Freivalds, Kārlis},
+	month = jan,
+	year = {2021},
+	note = {arXiv: 2004.04662
+version: 4},
+	keywords = {Computer Science - Machine Learning, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing},
+	annote = {Comment: 35th AAAI Conference on Artificial Intelligence (AAAI-21)},
+	file = {arXiv.org Snapshot:/Users/jack/Zotero/storage/29KSN9X3/2004.html:text/html;arXiv Fulltext PDF:/Users/jack/Zotero/storage/UU3NMQMK/Draguns et al. - 2021 - Residual Shuffle-Exchange Networks for Fast Proces.pdf:application/pdf}
+}
+
+@article{li_music_nodate,
+	title = {Music {Transcription} {Using} {Deep} {Learning}},
+	abstract = {Music transcription, as an essential component in music signal processing, contributes to wide applications in musicology, accelerates the development of commercial music industry, facilitates the music education as well as benefits extensive music lovers. However, the work relies on a lot of manual work due to heavy requirements on knowledge and experience. This project mainly examines two deep learning methods, DNN and LSTM, to automatize music transcription. We transform the audio files into spectrograms using constant Q transform and extract features from the spectrograms. Deep learning methods have the advantage of learning complex features in music transcription. The promising results verify that deep learning methods are capable of learning specific musical properties, including notes and rhythms.},
+	language = {en},
+	author = {Li, Luoqi and Ni, Isabella and Cs, Scpd and Yang, Liang},
+	pages = {6},
+	file = {Li et al. - Music Transcription Using Deep Learning.pdf:/Users/jack/Zotero/storage/D8VBWE8C/Li et al. - Music Transcription Using Deep Learning.pdf:application/pdf}
+}
+
+@article{hawthorne_enabling_2019,
+	title = {Enabling {Factorized} {Piano} {Music} {Modeling} and {Generation} with the {MAESTRO} {Dataset}},
+	url = {http://arxiv.org/abs/1810.12247},
+	abstract = {Generating musical audio directly with neural networks is notoriously difficult because it requires coherently modeling structure at many different timescales. Fortunately, most music is also highly structured and can be represented as discrete note events played on musical instruments. Herein, we show that by using notes as an intermediate representation, we can train a suite of models capable of transcribing, composing, and synthesizing audio waveforms with coherent musical structure on timescales spanning six orders of magnitude ({\textasciitilde}0.1 ms to {\textasciitilde}100 s), a process we call Wave2Midi2Wave. This large advance in the state of the art is enabled by our release of the new MAESTRO (MIDI and Audio Edited for Synchronous TRacks and Organization) dataset, composed of over 172 hours of virtuosic piano performances captured with fine alignment ({\textasciitilde}3 ms) between note labels and audio waveforms. The networks and the dataset together present a promising approach toward creating new expressive and interpretable neural models of music.},
+	urldate = {2021-04-03},
+	journal = {arXiv:1810.12247 [cs, eess, stat]},
+	author = {Hawthorne, Curtis and Stasyuk, Andriy and Roberts, Adam and Simon, Ian and Huang, Cheng-Zhi Anna and Dieleman, Sander and Elsen, Erich and Engel, Jesse and Eck, Douglas},
+	month = jan,
+	year = {2019},
+	note = {arXiv: 1810.12247},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing},
+	annote = {Comment: Examples available at https://goo.gl/magenta/maestro-examples},
+	file = {arXiv.org Snapshot:/Users/jack/Zotero/storage/5K3LG5XN/1810.html:text/html;arXiv Fulltext PDF:/Users/jack/Zotero/storage/NZ7EKQXN/Hawthorne et al. - 2019 - Enabling Factorized Piano Music Modeling and Gener.pdf:application/pdf}
+}
+
+@article{huang_bach_2019,
+	title = {The {Bach} {Doodle}: {Approachable} music composition with machine learning at scale},
+	shorttitle = {The {Bach} {Doodle}},
+	url = {http://arxiv.org/abs/1907.06637},
+	abstract = {To make music composition more approachable, we designed the first AI-powered Google Doodle, the Bach Doodle, where users can create their own melody and have it harmonized by a machine learning model Coconet (Huang et al., 2017) in the style of Bach. For users to input melodies, we designed a simplified sheet-music based interface. To support an interactive experience at scale, we re-implemented Coconet in TensorFlow.js (Smilkov et al., 2019) to run in the browser and reduced its runtime from 40s to 2s by adopting dilated depth-wise separable convolutions and fusing operations. We also reduced the model download size to approximately 400KB through post-training weight quantization. We calibrated a speed test based on partial model evaluation time to determine if the harmonization request should be performed locally or sent to remote TPU servers. In three days, people spent 350 years worth of time playing with the Bach Doodle, and Coconet received more than 55 million queries. Users could choose to rate their compositions and contribute them to a public dataset, which we are releasing with this paper. We hope that the community finds this dataset useful for applications ranging from ethnomusicological studies, to music education, to improving machine learning models.},
+	urldate = {2021-04-03},
+	journal = {arXiv:1907.06637 [cs, eess, stat]},
+	author = {Huang, Cheng-Zhi Anna and Hawthorne, Curtis and Roberts, Adam and Dinculescu, Monica and Wexler, James and Hong, Leon and Howcroft, Jacob},
+	month = jul,
+	year = {2019},
+	note = {arXiv: 1907.06637},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Human-Computer Interaction, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing},
+	annote = {Comment: Proceedings of the 18th International Society for Music Information Retrieval Conference, ISMIR 2019},
+	file = {arXiv.org Snapshot:/Users/jack/Zotero/storage/W7GUSRV3/1907.html:text/html;arXiv Fulltext PDF:/Users/jack/Zotero/storage/FQG4F6LS/Huang et al. - 2019 - The Bach Doodle Approachable music composition wi.pdf:application/pdf}
+}
+
+@inproceedings{huang_large-scale_2020,
+	title = {Large-{Scale} {Weakly}-{Supervised} {Content} {Embeddingsfor} {Music} {Recommendation} and {Tagging}},
+	author = {Huang, Qingqing and Jansen, Aren and Zhang, Li and Ellis, Dan and Saurous, Rif A. and Anderson, John Roberts},
+	year = {2020},
+	file = {Full Text PDF:/Users/jack/Zotero/storage/IHJN67LD/Huang et al. - 2020 - Large-Scale Weakly-Supervised Content Embeddingsfo.pdf:application/pdf}
+}
+
+@article{choi_encoding_2020,
+	title = {Encoding {Musical} {Style} with {Transformer} {Autoencoders}},
+	url = {http://arxiv.org/abs/1912.05537},
+	abstract = {We consider the problem of learning high-level controls over the global structure of generated sequences, particularly in the context of symbolic music generation with complex language models. In this work, we present the Transformer autoencoder, which aggregates encodings of the input data across time to obtain a global representation of style from a given performance. We show it is possible to combine this global representation with other temporally distributed embeddings, enabling improved control over the separate aspects of performance style and melody. Empirically, we demonstrate the effectiveness of our method on various music generation tasks on the MAESTRO dataset and a YouTube dataset with 10,000+ hours of piano performances, where we achieve improvements in terms of log-likelihood and mean listening scores as compared to baselines.},
+	urldate = {2021-04-03},
+	journal = {arXiv:1912.05537 [cs, eess, stat]},
+	author = {Choi, Kristy and Hawthorne, Curtis and Simon, Ian and Dinculescu, Monica and Engel, Jesse},
+	month = jun,
+	year = {2020},
+	note = {arXiv: 1912.05537},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing},
+	file = {arXiv.org Snapshot:/Users/jack/Zotero/storage/PYNVVB6T/1912.html:text/html}
+}
+
+@article{wang_polyphonic_2018,
+	title = {Polyphonic {Piano} {Transcription} with a {Note}-{Based} {Music} {Language} {Model}},
+	volume = {8},
+	issn = {2076-3417},
+	url = {http://www.mdpi.com/2076-3417/8/3/470},
+	doi = {10.3390/app8030470},
+	abstract = {This paper proposes a note-based music language model (MLM) for improving note-level polyphonic piano transcription. The MLM is based on the recurrent structure, which could model the temporal correlations between notes in music sequences. To combine the outputs of the note-based MLM and acoustic model directly, an integrated architecture is adopted in this paper. We also propose an inference algorithm, in which the note-based MLM is used to predict notes at the blank onsets in the thresholding transcription results. The experimental results show that the proposed inference algorithm improves the performance of note-level transcription. We also observe that the combination of the restricted Boltzmann machine (RBM) and recurrent structure outperforms a single recurrent neural network (RNN) or long short-term memory network (LSTM) in modeling the high-dimensional note sequences. Among all the MLMs, LSTM-RBM helps the system yield the best results on all evaluation metrics regardless of the performance of acoustic models.},
+	language = {en},
+	number = {3},
+	urldate = {2021-04-03},
+	journal = {Applied Sciences},
+	author = {Wang, Qi and Zhou, Ruohua and Yan, Yonghong},
+	month = mar,
+	year = {2018},
+	pages = {470},
+	file = {Wang et al. - 2018 - Polyphonic Piano Transcription with a Note-Based M.pdf:/Users/jack/Zotero/storage/3WEN5334/Wang et al. - 2018 - Polyphonic Piano Transcription with a Note-Based M.pdf:application/pdf}
+}
+
+@article{ycart_learning_2020,
+	title = {Learning and {Evaluation} {Methodologies} for {Polyphonic} {Music} {Sequence} {Prediction} {With} {LSTMs}},
+	volume = {28},
+	issn = {2329-9290, 2329-9304},
+	url = {https://ieeexplore.ieee.org/document/9066999/},
+	doi = {10.1109/TASLP.2020.2987130},
+	abstract = {Music language models play an important role for various music signal and symbolic music processing tasks, such as music generation, symbolic music classiﬁcation, or automatic music transcription (AMT). In this article, we investigate Long Short-Term Memory (LSTM) networks for polyphonic music prediction, in the form of binary piano rolls. A preliminary experiment, assessing the inﬂuence of the timestep of piano rolls on system performance, highlights the need for more musical evaluation metrics. We introduce a range of metrics, focusing on temporal and harmonic aspects. We propose to combine them into a parametrisable loss to train our network. We then conduct a range of experiments with this new loss, both for polyphonic music prediction (intrinsic evaluation) and using our predictive model as a language model for AMT (extrinsic evaluation). Intrinsic evaluation shows that tuning the behaviour of a model is possible by adjusting loss parameters, with consistent results across timesteps. Extrinsic evaluation shows consistent behaviour across timesteps in terms of precision and recall with respect to the loss parameters, leading to an improvement in AMT performance without changing the complexity of the model. In particular, we show that intrinsic performance (in terms of cross entropy) is not related to extrinsic performance, highlighting the importance of using custom training losses for each speciﬁc application. Our model also compares favourably with previously proposed MLMs.},
+	language = {en},
+	urldate = {2021-04-03},
+	journal = {IEEE/ACM Transactions on Audio, Speech, and Language Processing},
+	author = {Ycart, Adrien and Benetos, Emmanouil},
+	year = {2020},
+	pages = {1328--1341},
+	file = {Ycart and Benetos - 2020 - Learning and Evaluation Methodologies for Polyphon.pdf:/Users/jack/Zotero/storage/4TCTE4F3/Ycart and Benetos - 2020 - Learning and Evaluation Methodologies for Polyphon.pdf:application/pdf}
+}
+
+@article{wang_r-transformer_2019,
+	title = {R-{Transformer}: {Recurrent} {Neural} {Network} {Enhanced} {Transformer}},
+	shorttitle = {R-{Transformer}},
+	url = {http://arxiv.org/abs/1907.05572},
+	abstract = {Recurrent Neural Networks have long been the dominating choice for sequence modeling. However, it severely suffers from two issues: impotent in capturing very long-term dependencies and unable to parallelize the sequential computation procedure. Therefore, many non-recurrent sequence models that are built on convolution and attention operations have been proposed recently. Notably, models with multi-head attention such as Transformer have demonstrated extreme effectiveness in capturing long-term dependencies in a variety of sequence modeling tasks. Despite their success, however, these models lack necessary components to model local structures in sequences and heavily rely on position embeddings that have limited effects and require a considerable amount of design efforts. In this paper, we propose the R-Transformer which enjoys the advantages of both RNNs and the multi-head attention mechanism while avoids their respective drawbacks. The proposed model can effectively capture both local structures and global long-term dependencies in sequences without any use of position embeddings. We evaluate R-Transformer through extensive experiments with data from a wide range of domains and the empirical results show that R-Transformer outperforms the state-of-the-art methods by a large margin in most of the tasks. We have made the code publicly available at {\textbackslash}url\{https://github.com/DSE-MSU/R-transformer\}.},
+	urldate = {2021-04-03},
+	journal = {arXiv:1907.05572 [cs, eess]},
+	author = {Wang, Zhiwei and Ma, Yao and Liu, Zitao and Tang, Jiliang},
+	month = jul,
+	year = {2019},
+	note = {arXiv: 1907.05572
+version: 1},
+	keywords = {Computer Science - Computer Vision and Pattern Recognition, Computer Science - Machine Learning, Computer Science - Computation and Language, Electrical Engineering and Systems Science - Audio and Speech Processing},
+	file = {arXiv.org Snapshot:/Users/jack/Zotero/storage/KYEXLH9X/1907.html:text/html}
+}
+
+@misc{noauthor_musicnet_nodate,
+	title = {{MusicNet}},
+	url = {https://homes.cs.washington.edu/~thickstn/musicnet.html},
+	urldate = {2021-04-03},
+	file = {MusicNet:/Users/jack/Zotero/storage/B66AD4KJ/musicnet.html:text/html}
+}
+
+@article{huang_music_2018,
+	title = {Music {Transformer}},
+	url = {http://arxiv.org/abs/1809.04281},
+	abstract = {Music relies heavily on repetition to build structure and meaning. Self-reference occurs on multiple timescales, from motifs to phrases to reusing of entire sections of music, such as in pieces with ABA structure. The Transformer (Vaswani et al., 2017), a sequence model based on self-attention, has achieved compelling results in many generation tasks that require maintaining long-range coherence. This suggests that self-attention might also be well-suited to modeling music. In musical composition and performance, however, relative timing is critically important. Existing approaches for representing relative positional information in the Transformer modulate attention based on pairwise distance (Shaw et al., 2018). This is impractical for long sequences such as musical compositions since their memory complexity for intermediate relative information is quadratic in the sequence length. We propose an algorithm that reduces their intermediate memory requirement to linear in the sequence length. This enables us to demonstrate that a Transformer with our modified relative attention mechanism can generate minute-long compositions (thousands of steps, four times the length modeled in Oore et al., 2018) with compelling structure, generate continuations that coherently elaborate on a given motif, and in a seq2seq setup generate accompaniments conditioned on melodies. We evaluate the Transformer with our relative attention mechanism on two datasets, JSB Chorales and Piano-e-Competition, and obtain state-of-the-art results on the latter.},
+	urldate = {2021-04-03},
+	journal = {arXiv:1809.04281 [cs, eess, stat]},
+	author = {Huang, Cheng-Zhi Anna and Vaswani, Ashish and Uszkoreit, Jakob and Shazeer, Noam and Simon, Ian and Hawthorne, Curtis and Dai, Andrew M. and Hoffman, Matthew D. and Dinculescu, Monica and Eck, Douglas},
+	month = dec,
+	year = {2018},
+	note = {arXiv: 1809.04281},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing},
+	annote = {Comment: Improved skewing section and accompanying figures. Previous titles are "An Improved Relative Self-Attention Mechanism for Transformer with Application to Music Generation" and "Music Transformer"},
+	file = {arXiv.org Snapshot:/Users/jack/Zotero/storage/HWIEIEIN/1809.html:text/html;arXiv Fulltext PDF:/Users/jack/Zotero/storage/BFAISKEM/Huang et al. - 2018 - Music Transformer.pdf:application/pdf}
+}
+
+@article{huang_visualizing_nodate,
+	title = {Visualizing {Music} {Self}-{Attention}},
+	abstract = {Like language, music can be represented as a sequence of discrete symbols that form a hierarchical syntax, with notes being roughly like characters and motifs of notes like words. Unlike text however, music relies heavily on repetition on multiple timescales to build structure and meaning. The Music Transformer has shown compelling results in generating music with structure [3]. In this paper, we introduce a tool for visualizing self-attention on polyphonic music with an interactive pianoroll. We use music transformer as both a descriptive tool and a generative model. For the former, we use it to analyze existing music to see if the resulting self-attention structure corroborates with the musical structure known from music theory. For the latter, we inspect the model’s self-attention during generation, in order to understand how past notes affect future ones. We also compare and contrast the attention structure of regular attention to that of relative attention [6, 3], and examine its impact on the resulting generated music. For example, for the JSB Chorales dataset, a model trained with relative attention is more consistent in attending to all the voices in the preceding timestep and the chords before, and at cadences to the beginning of a phrase, allowing it to create an arc. We hope that our analyses will offer more evidence for relative self-attention as a powerful inductive bias for modeling music. We invite the reader to view our video animations of music attention and to interact with the visualizations at https:// storage.googleapis.com/nips-workshop-visualization/index.html.},
+	language = {en},
+	author = {Huang, Anna and Dinculescu, Monica and Eck, Douglas and Vaswani, Ashish},
+	pages = {5},
+	file = {Huang et al. - Visualizing Music Self-Attention.pdf:/Users/jack/Zotero/storage/7TXWKFQB/Huang et al. - Visualizing Music Self-Attention.pdf:application/pdf}
+}
+
+@article{yang_complex_2019,
+	title = {Complex {Transformer}: {A} {Framework} for {Modeling} {Complex}-{Valued} {Sequence}},
+	shorttitle = {Complex {Transformer}},
+	url = {http://arxiv.org/abs/1910.10202},
+	abstract = {While deep learning has received a surge of interest in a variety of ﬁelds in recent years, major deep learning models barely use complex numbers. However, speech, signal and audio data are naturally complex-valued after Fourier Transform, and studies have shown a potentially richer representation of complex nets. In this paper, we propose a Complex Transformer, which incorporates the transformer model as a backbone for sequence modeling; we also develop attention and encoder-decoder network operating for complex input. The model achieves state-of-the-art performance on the MusicNet dataset and an In-phase Quadrature (IQ) signal dataset. The GitHub implementation to reproduce the experimental results is available at https://github.com/ muqiaoy/dl\_signal.},
+	language = {en},
+	urldate = {2021-04-04},
+	journal = {arXiv:1910.10202 [cs, eess, stat]},
+	author = {Yang, Muqiao and Ma, Martin Q. and Li, Dongyu and Tsai, Yao-Hung Hubert and Salakhutdinov, Ruslan},
+	month = oct,
+	year = {2019},
+	note = {arXiv: 1910.10202},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing},
+	file = {Yang et al. - 2019 - Complex Transformer A Framework for Modeling Comp.pdf:/Users/jack/Zotero/storage/2QVWXKX9/Yang et al. - 2019 - Complex Transformer A Framework for Modeling Comp.pdf:application/pdf}
+}
+
+@article{thickstun_invariances_2017,
+	title = {Invariances and {Data} {Augmentation} for {Supervised} {Music} {Transcription}},
+	url = {http://arxiv.org/abs/1711.04845},
+	abstract = {This paper explores a variety of models for frame-based music transcription, with an emphasis on the methods needed to reach state-of-the-art on human recordings. The translationinvariant network discussed in this paper, which combines a traditional ﬁlterbank with a convolutional neural network, was the top-performing model in the 2017 MIREX Multiple Fundamental Frequency Estimation evaluation. This class of models shares parameters in the log-frequency domain, which exploits the frequency invariance of music to reduce the number of model parameters and avoid overﬁtting to the training data. All models in this paper were trained with supervision by labeled data from the MusicNet dataset, augmented by random label-preserving pitch-shift transformations.},
+	language = {en},
+	urldate = {2021-04-04},
+	journal = {arXiv:1711.04845 [cs, eess, stat]},
+	author = {Thickstun, John and Harchaoui, Zaid and Foster, Dean and Kakade, Sham M.},
+	month = nov,
+	year = {2017},
+	note = {arXiv: 1711.04845},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing},
+	annote = {Comment: 6 pages},
+	file = {Thickstun et al. - 2017 - Invariances and Data Augmentation for Supervised M.pdf:/Users/jack/Zotero/storage/S5VG6LEZ/Thickstun et al. - 2017 - Invariances and Data Augmentation for Supervised M.pdf:application/pdf}
+}
+
+@article{draguns_residual_2021-1,
+	title = {Residual {Shuffle}-{Exchange} {Networks} for {Fast} {Processing} of {Long} {Sequences}},
+	url = {http://arxiv.org/abs/2004.04662},
+	abstract = {Attention is a commonly used mechanism in sequence processing, but it is of O(n2) complexity which prevents its application to long sequences. The recently introduced neural Shufﬂe-Exchange network offers a computation-efﬁcient alternative, enabling the modelling of long-range dependencies in O(n log n) time. The model, however, is quite complex, involving a sophisticated gating mechanism derived from the Gated Recurrent Unit. In this paper, we present a simple and lightweight variant of the Shufﬂe-Exchange network, which is based on a residual network employing GELU and Layer Normalization. The proposed architecture not only scales to longer sequences but also converges faster and provides better accuracy. It surpasses the Shufﬂe-Exchange network on the LAMBADA language modelling task and achieves state-ofthe-art performance on the MusicNet dataset for music transcription while being efﬁcient in the number of parameters. We show how to combine the improved Shufﬂe-Exchange network with convolutional layers, establishing it as a useful building block in long sequence processing applications.},
+	language = {en},
+	urldate = {2021-04-04},
+	journal = {arXiv:2004.04662 [cs, eess]},
+	author = {Draguns, Andis and Ozoliņš, Emīls and Šostaks, Agris and Apinis, Matīss and Freivalds, Kārlis},
+	month = jan,
+	year = {2021},
+	note = {arXiv: 2004.04662},
+	keywords = {Computer Science - Machine Learning, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing},
+	annote = {Comment: 35th AAAI Conference on Artificial Intelligence (AAAI-21)},
+	file = {Draguns et al. - 2021 - Residual Shuffle-Exchange Networks for Fast Proces.pdf:/Users/jack/Zotero/storage/LUAXXCY6/Draguns et al. - 2021 - Residual Shuffle-Exchange Networks for Fast Proces.pdf:application/pdf}
+}
+
+@article{flamary_optimal_2016,
+	title = {Optimal spectral transportation with application to music transcription},
+	url = {http://arxiv.org/abs/1609.09799},
+	abstract = {Many spectral unmixing methods rely on the non-negative decomposition of spectral data onto a dictionary of spectral templates. In particular, state-of-the-art music transcription systems decompose the spectrogram of the input signal onto a dictionary of representative note spectra. The typical measures of ﬁt used to quantify the adequacy of the decomposition compare the data and template entries frequency-wise. As such, small displacements of energy from a frequency bin to another as well as variations of timbre can disproportionally harm the ﬁt. We address these issues by means of optimal transportation and propose a new measure of ﬁt that treats the frequency distributions of energy holistically as opposed to frequency-wise. Building on the harmonic nature of sound, the new measure is invariant to shifts of energy to harmonically-related frequencies, as well as to small and local displacements of energy. Equipped with this new measure of ﬁt, the dictionary of note templates can be considerably simpliﬁed to a set of Dirac vectors located at the target fundamental frequencies (musical pitch values). This in turns gives ground to a very fast and simple decomposition algorithm that achieves state-of-the-art performance on real musical data.},
+	language = {en},
+	urldate = {2021-04-04},
+	journal = {arXiv:1609.09799 [cs, stat]},
+	author = {Flamary, Rémi and Févotte, Cédric and Courty, Nicolas and Emiya, Valentin},
+	month = oct,
+	year = {2016},
+	note = {arXiv: 1609.09799},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound},
+	annote = {Comment: NIPS 2016},
+	file = {Flamary et al. - 2016 - Optimal spectral transportation with application t.pdf:/Users/jack/Zotero/storage/V4RXPZQH/Flamary et al. - 2016 - Optimal spectral transportation with application t.pdf:application/pdf}
+}
+
+@article{thickstun_learning_2017,
+	title = {Learning {Features} of {Music} from {Scratch}},
+	url = {http://arxiv.org/abs/1611.09827},
+	abstract = {This paper introduces a new large-scale music dataset, MusicNet, to serve as a source of supervision and evaluation of machine learning methods for music research. MusicNet consists of hundreds of freely-licensed classical music recordings by 10 composers, written for 11 instruments, together with instrument/note annotations resulting in over 1 million temporal labels on 34 hours of chamber music performances under various studio and microphone conditions.},
+	language = {en},
+	urldate = {2021-04-04},
+	journal = {arXiv:1611.09827 [cs, stat]},
+	author = {Thickstun, John and Harchaoui, Zaid and Kakade, Sham},
+	month = apr,
+	year = {2017},
+	note = {arXiv: 1611.09827},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound},
+	annote = {Comment: 14 pages; camera-ready version; updated experiments and related works; additional MIR metrics (Appendix C)},
+	file = {Thickstun et al. - 2017 - Learning Features of Music from Scratch.pdf:/Users/jack/Zotero/storage/B97KUDEV/Thickstun et al. - 2017 - Learning Features of Music from Scratch.pdf:application/pdf}
+}
+
+@article{mcleod_evaluating_nodate,
+	title = {{EVALUATING} {AUTOMATIC} {POLYPHONIC} {MUSIC} {TRANSCRIPTION}},
+	language = {en},
+	author = {McLeod, Andrew and Steedman, Mark},
+	pages = {8},
+	file = {McLeod and Steedman - EVALUATING AUTOMATIC POLYPHONIC MUSIC TRANSCRIPTIO.pdf:/Users/jack/Zotero/storage/MSNTF6XP/McLeod and Steedman - EVALUATING AUTOMATIC POLYPHONIC MUSIC TRANSCRIPTIO.pdf:application/pdf}
+}
+
+@article{cogliati_metric_2017,
+	title = {A {METRIC} {FOR} {MUSIC} {NOTATION} {TRANSCRIPTION} {ACCURACY}},
+	abstract = {Automatic music transcription aims at transcribing musical performances into music notation. However, most existing transcription systems only focus on parametric transcription, i.e., they output a symbolic representation in absolute terms, showing frequency and absolute time (e.g., a pianoroll representation), but not in musical terms, with spelling distinctions (e.g., A versus G ) and quantized meter. Recent attempts at producing full music notation output have been hindered by the lack of an objective metric to measure the adherence of the results to the ground truth music score, and had to rely on time-consuming human evaluation by music theorists. In this paper, we propose an edit distance, similar to the Levenshtein Distance used for measuring the difference between two sequences, typically strings of characters. The metric treats a music score as a sequence of sets of musical objects, ordered by their onsets. The metric reports the differences between two music scores based on twelve aspects: barlines, clefs, key signatures, time signatures, notes, note spelling, note durations, stem directions, groupings, rests, rest duration, and staff assignment. We also apply a linear regression model to the metric in order to predict human evaluations on a dataset of short music excerpts automatically transcribed into music notation.},
+	language = {en},
+	author = {Cogliati, Andrea and Duan, Zhiyao},
+	year = {2017},
+	pages = {7},
+	file = {Cogliati and Duan - 2017 - A METRIC FOR MUSIC NOTATION TRANSCRIPTION ACCURACY.pdf:/Users/jack/Zotero/storage/7FM4JLV7/Cogliati and Duan - 2017 - A METRIC FOR MUSIC NOTATION TRANSCRIPTION ACCURACY.pdf:application/pdf}
+}
+
+@article{benetos_automatic_2013,
+	title = {Automatic music transcription: challenges and future directions},
+	volume = {41},
+	issn = {0925-9902, 1573-7675},
+	shorttitle = {Automatic music transcription},
+	url = {http://link.springer.com/10.1007/s10844-013-0258-3},
+	doi = {10.1007/s10844-013-0258-3},
+	abstract = {Automatic music transcription is considered by many to be a key enabling technology in music signal processing. However, the performance of transcription systems is still signiﬁcantly below that of a human expert, and accuracies reported in recent years seem to have reached a limit, although the ﬁeld is still very active. In this paper we analyse limitations of current methods and identify promising directions for future research. Current transcription methods use general purpose models which are unable to capture the rich diversity found in music signals. One way to overcome the limited performance of transcription systems is to tailor algorithms to speciﬁc use-cases. Semi-automatic approaches are another way of achieving a more reliable transcription. Also, the wealth of musical scores and corresponding audio data now available are a rich potential source of training data, via forced alignment of audio to scores, but large scale utilisation of such data has yet to be attempted. Other promising approaches include the integration of information from multiple algorithms and diﬀerent musical aspects.},
+	language = {en},
+	number = {3},
+	urldate = {2021-04-04},
+	journal = {Journal of Intelligent Information Systems},
+	author = {Benetos, Emmanouil and Dixon, Simon and Giannoulis, Dimitrios and Kirchhoff, Holger and Klapuri, Anssi},
+	month = dec,
+	year = {2013},
+	pages = {407--434},
+	file = {Benetos et al. - 2013 - Automatic music transcription challenges and futu.pdf:/Users/jack/Zotero/storage/A9U6QQIX/Benetos et al. - 2013 - Automatic music transcription challenges and futu.pdf:application/pdf}
+}
+
+@misc{noauthor_air_nodate,
+	title = {{AIR} {Lab} {\textbar} {Projects} {\textbar} {Piano} {Music} {Transcription} into {Music} {Notation}},
+	url = {http://www2.ece.rochester.edu/projects/air/projects/AMT.html},
+	urldate = {2021-04-04},
+	file = {AIR Lab | Projects | Piano Music Transcription into Music Notation:/Users/jack/Zotero/storage/FGD2IDY2/AMT.html:text/html}
+}
+
+@article{roche_autoencoders_nodate,
+	title = {Autoencoders for music sound modeling: a comparison of linear, shallow, deep, recurrent and variational models},
+	abstract = {This study investigates the use of non-linear unsupervised dimensionality reduction techniques to compress a music dataset into a low-dimensional representation which can be used in turn for the synthesis of new sounds. We systematically compare (shallow) autoencoders (AEs), deep autoencoders (DAEs), recurrent autoencoders (with Long ShortTerm Memory cells – LSTM-AEs) and variational autoencoders (VAEs) with principal component analysis (PCA) for representing the high-resolution short-term magnitude spectrum of a large and dense dataset of music notes into a lower-dimensional vector (and then convert it back to a magnitude spectrum used for sound resynthesis). Our experiments were conducted on the publicly available multiinstrument and multi-pitch database NSynth. Interestingly and contrary to the recent literature on image processing, we can show that PCA systematically outperforms shallow AE. Only deep and recurrent architectures (DAEs and LSTM-AEs) lead to a lower reconstruction error. The optimization criterion in VAEs being the sum of the reconstruction error and a regularization term, it naturally leads to a lower reconstruction accuracy than DAEs but we show that VAEs are still able to outperform PCA while providing a low-dimensional latent space with nice “usability” properties. We also provide corresponding objective measures of perceptual audio quality (PEMO-Q scores), which generally correlate well with the reconstruction error.},
+	language = {en},
+	author = {Roche, Fanny and Hueber, Thomas and Limier, Samuel and Girin, Laurent},
+	pages = {8},
+	file = {Roche et al. - Autoencoders for music sound modeling a compariso.pdf:/Users/jack/Zotero/storage/TVMNHEQ3/Roche et al. - Autoencoders for music sound modeling a compariso.pdf:application/pdf}
+}
+
+@misc{skuli_how_2017,
+	title = {How to {Generate} {Music} using a {LSTM} {Neural} {Network} in {Keras}},
+	url = {https://towardsdatascience.com/how-to-generate-music-using-a-lstm-neural-network-in-keras-68786834d4c5},
+	abstract = {An introduction to creating music using LSTM Neural Networks},
+	language = {en},
+	urldate = {2021-04-05},
+	journal = {Medium},
+	author = {Skúli, Sigurður},
+	month = dec,
+	year = {2017},
+	file = {Snapshot:/Users/jack/Zotero/storage/THY5Q4UD/how-to-generate-music-using-a-lstm-neural-network-in-keras-68786834d4c5.html:text/html}
+}
+
+@inproceedings{roberts_hierarchical_2017,
+	title = {Hierarchical {Variational} {Autoencoders} for {Music}},
+	url = {https://nips2017creativity.github.io/doc/Hierarchical_Variational_Autoencoders_for_Music.pdf},
+	abstract = {In this work we develop recurrent variational autoencoders (VAEs) trained to reproduce short musical sequences and demonstrate their use as a creative device both via random sampling and data interpolation. Furthermore, by using a novel hierarchical decoder, we show that we are able to model long sequences with musical structure for both individual instruments and a three-piece band (lead, bass, and drums). Finally, we demonstrate the effectiveness of scheduled sampling in signiﬁcantly improving our reconstruction accuracy.},
+	language = {en},
+	booktitle = {{NIPS} {Conference} {Proceedings}},
+	author = {Roberts, Adam and Engel, Jesse and Eck, Douglas},
+	year = {2017},
+	pages = {6},
+	file = {Roberts et al. - Hierarchical Variational Autoencoders for Music.pdf:/Users/jack/Zotero/storage/YIDHEJ2Q/Roberts et al. - Hierarchical Variational Autoencoders for Music.pdf:application/pdf}
+}
+
+@misc{noauthor_magenta_nodate,
+	title = {Magenta},
+	url = {https://magenta.tensorflow.org/},
+	abstract = {A research project exploring the role of machine learning in the process of creating art and music.},
+	language = {en},
+	urldate = {2021-04-05},
+	journal = {Magenta},
+	file = {Snapshot:/Users/jack/Zotero/storage/FZFALZY9/magenta.tensorflow.org.html:text/html}
+}
+
+@inproceedings{roberts_hierarchical_2018,
+	title = {A {Hierarchical} {Latent} {Vector} {Model} for {Learning} {Long}-{Term} {Structure} in {Music}},
+	language = {en},
+	booktitle = {Proceedings of the35th {International} {Conference} on {Machine} {Learning}},
+	author = {Roberts, Adam and Engel, Jesse and Raffel, Colin and Hawthorne, Curtis and Eck, Douglas},
+	year = {2018},
+	pages = {10},
+	file = {Roberts et al. - A Hierarchical Latent Vector Model for Learning Lo.pdf:/Users/jack/Zotero/storage/ZJ2JDLW8/Roberts et al. - A Hierarchical Latent Vector Model for Learning Lo.pdf:application/pdf}
+}
+
+@article{engel_gansynth_2019,
+	title = {{GANSYNTH}: {ADVERSARIAL} {NEURAL} {AUDIO} {SYNTHESIS}},
+	language = {en},
+	author = {Engel, Jesse and Agrawal, Kumar Krishna and Chen, Shuo and Gulrajani, Ishaan and Donahue, Chris and Roberts, Adam},
+	year = {2019},
+	pages = {17},
+	file = {Engel et al. - 2019 - GANSYNTH ADVERSARIAL NEURAL AUDIO SYNTHESIS.pdf:/Users/jack/Zotero/storage/J5R4MTEX/Engel et al. - 2019 - GANSYNTH ADVERSARIAL NEURAL AUDIO SYNTHESIS.pdf:application/pdf}
+}
+
+@article{engel_differentiable_2020,
+	title = {{DIFFERENTIABLE} {DIGITAL} {SIGNAL} {PROCESSING}},
+	abstract = {Most generative models of audio directly generate samples in one of two domains: time or frequency. While sufﬁcient to express any signal, these representations are inefﬁcient, as they do not utilize existing knowledge of how sound is generated and perceived. A third approach (vocoders/synthesizers) successfully incorporates strong domain knowledge of signal processing and perception, but has been less actively researched due to limited expressivity and difﬁculty integrating with modern auto-differentiation-based machine learning methods. In this paper, we introduce the Differentiable Digital Signal Processing (DDSP) library, which enables direct integration of classic signal processing elements with deep learning methods. Focusing on audio synthesis, we achieve high-ﬁdelity generation without the need for large autoregressive models or adversarial losses, demonstrating that DDSP enables utilizing strong inductive biases without losing the expressive power of neural networks. Further, we show that combining interpretable modules permits manipulation of each separate model component, with applications such as independent control of pitch and loudness, realistic extrapolation to pitches not seen during training, blind dereverberation of room acoustics, transfer of extracted room acoustics to new environments, and transformation of timbre between disparate sources. In short, DDSP enables an interpretable and modular approach to generative modeling, without sacriﬁcing the beneﬁts of deep learning. The library is publicly available1 and we welcome further contributions from the community and domain experts.},
+	language = {en},
+	author = {Engel, Jesse and Hantrakul, Lamtharn and Gu, Chenjie and Roberts, Adam},
+	year = {2020},
+	pages = {19},
+	file = {Engel et al. - 2020 - DIFFERENTIABLE DIGITAL SIGNAL PROCESSING.pdf:/Users/jack/Zotero/storage/GMDZU52T/Engel et al. - 2020 - DIFFERENTIABLE DIGITAL SIGNAL PROCESSING.pdf:application/pdf}
+}
+
+@article{gfeller_spice_2020,
+	title = {{SPICE}: {Self}-supervised {Pitch} {Estimation}},
+	volume = {28},
+	issn = {2329-9290, 2329-9304},
+	shorttitle = {{SPICE}},
+	url = {http://arxiv.org/abs/1910.11664},
+	doi = {10.1109/TASLP.2020.2982285},
+	abstract = {We propose a model to estimate the fundamental frequency in monophonic audio, often referred to as pitch estimation. We acknowledge the fact that obtaining ground truth annotations at the required temporal and frequency resolution is a particularly daunting task. Therefore, we propose to adopt a self-supervised learning technique, which is able to estimate pitch without any form of supervision. The key observation is that pitch shift maps to a simple translation when the audio signal is analysed through the lens of the constant-Q transform (CQT). We design a self-supervised task by feeding two shifted slices of the CQT to the same convolutional encoder, and require that the difference in the outputs is proportional to the corresponding difference in pitch. In addition, we introduce a small model head on top of the encoder, which is able to determine the confidence of the pitch estimate, so as to distinguish between voiced and unvoiced audio. Our results show that the proposed method is able to estimate pitch at a level of accuracy comparable to fully supervised models, both on clean and noisy audio samples, although it does not require access to large labeled datasets.},
+	urldate = {2021-04-05},
+	journal = {IEEE/ACM Transactions on Audio, Speech, and Language Processing},
+	author = {Gfeller, Beat and Frank, Christian and Roblek, Dominik and Sharifi, Matt and Tagliasacchi, Marco and Velimirović, Mihajlo},
+	year = {2020},
+	note = {arXiv: 1910.11664},
+	keywords = {Computer Science - Machine Learning, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing},
+	pages = {1118--1128},
+	annote = {Comment: Accepted to IEEE Transactions on Audio, Speech and Language Processing},
+	file = {arXiv.org Snapshot:/Users/jack/Zotero/storage/7A43W4ZD/1910.html:text/html;arXiv Fulltext PDF:/Users/jack/Zotero/storage/82ZWV8GA/Gfeller et al. - 2020 - SPICE Self-supervised Pitch Estimation.pdf:application/pdf}
+}
+
+@article{benetos_automatic_2012,
+	title = {{AUTOMATIC} {MUSIC} {TRANSCRIPTION}: {BREAKING} {THE} {GLASS} {CEILING}},
+	abstract = {Automatic music transcription is considered by many to be the Holy Grail in the ﬁeld of music signal analysis. However, the performance of transcription systems is still signiﬁcantly below that of a human expert, and accuracies reported in recent years seem to have reached a limit, although the ﬁeld is still very active. In this paper we analyse limitations of current methods and identify promising directions for future research. Current transcription methods use general purpose models which are unable to capture the rich diversity found in music signals. In order to overcome the limited performance of transcription systems, algorithms have to be tailored to speciﬁc use-cases. Semiautomatic approaches are another way of achieving a more reliable transcription. Also, the wealth of musical scores and corresponding audio data now available are a rich potential source of training data, via forced alignment of audio to scores, but large scale utilisation of such data has yet to be attempted. Other promising approaches include the integration of information across different methods and musical aspects.},
+	language = {en},
+	author = {Benetos, Emmanouil and Dixon, Simon and Giannoulis, Dimitrios and Kirchhoff, Holger and Klapuri, Anssi},
+	year = {2012},
+	pages = {6},
+	file = {Benetos et al. - 2012 - AUTOMATIC MUSIC TRANSCRIPTION BREAKING THE GLASS .pdf:/Users/jack/Zotero/storage/ZBPYA69U/Benetos et al. - 2012 - AUTOMATIC MUSIC TRANSCRIPTION BREAKING THE GLASS .pdf:application/pdf}
+}
+
+@article{oord_wavenet_2016,
+	title = {{WaveNet}: {A} {Generative} {Model} for {Raw} {Audio}},
+	shorttitle = {{WaveNet}},
+	url = {http://arxiv.org/abs/1609.03499},
+	abstract = {This paper introduces WaveNet, a deep neural network for generating raw audio waveforms. The model is fully probabilistic and autoregressive, with the predictive distribution for each audio sample conditioned on all previous ones; nonetheless we show that it can be efficiently trained on data with tens of thousands of samples per second of audio. When applied to text-to-speech, it yields state-of-the-art performance, with human listeners rating it as significantly more natural sounding than the best parametric and concatenative systems for both English and Mandarin. A single WaveNet can capture the characteristics of many different speakers with equal fidelity, and can switch between them by conditioning on the speaker identity. When trained to model music, we find that it generates novel and often highly realistic musical fragments. We also show that it can be employed as a discriminative model, returning promising results for phoneme recognition.},
+	urldate = {2021-04-05},
+	journal = {arXiv:1609.03499 [cs]},
+	author = {Oord, Aaron van den and Dieleman, Sander and Zen, Heiga and Simonyan, Karen and Vinyals, Oriol and Graves, Alex and Kalchbrenner, Nal and Senior, Andrew and Kavukcuoglu, Koray},
+	month = sep,
+	year = {2016},
+	note = {arXiv: 1609.03499},
+	keywords = {Computer Science - Machine Learning, Computer Science - Sound},
+	file = {arXiv.org Snapshot:/Users/jack/Zotero/storage/9Q22ZW6B/1609.html:text/html;arXiv Fulltext PDF:/Users/jack/Zotero/storage/WFSA9USD/Oord et al. - 2016 - WaveNet A Generative Model for Raw Audio.pdf:application/pdf}
+}
+
+@article{huang_counterpoint_2019,
+	title = {Counterpoint by {Convolution}},
+	url = {http://arxiv.org/abs/1903.07227},
+	abstract = {Machine learning models of music typically break up the task of composition into a chronological process, composing a piece of music in a single pass from beginning to end. On the contrary, human composers write music in a nonlinear fashion, scribbling motifs here and there, often revisiting choices previously made. In order to better approximate this process, we train a convolutional neural network to complete partial musical scores, and explore the use of blocked Gibbs sampling as an analogue to rewriting. Neither the model nor the generative procedure are tied to a particular causal direction of composition. Our model is an instance of orderless NADE (Uria et al., 2014), which allows more direct ancestral sampling. However, we find that Gibbs sampling greatly improves sample quality, which we demonstrate to be due to some conditional distributions being poorly modeled. Moreover, we show that even the cheap approximate blocked Gibbs procedure from Yao et al. (2014) yields better samples than ancestral sampling, based on both log-likelihood and human evaluation.},
+	urldate = {2021-04-05},
+	journal = {arXiv:1903.07227 [cs, eess, stat]},
+	author = {Huang, Cheng-Zhi Anna and Cooijmans, Tim and Roberts, Adam and Courville, Aaron and Eck, Douglas},
+	month = mar,
+	year = {2019},
+	note = {arXiv: 1903.07227},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing, H.5.5, I.2},
+	annote = {Comment: Proceedings of the 18th International Society for Music Information Retrieval Conference, ISMIR 2017},
+	file = {arXiv.org Snapshot:/Users/jack/Zotero/storage/HGR4RQHS/1903.html:text/html;arXiv Fulltext PDF:/Users/jack/Zotero/storage/RABM3C3F/Huang et al. - 2019 - Counterpoint by Convolution.pdf:application/pdf}
+}
+
+@article{bai_empirical_2018,
+	title = {An {Empirical} {Evaluation} of {Generic} {Convolutional} and {Recurrent} {Networks} for {Sequence} {Modeling}},
+	url = {http://arxiv.org/abs/1803.01271},
+	abstract = {For most deep learning practitioners, sequence modeling is synonymous with recurrent networks. Yet recent results indicate that convolutional architectures can outperform recurrent networks on tasks such as audio synthesis and machine translation. Given a new sequence modeling task or dataset, which architecture should one use? We conduct a systematic evaluation of generic convolutional and recurrent architectures for sequence modeling. The models are evaluated across a broad range of standard tasks that are commonly used to benchmark recurrent networks. Our results indicate that a simple convolutional architecture outperforms canonical recurrent networks such as LSTMs across a diverse range of tasks and datasets, while demonstrating longer effective memory. We conclude that the common association between sequence modeling and recurrent networks should be reconsidered, and convolutional networks should be regarded as a natural starting point for sequence modeling tasks. To assist related work, we have made code available at http://github.com/locuslab/TCN.},
+	language = {en},
+	urldate = {2021-04-05},
+	journal = {arXiv:1803.01271 [cs]},
+	author = {Bai, Shaojie and Kolter, J. Zico and Koltun, Vladlen},
+	month = apr,
+	year = {2018},
+	note = {arXiv: 1803.01271},
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Machine Learning, Computer Science - Computation and Language},
+	file = {Bai et al. - 2018 - An Empirical Evaluation of Generic Convolutional a.pdf:/Users/jack/Zotero/storage/3RHAYMCQ/Bai et al. - 2018 - An Empirical Evaluation of Generic Convolutional a.pdf:application/pdf}
+}
+
+@article{alvarado_efcient_nodate,
+	title = {Efﬁcient {Learning} of {Harmonic} {Priors} for {Pitch} {Detection} in {Polyphonic} {Music}},
+	abstract = {Automatic music transcription (AMT) aims to infer a latent symbolic representation of a piece of music (piano-roll), given a corresponding observed audio recording. Transcribing polyphonic music (when multiple notes are played simultaneously) is a challenging problem, due to highly structured overlapping between harmonics. We study whether the introduction of physically inspired Gaussian process (GP) priors into audio content analysis models improves the extraction of patterns required for AMT. Audio signals are described as a linear combination of sources. Each source is decomposed into the product of an amplitude-envelope, and a quasi-periodic component process. We introduce the Mat´ern spectral mixture (MSM) kernel for describing frequency content of singles notes. We consider two different regression approaches. In the sigmoid model every pitch-activation is independently non-linear transformed. In the softmax model several activation GPs are jointly non-linearly transformed. This introduce cross-correlation between activations. We use variational Bayes for approximate inference. We empirically evaluate how these models work in practice transcribing polyphonic music. We demonstrate that rather than encourage dependency between activations, what is relevant for improving pitch detection is to learnt priors that ﬁt the frequency content of the sound events to detect. The Python code is available at https://github.com/PabloAlvarado/MSMK.},
+	language = {en},
+	author = {Alvarado, Pablo A and Stowell, Dan},
+	pages = {20},
+	file = {Alvarado and Stowell - Efﬁcient Learning of Harmonic Priors for Pitch Det.pdf:/Users/jack/Zotero/storage/NKQEE3S6/Alvarado and Stowell - Efﬁcient Learning of Harmonic Priors for Pitch Det.pdf:application/pdf}
+}
+
+@article{vasquez_melnet_2019,
+	title = {{MelNet}: {A} {Generative} {Model} for {Audio} in the {Frequency} {Domain}},
+	shorttitle = {{MelNet}},
+	url = {http://arxiv.org/abs/1906.01083},
+	abstract = {Capturing high-level structure in audio waveforms is challenging because a single second of audio spans tens of thousands of timesteps. While long-range dependencies are difficult to model directly in the time domain, we show that they can be more tractably modelled in two-dimensional time-frequency representations such as spectrograms. By leveraging this representational advantage, in conjunction with a highly expressive probabilistic model and a multiscale generation procedure, we design a model capable of generating high-fidelity audio samples which capture structure at timescales that time-domain models have yet to achieve. We apply our model to a variety of audio generation tasks, including unconditional speech generation, music generation, and text-to-speech synthesis---showing improvements over previous approaches in both density estimates and human judgments.},
+	urldate = {2021-04-19},
+	journal = {arXiv:1906.01083 [cs, eess, stat]},
+	author = {Vasquez, Sean and Lewis, Mike},
+	month = jun,
+	year = {2019},
+	note = {arXiv: 1906.01083},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing},
+	file = {arXiv.org Snapshot:/Users/jack/Zotero/storage/KJJCEDW6/1906.html:text/html;arXiv Fulltext PDF:/Users/jack/Zotero/storage/TP5GMM6R/Vasquez and Lewis - 2019 - MelNet A Generative Model for Audio in the Freque.pdf:application/pdf}
+}
+
+@article{manzelli_conditioning_2018,
+	title = {Conditioning {Deep} {Generative} {Raw} {Audio} {Models} for {Structured} {Automatic} {Music}},
+	url = {http://arxiv.org/abs/1806.09905},
+	abstract = {Existing automatic music generation approaches that feature deep learning can be broadly classified into two types: raw audio models and symbolic models. Symbolic models, which train and generate at the note level, are currently the more prevalent approach; these models can capture long-range dependencies of melodic structure, but fail to grasp the nuances and richness of raw audio generations. Raw audio models, such as DeepMind's WaveNet, train directly on sampled audio waveforms, allowing them to produce realistic-sounding, albeit unstructured music. In this paper, we propose an automatic music generation methodology combining both of these approaches to create structured, realistic-sounding compositions. We consider a Long Short Term Memory network to learn the melodic structure of different styles of music, and then use the unique symbolic generations from this model as a conditioning input to a WaveNet-based raw audio generator, creating a model for automatic, novel music. We then evaluate this approach by showcasing results of this work.},
+	urldate = {2021-04-19},
+	journal = {arXiv:1806.09905 [cs, eess, stat]},
+	author = {Manzelli, Rachel and Thakkar, Vijay and Siahkamari, Ali and Kulis, Brian},
+	month = jun,
+	year = {2018},
+	note = {arXiv: 1806.09905},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing},
+	annote = {Comment: Presented at the ISMIR 2018 Conference},
+	file = {arXiv.org Snapshot:/Users/jack/Zotero/storage/G4N66R4H/1806.html:text/html;arXiv Fulltext PDF:/Users/jack/Zotero/storage/2XN6PJDF/Manzelli et al. - 2018 - Conditioning Deep Generative Raw Audio Models for .pdf:application/pdf}
+}
+
+@misc{noauthor_combining_nodate,
+	title = {Combining {Deep} {Symbolic} and {Raw} {Audio} {Music} {Models}},
+	url = {http://people.bu.edu/bkulis/projects/music/index.html},
+	urldate = {2021-04-19},
+	file = {Combining Deep Symbolic and Raw Audio Music Models:/Users/jack/Zotero/storage/KZXVJQUU/index.html:text/html}
+}
+
+@article{dhariwal_jukebox_2020,
+	title = {Jukebox: {A} {Generative} {Model} for {Music}},
+	shorttitle = {Jukebox},
+	url = {http://arxiv.org/abs/2005.00341},
+	abstract = {We introduce Jukebox, a model that generates music with singing in the raw audio domain. We tackle the long context of raw audio using a multi-scale VQ-VAE to compress it to discrete codes, and modeling those using autoregressive Transformers. We show that the combined model at scale can generate high-fidelity and diverse songs with coherence up to multiple minutes. We can condition on artist and genre to steer the musical and vocal style, and on unaligned lyrics to make the singing more controllable. We are releasing thousands of non cherry-picked samples at https://jukebox.openai.com, along with model weights and code at https://github.com/openai/jukebox},
+	urldate = {2021-04-19},
+	journal = {arXiv:2005.00341 [cs, eess, stat]},
+	author = {Dhariwal, Prafulla and Jun, Heewoo and Payne, Christine and Kim, Jong Wook and Radford, Alec and Sutskever, Ilya},
+	month = apr,
+	year = {2020},
+	note = {arXiv: 2005.00341},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing},
+	file = {arXiv.org Snapshot:/Users/jack/Zotero/storage/9ETQF77D/2005.html:text/html;arXiv Fulltext PDF:/Users/jack/Zotero/storage/YBS2UKQ3/Dhariwal et al. - 2020 - Jukebox A Generative Model for Music.pdf:application/pdf}
+}
+
+@article{kolouri_sliced-wasserstein_2018,
+	title = {Sliced-{Wasserstein} {Autoencoder}: {An} {Embarrassingly} {Simple} {Generative} {Model}},
+	shorttitle = {Sliced-{Wasserstein} {Autoencoder}},
+	url = {http://arxiv.org/abs/1804.01947},
+	abstract = {In this paper we study generative modeling via autoencoders while using the elegant geometric properties of the optimal transport (OT) problem and the Wasserstein distances. We introduce Sliced-Wasserstein Autoencoders (SWAE), which are generative models that enable one to shape the distribution of the latent space into any samplable probability distribution without the need for training an adversarial network or defining a closed-form for the distribution. In short, we regularize the autoencoder loss with the sliced-Wasserstein distance between the distribution of the encoded training samples and a predefined samplable distribution. We show that the proposed formulation has an efficient numerical solution that provides similar capabilities to Wasserstein Autoencoders (WAE) and Variational Autoencoders (VAE), while benefiting from an embarrassingly simple implementation.},
+	urldate = {2021-04-19},
+	journal = {arXiv:1804.01947 [cs, stat]},
+	author = {Kolouri, Soheil and Pope, Phillip E. and Martin, Charles E. and Rohde, Gustavo K.},
+	month = jun,
+	year = {2018},
+	note = {arXiv: 1804.01947},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning},
+	file = {arXiv.org Snapshot:/Users/jack/Zotero/storage/IDRA6CWT/1804.html:text/html;arXiv Fulltext PDF:/Users/jack/Zotero/storage/NHPUUYUG/Kolouri et al. - 2018 - Sliced-Wasserstein Autoencoder An Embarrassingly .pdf:application/pdf}
+}
+
+@article{arjovsky_wasserstein_2017,
+	title = {Wasserstein {GAN}},
+	url = {http://arxiv.org/abs/1701.07875},
+	abstract = {We introduce a new algorithm named WGAN, an alternative to traditional GAN training. In this new model, we show that we can improve the stability of learning, get rid of problems like mode collapse, and provide meaningful learning curves useful for debugging and hyperparameter searches. Furthermore, we show that the corresponding optimization problem is sound, and provide extensive theoretical work highlighting the deep connections to other distances between distributions.},
+	urldate = {2021-04-19},
+	journal = {arXiv:1701.07875 [cs, stat]},
+	author = {Arjovsky, Martin and Chintala, Soumith and Bottou, Léon},
+	month = dec,
+	year = {2017},
+	note = {arXiv: 1701.07875},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning},
+	file = {arXiv.org Snapshot:/Users/jack/Zotero/storage/2Q65C7W6/1701.html:text/html;arXiv Fulltext PDF:/Users/jack/Zotero/storage/TLLGHK3S/Arjovsky et al. - 2017 - Wasserstein GAN.pdf:application/pdf}
+}
+
+@article{mehri_samplernn_2017,
+	title = {{SampleRNN}: {An} {Unconditional} {End}-to-{End} {Neural} {Audio} {Generation} {Model}},
+	shorttitle = {{SampleRNN}},
+	url = {http://arxiv.org/abs/1612.07837},
+	abstract = {In this paper we propose a novel model for unconditional audio generation based on generating one audio sample at a time. We show that our model, which profits from combining memory-less modules, namely autoregressive multilayer perceptrons, and stateful recurrent neural networks in a hierarchical structure is able to capture underlying sources of variations in the temporal sequences over very long time spans, on three datasets of different nature. Human evaluation on the generated samples indicate that our model is preferred over competing models. We also show how each component of the model contributes to the exhibited performance.},
+	urldate = {2021-04-19},
+	journal = {arXiv:1612.07837 [cs]},
+	author = {Mehri, Soroush and Kumar, Kundan and Gulrajani, Ishaan and Kumar, Rithesh and Jain, Shubham and Sotelo, Jose and Courville, Aaron and Bengio, Yoshua},
+	month = feb,
+	year = {2017},
+	note = {arXiv: 1612.07837},
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Sound},
+	annote = {Comment: Published as a conference paper at ICLR 2017},
+	file = {arXiv.org Snapshot:/Users/jack/Zotero/storage/4MDKBMZ6/1612.html:text/html;arXiv Fulltext PDF:/Users/jack/Zotero/storage/6TX4W5HV/Mehri et al. - 2017 - SampleRNN An Unconditional End-to-End Neural Audi.pdf:application/pdf}
+}
+
+@article{dieleman_challenge_2018,
+	title = {The challenge of realistic music generation: modelling raw audio at scale},
+	shorttitle = {The challenge of realistic music generation},
+	url = {http://arxiv.org/abs/1806.10474},
+	abstract = {Realistic music generation is a challenging task. When building generative models of music that are learnt from data, typically high-level representations such as scores or MIDI are used that abstract away the idiosyncrasies of a particular performance. But these nuances are very important for our perception of musicality and realism, so in this work we embark on modelling music in the raw audio domain. It has been shown that autoregressive models excel at generating raw audio waveforms of speech, but when applied to music, we find them biased towards capturing local signal structure at the expense of modelling long-range correlations. This is problematic because music exhibits structure at many different timescales. In this work, we explore autoregressive discrete autoencoders (ADAs) as a means to enable autoregressive models to capture long-range correlations in waveforms. We find that they allow us to unconditionally generate piano music directly in the raw audio domain, which shows stylistic consistency across tens of seconds.},
+	urldate = {2021-04-19},
+	journal = {arXiv:1806.10474 [cs, eess, stat]},
+	author = {Dieleman, Sander and Oord, Aäron van den and Simonyan, Karen},
+	month = jun,
+	year = {2018},
+	note = {arXiv: 1806.10474},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing},
+	annote = {Comment: 13 pages, 2 figures, submitted to NIPS 2018},
+	file = {arXiv.org Snapshot:/Users/jack/Zotero/storage/PI4HACJB/1806.html:text/html;arXiv Fulltext PDF:/Users/jack/Zotero/storage/DRNN9AQF/Dieleman et al. - 2018 - The challenge of realistic music generation model.pdf:application/pdf}
+}
+
+@article{dieleman_challenge_nodate,
+	title = {The challenge of realistic music generation: modelling raw audio at scale},
+	abstract = {Realistic music generation is a challenging task. When building generative models of music that are learnt from data, typically high-level representations such as scores or MIDI are used that abstract away the idiosyncrasies of a particular performance. But these nuances are very important for our perception of musicality and realism, so in this work we embark on modelling music in the raw audio domain. It has been shown that autoregressive models excel at generating raw audio waveforms of speech, but when applied to music, we ﬁnd them biased towards capturing local signal structure at the expense of modelling long-range correlations. This is problematic because music exhibits structure at many different timescales. In this work, we explore autoregressive discrete autoencoders (ADAs) as a means to enable autoregressive models to capture long-range correlations in waveforms. We ﬁnd that they allow us to unconditionally generate piano music directly in the raw audio domain, which shows stylistic consistency across tens of seconds.},
+	language = {en},
+	author = {Dieleman, Sander},
+	pages = {11},
+	file = {Dieleman - The challenge of realistic music generation model.pdf:/Users/jack/Zotero/storage/NZJN4JS3/Dieleman - The challenge of realistic music generation model.pdf:application/pdf}
+}
+
+@article{mehri_samplernn_2017-1,
+	title = {{SampleRNN}: {An} {Unconditional} {End}-to-{End} {Neural} {Audio} {Generation} {Model}},
+	shorttitle = {{SampleRNN}},
+	url = {http://arxiv.org/abs/1612.07837},
+	abstract = {In this paper we propose a novel model for unconditional audio generation based on generating one audio sample at a time. We show that our model, which profits from combining memory-less modules, namely autoregressive multilayer perceptrons, and stateful recurrent neural networks in a hierarchical structure is able to capture underlying sources of variations in the temporal sequences over very long time spans, on three datasets of different nature. Human evaluation on the generated samples indicate that our model is preferred over competing models. We also show how each component of the model contributes to the exhibited performance.},
+	urldate = {2021-04-19},
+	journal = {arXiv:1612.07837 [cs]},
+	author = {Mehri, Soroush and Kumar, Kundan and Gulrajani, Ishaan and Kumar, Rithesh and Jain, Shubham and Sotelo, Jose and Courville, Aaron and Bengio, Yoshua},
+	month = feb,
+	year = {2017},
+	note = {arXiv: 1612.07837},
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Sound}
+}
+
+@article{mehri_samplernn_2017-2,
+	title = {{SampleRNN}: {An} {Unconditional} {End}-to-{End} {Neural} {Audio} {Generation} {Model}},
+	shorttitle = {{SampleRNN}},
+	url = {http://arxiv.org/abs/1612.07837},
+	abstract = {In this paper we propose a novel model for unconditional audio generation based on generating one audio sample at a time. We show that our model, which profits from combining memory-less modules, namely autoregressive multilayer perceptrons, and stateful recurrent neural networks in a hierarchical structure is able to capture underlying sources of variations in the temporal sequences over very long time spans, on three datasets of different nature. Human evaluation on the generated samples indicate that our model is preferred over competing models. We also show how each component of the model contributes to the exhibited performance.},
+	urldate = {2021-04-19},
+	journal = {arXiv:1612.07837 [cs]},
+	author = {Mehri, Soroush and Kumar, Kundan and Gulrajani, Ishaan and Kumar, Rithesh and Jain, Shubham and Sotelo, Jose and Courville, Aaron and Bengio, Yoshua},
+	month = feb,
+	year = {2017},
+	note = {arXiv: 1612.07837},
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Sound},
+	annote = {Comment: Published as a conference paper at ICLR 2017},
+	file = {arXiv Fulltext PDF:/Users/jack/Zotero/storage/RVEWG634/Mehri et al. - 2017 - SampleRNN An Unconditional End-to-End Neural Audi.pdf:application/pdf}
+}
+
+@misc{noauthor_davids_nodate,
+	title = {David's {MIDI} {Spec}},
+	url = {https://www.cs.cmu.edu/~music/cmsip/readings/davids-midi-spec.htm},
+	urldate = {2021-04-19},
+	file = {David's MIDI Spec:/Users/jack/Zotero/storage/JKEKKHF2/davids-midi-spec.html:text/html}
+}
+
+@misc{back_standard_1999,
+	title = {Standard {MIDI} file format, updated},
+	url = {http://www.music.mcgill.ca/~ich/classes/mumt306/StandardMIDIfileformat.html},
+	urldate = {2021-04-18},
+	author = {Back, David},
+	year = {1999},
+	file = {Standard MIDI file format, updated:/Users/jack/Zotero/storage/4P95X4VE/StandardMIDIfileformat.html:text/html}
+}
+
+@misc{noauthor_midi_nodate,
+	title = {The {MIDI} {Association} - {Standard} {MIDI} {Files}},
+	url = {https://www.midi.org/specifications/file-format-specifications/standard-midi-files},
+	urldate = {2021-04-18},
+	file = {The MIDI Association - Standard MIDI Files:/Users/jack/Zotero/storage/SLHII7K7/standard-midi-files.html:text/html}
+}
+
+@article{peracha_improving_2020,
+	title = {Improving {Polyphonic} {Music} {Models} with {Feature}-{Rich} {Encoding}},
+	url = {http://arxiv.org/abs/1911.11775},
+	abstract = {This paper explores sequential modelling of polyphonic music with deep neural networks. While recent breakthroughs have focussed on network architecture, we demonstrate that the representation of the sequence can make an equally significant contribution to the performance of the model as measured by validation set loss. By extracting salient features inherent to the training dataset, the model can either be conditioned on these features or trained to predict said features as extra components of the sequences being modelled. We show that training a neural network to predict a seemingly more complex sequence, with extra features included in the series being modelled, can improve overall model performance significantly. We first introduce TonicNet, a GRU-based model trained to initially predict the chord at a given time-step before then predicting the notes of each voice at that time-step, in contrast with the typical approach of predicting only the notes. We then evaluate TonicNet on the canonical JSB Chorales dataset and obtain state-of-the-art results.},
+	urldate = {2021-04-18},
+	journal = {arXiv:1911.11775 [cs, eess, stat]},
+	author = {Peracha, Omar},
+	month = sep,
+	year = {2020},
+	note = {arXiv: 1911.11775
+version: 3},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing, 68T99},
+	annote = {Comment: Proceedings of the 21st International Society for Music Information Retrieval Conference, ISMIR 2020},
+	file = {arXiv.org Snapshot:/Users/jack/Zotero/storage/MJ67G8NA/1911.html:text/html;arXiv Fulltext PDF:/Users/jack/Zotero/storage/MW45L9HF/Peracha - 2020 - Improving Polyphonic Music Models with Feature-Ric.pdf:application/pdf}
+}
+
+@misc{noauthor_onsets_nodate,
+	title = {Onsets and {Frames}: {Dual}-{Objective} {Piano} {Transcription}},
+	shorttitle = {Onsets and {Frames}},
+	url = {https://magenta.tensorflow.org/onsets-frames},
+	abstract = {Update (9/20/18): Try out the new JavaScript implementation!Update (10/30/18): Read about improvements and a new dataset in The MAESTRO Dataset and Wave2Midi...},
+	language = {en},
+	urldate = {2021-04-18},
+	journal = {Magenta},
+	file = {Snapshot:/Users/jack/Zotero/storage/9SUFMZTM/onsets-frames.html:text/html}
+}
+
+@misc{noauthor_notitle_nodate
+}
+
+@article{vasquez_melnet_2019-1,
+	title = {{MelNet}: {A} {Generative} {Model} for {Audio} in the {Frequency} {Domain}},
+	shorttitle = {{MelNet}},
+	url = {http://arxiv.org/abs/1906.01083},
+	abstract = {Capturing high-level structure in audio waveforms is challenging because a single second of audio spans tens of thousands of timesteps. While long-range dependencies are difﬁcult to model directly in the time domain, we show that they can be more tractably modelled in two-dimensional time-frequency representations such as spectrograms. By leveraging this representational advantage, in conjunction with a highly expressive probabilistic model and a multiscale generation procedure, we design a model capable of generating high-ﬁdelity audio samples which capture structure at timescales that time-domain models have yet to achieve. We apply our model to a variety of audio generation tasks, including unconditional speech generation, music generation, and text-to-speech synthesis—showing improvements over previous approaches in both density estimates and human judgments.},
+	language = {en},
+	urldate = {2021-04-23},
+	journal = {arXiv:1906.01083 [cs, eess, stat]},
+	author = {Vasquez, Sean and Lewis, Mike},
+	month = jun,
+	year = {2019},
+	note = {arXiv: 1906.01083},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing},
+	file = {Vasquez and Lewis - 2019 - MelNet A Generative Model for Audio in the Freque.pdf:/Users/jack/Zotero/storage/9F5AC6MU/Vasquez and Lewis - 2019 - MelNet A Generative Model for Audio in the Freque.pdf:application/pdf}
+}
+
+@article{manzelli_conditioning_2018-1,
+	title = {Conditioning {Deep} {Generative} {Raw} {Audio} {Models} for {Structured} {Automatic} {Music}},
+	url = {http://arxiv.org/abs/1806.09905},
+	abstract = {Existing automatic music generation approaches that feature deep learning can be broadly classiﬁed into two types: raw audio models and symbolic models. Symbolic models, which train and generate at the note level, are currently the more prevalent approach; these models can capture long-range dependencies of melodic structure, but fail to grasp the nuances and richness of raw audio generations. Raw audio models, such as DeepMind’s WaveNet, train directly on sampled audio waveforms, allowing them to produce realistic-sounding, albeit unstructured music. In this paper, we propose an automatic music generation methodology combining both of these approaches to create structured, realistic-sounding compositions. We consider a Long Short Term Memory network to learn the melodic structure of different styles of music, and then use the unique symbolic generations from this model as a conditioning input to a WaveNet-based raw audio generator, creating a model for automatic, novel music. We then evaluate this approach by showcasing results of this work.},
+	language = {en},
+	urldate = {2021-04-23},
+	journal = {arXiv:1806.09905 [cs, eess, stat]},
+	author = {Manzelli, Rachel and Thakkar, Vijay and Siahkamari, Ali and Kulis, Brian},
+	month = jun,
+	year = {2018},
+	note = {arXiv: 1806.09905},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing},
+	annote = {Comment: Presented at the ISMIR 2018 Conference},
+	file = {Manzelli et al. - 2018 - Conditioning Deep Generative Raw Audio Models for .pdf:/Users/jack/Zotero/storage/K739SAZ9/Manzelli et al. - 2018 - Conditioning Deep Generative Raw Audio Models for .pdf:application/pdf}
+}
+
+@article{dieleman_challenge_nodate-1,
+	title = {The challenge of realistic music generation: modelling raw audio at scale},
+	abstract = {Realistic music generation is a challenging task. When building generative models of music that are learnt from data, typically high-level representations such as scores or MIDI are used that abstract away the idiosyncrasies of a particular performance. But these nuances are very important for our perception of musicality and realism, so in this work we embark on modelling music in the raw audio domain. It has been shown that autoregressive models excel at generating raw audio waveforms of speech, but when applied to music, we ﬁnd them biased towards capturing local signal structure at the expense of modelling long-range correlations. This is problematic because music exhibits structure at many different timescales. In this work, we explore autoregressive discrete autoencoders (ADAs) as a means to enable autoregressive models to capture long-range correlations in waveforms. We ﬁnd that they allow us to unconditionally generate piano music directly in the raw audio domain, which shows stylistic consistency across tens of seconds.},
+	language = {en},
+	author = {Dieleman, Sander},
+	pages = {11},
+	file = {Dieleman - The challenge of realistic music generation model.pdf:/Users/jack/Zotero/storage/K3IZ8RDS/Dieleman - The challenge of realistic music generation model.pdf:application/pdf}
+}
+
+@article{yang_evaluation_2020,
+	title = {On the evaluation of generative models in music},
+	volume = {32},
+	issn = {0941-0643, 1433-3058},
+	url = {http://link.springer.com/10.1007/s00521-018-3849-7},
+	doi = {10.1007/s00521-018-3849-7},
+	abstract = {The modeling of artiﬁcial, human-level creativity is becoming more and more achievable. In recent years, neural networks have been successfully applied to diﬀerent tasks such as image and music generation, demonstrating their great potential in realizing computational creativity. The fuzzy deﬁnition of creativity combined with varying goals of the evaluated generative systems, however, make subjective evaluation seem to be the only viable methodology of choice. We review the evaluation of generative music systems and discuss the inherent challenges of their evaluation. Although subjective evaluation should always be the ultimate choice for the evaluation of creative results, researchers unfamiliar with rigorous subjective experiment design and without the necessary resources for the execution of a large-scale experiment face challenges in terms of reliability, validity, and replicability of the results. In numerous studies, this leads to the report of insigniﬁcant and possibly irrelevant results and the lack of comparability with similar and previous generative systems. Therefore, we propose a set of simple musically informed objective metrics enabling an objective and reproducible way of evaluating and comparing the output of music generative systems. We demonstrate the usefulness of the proposed metrics with several experiments on real-world data.},
+	language = {en},
+	number = {9},
+	urldate = {2021-04-25},
+	journal = {Neural Computing and Applications},
+	author = {Yang, Li-Chia and Lerch, Alexander},
+	month = may,
+	year = {2020},
+	pages = {4773--4784},
+	file = {Yang and Lerch - 2020 - On the evaluation of generative models in music.pdf:/Users/jack/Zotero/storage/9WDAQXR3/Yang and Lerch - 2020 - On the evaluation of generative models in music.pdf:application/pdf}
+}
+
+@misc{noauthor_lakh_nodate,
+	title = {The {Lakh} {MIDI} {Dataset} v0.1},
+	url = {https://colinraffel.com/projects/lmd/#get},
+	urldate = {2021-04-25},
+	file = {The Lakh MIDI Dataset v0.1:/Users/jack/Zotero/storage/RTX67QAV/lmd.html:text/html}
+}
+
+@misc{noauthor_generating_nodate,
+	title = {Generating music in the waveform domain},
+	url = {https://benanne.github.io/2020/03/24/audio-generation.html},
+	abstract = {This is a write-up of a presentation on generating music in the waveform domain, which was part of a tutorial that I co-presented at ISMIR 2019 earlier this month.},
+	language = {en},
+	urldate = {2021-04-24},
+	journal = {Sander Dieleman}
+}
+
+@article{li_music_nodate-1,
+	title = {Music {Theory} {Inspired} {Policy} {Gradient} {Method} for {Piano} {Music} {Transcription}},
+	abstract = {This paper presents a novel approach for transcribing polyphonic piano music to a symbolic form by incorporating reward rules based on classical music theory using Reinforcement Learning (RL). We use convolutional recurrent neural networks (CRNNs) to predict both the onset and the pitch of piano notes. Our RL transcriber model predicts pitch onset events and utilizes a policy gradient method that incorporates rewards based on music theory. Our pitch prediction is conditioned on the onset of notes and also incorporates music theory based rewards. We believe that good piano music conforms to rules from classical music theory. Thus, penalized heavily according to these rules in the inference procedure, the RL transcriber can be signiﬁcantly less susceptible to noises that come with the audio recordings. As a result, our technique achieved a 10\% relative improvement compared with the state-of-the-art methods on the MAPS dataset [8].},
+	language = {en},
+	author = {Li, Juncheng and Qu, Shuhui and Wang, Yun and Li, Xinjian and Das, Samarjit and Metze, Florian},
+	pages = {10},
+	file = {Li et al. - Music Theory Inspired Policy Gradient Method for P.pdf:/Users/jack/Zotero/storage/WVRCLDJS/Li et al. - Music Theory Inspired Policy Gradient Method for P.pdf:application/pdf}
+}
+
+@article{dong_musegan_2017,
+	title = {{MuseGAN}: {Multi}-track {Sequential} {Generative} {Adversarial} {Networks} for {Symbolic} {Music} {Generation} and {Accompaniment}},
+	shorttitle = {{MuseGAN}},
+	url = {http://arxiv.org/abs/1709.06298},
+	abstract = {Generating music has a few notable differences from generating images and videos. First, music is an art of time, necessitating a temporal model. Second, music is usually composed of multiple instruments/tracks with their own temporal dynamics, but collectively they unfold over time interdependently. Lastly, musical notes are often grouped into chords, arpeggios or melodies in polyphonic music, and thereby introducing a chronological ordering of notes is not naturally suitable. In this paper, we propose three models for symbolic multi-track music generation under the framework of generative adversarial networks (GANs). The three models, which differ in the underlying assumptions and accordingly the network architectures, are referred to as the jamming model, the composer model and the hybrid model. We trained the proposed models on a dataset of over one hundred thousand bars of rock music and applied them to generate piano-rolls of ﬁve tracks: bass, drums, guitar, piano and strings. A few intratrack and inter-track objective metrics are also proposed to evaluate the generative results, in addition to a subjective user study. We show that our models can generate coherent music of four bars right from scratch (i.e. without human inputs). We also extend our models to human-AI cooperative music generation: given a speciﬁc track composed by human, we can generate four additional tracks to accompany it. All code, the dataset and the rendered audio samples are available at https://salu133445.github.io/musegan/.},
+	language = {en},
+	urldate = {2021-04-24},
+	journal = {arXiv:1709.06298 [cs, eess, stat]},
+	author = {Dong, Hao-Wen and Hsiao, Wen-Yi and Yang, Li-Chia and Yang, Yi-Hsuan},
+	month = nov,
+	year = {2017},
+	note = {arXiv: 1709.06298},
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing},
+	annote = {Comment: to appear at AAAI 2018},
+	file = {Dong et al. - 2017 - MuseGAN Multi-track Sequential Generative Adversa.pdf:/Users/jack/Zotero/storage/87WXIPST/Dong et al. - 2017 - MuseGAN Multi-track Sequential Generative Adversa.pdf:application/pdf}
+}
+
+@misc{noauthor_generative_2019,
+	title = {Generative {Modeling} with {Sparse} {Transformers}},
+	url = {https://openai.com/blog/sparse-transformer/},
+	abstract = {We've developed the Sparse Transformer, a deep neural network which sets new records at predicting what comes next in a sequence—whether text, images, or sound.},
+	language = {en},
+	urldate = {2021-04-24},
+	journal = {OpenAI},
+	month = apr,
+	year = {2019},
+	file = {Snapshot:/Users/jack/Zotero/storage/TR2RGN2S/sparse-transformer.html:text/html}
+}
+
+@article{child_generating_2019,
+	title = {Generating {Long} {Sequences} with {Sparse} {Transformers}},
+	url = {http://arxiv.org/abs/1904.10509},
+	abstract = {Transformers are powerful sequence models, but require time and memory that grows quadratically with the sequence length. In this paper we introduce sparse factorizations o√f the attention matrix which reduce this to O(n n). We also introduce a) a variation on architecture and initialization to train deeper networks, b) the recomputation of attention matrices to save memory, and c) fast attention kernels for training. We call networks with these changes Sparse Transformers, and show they can model sequences tens of thousands of timesteps long using hundreds of layers. We use the same architecture to model images, audio, and text from raw bytes, setting a new state of the art for density modeling of Enwik8, CIFAR10, and ImageNet-64. We generate unconditional samples that demonstrate global coherence and great diversity, and show it is possible in principle to use self-attention to model sequences of length one million or more.},
+	language = {en},
+	urldate = {2021-04-24},
+	journal = {arXiv:1904.10509 [cs, stat]},
+	author = {Child, Rewon and Gray, Scott and Radford, Alec and Sutskever, Ilya},
+	month = apr,
+	year = {2019},
+	note = {arXiv: 1904.10509},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning},
+	file = {Child et al. - 2019 - Generating Long Sequences with Sparse Transformers.pdf:/Users/jack/Zotero/storage/C6F94DJL/Child et al. - 2019 - Generating Long Sequences with Sparse Transformers.pdf:application/pdf}
+}
+
+@article{oore_this_2018,
+	title = {This {Time} with {Feeling}: {Learning} {Expressive} {Musical} {Performance}},
+	shorttitle = {This {Time} with {Feeling}},
+	url = {http://arxiv.org/abs/1808.03715},
+	abstract = {Music generation has generally been focused on either creating scores or interpreting them. We discuss differences between these two problems and propose that, in fact, it may be valuable to work in the space of direct \${\textbackslash}it performance\$ generation: jointly predicting the notes \${\textbackslash}it and\$ \${\textbackslash}it also\$ their expressive timing and dynamics. We consider the significance and qualities of the data set needed for this. Having identified both a problem domain and characteristics of an appropriate data set, we show an LSTM-based recurrent network model that subjectively performs quite well on this task. Critically, we provide generated examples. We also include feedback from professional composers and musicians about some of these examples.},
+	urldate = {2021-04-26},
+	journal = {arXiv:1808.03715 [cs, eess]},
+	author = {Oore, Sageev and Simon, Ian and Dieleman, Sander and Eck, Douglas and Simonyan, Karen},
+	month = aug,
+	year = {2018},
+	note = {arXiv: 1808.03715},
+	keywords = {Computer Science - Machine Learning, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing},
+	annote = {Comment: Includes links to urls for audio samples},
+	file = {arXiv.org Snapshot:/Users/jack/Zotero/storage/SKNKH8PB/1808.html:text/html;arXiv Fulltext PDF:/Users/jack/Zotero/storage/IH9TKCUJ/Oore et al. - 2018 - This Time with Feeling Learning Expressive Musica.pdf:application/pdf}
+}
+
+@article{dong_musegan_nodate,
+	title = {{MuseGAN}: {Multi}-{Track} {Sequential} {Generative} {Adversarial} {Networks} for {Symbolic} {Music} {Generation} and {Accompaniment}},
+	abstract = {Generating music has a few notable differences from generating images and videos. First, music is an art of time, necessitating a temporal model. Second, music is usually composed of multiple instruments/tracks with their own temporal dynamics, but collectively they unfold over time interdependently. Lastly, musical notes are often grouped into chords, arpeggios or melodies in polyphonic music, and thereby introducing a chronological ordering of notes is not naturally suitable. In this paper, we propose three models for symbolic multi-track music generation under the framework of generative adversarial networks (GANs). The three models, which differ in the underlying assumptions and accordingly the network architectures, are referred to as the jamming model, the composer model and the hybrid model. We trained the proposed models on a dataset of over one hundred thousand bars of rock music and applied them to generate piano-rolls of ﬁve tracks: bass, drums, guitar, piano and strings. A few intratrack and inter-track objective metrics are also proposed to evaluate the generative results, in addition to a subjective user study. We show that our models can generate coherent music of four bars right from scratch (i.e. without human inputs). We also extend our models to human-AI cooperative music generation: given a speciﬁc track composed by human, we can generate four additional tracks to accompany it. All code, the dataset and the rendered audio samples are available at https://salu133445.github.io/musegan/.},
+	language = {en},
+	author = {Dong, Hao-Wen and Hsiao, Wen-Yi and Yang, Li-Chia and Yang, Yi-Hsuan},
+	pages = {8},
+	file = {Dong et al. - MuseGAN Multi-Track Sequential Generative Adversa.pdf:/Users/jack/Zotero/storage/KDEQ68PR/Dong et al. - MuseGAN Multi-Track Sequential Generative Adversa.pdf:application/pdf}
+}
+
+@phdthesis{raffel_learning-based_2016,
+	title = {Learning-{Based} {Methods} for {Comparing} {Sequences}, with {Applications} to {Audio}-to-{MIDI} {Alignment} and {Matching}},
+	language = {en},
+	school = {Columbia University},
+	author = {Raffel, Colin},
+	year = {2016},
+	file = {Raffel - Learning-Based Methods for Comparing Sequences, wi.pdf:/Users/jack/Zotero/storage/C8X3GN4K/Raffel - Learning-Based Methods for Comparing Sequences, wi.pdf:application/pdf}
+}
+
+@article{briot_deep_2019,
+	title = {Deep {Learning} {Techniques} for {Music} {Generation} -- {A} {Survey}},
+	url = {http://arxiv.org/abs/1709.01620},
+	abstract = {This paper is a survey and an analysis of different ways of using deep learning (deep artificial neural networks) to generate musical content. We propose a methodology based on five dimensions for our analysis: Objective - What musical content is to be generated? Examples are: melody, polyphony, accompaniment or counterpoint. - For what destination and for what use? To be performed by a human(s) (in the case of a musical score), or by a machine (in the case of an audio file). Representation - What are the concepts to be manipulated? Examples are: waveform, spectrogram, note, chord, meter and beat. - What format is to be used? Examples are: MIDI, piano roll or text. - How will the representation be encoded? Examples are: scalar, one-hot or many-hot. Architecture - What type(s) of deep neural network is (are) to be used? Examples are: feedforward network, recurrent network, autoencoder or generative adversarial networks. Challenge - What are the limitations and open challenges? Examples are: variability, interactivity and creativity. Strategy - How do we model and control the process of generation? Examples are: single-step feedforward, iterative feedforward, sampling or input manipulation. For each dimension, we conduct a comparative analysis of various models and techniques and we propose some tentative multidimensional typology. This typology is bottom-up, based on the analysis of many existing deep-learning based systems for music generation selected from the relevant literature. These systems are described and are used to exemplify the various choices of objective, representation, architecture, challenge and strategy. The last section includes some discussion and some prospects.},
+	language = {en},
+	urldate = {2021-04-30},
+	journal = {arXiv:1709.01620 [cs]},
+	author = {Briot, Jean-Pierre and Hadjeres, Gaëtan and Pachet, François-David},
+	month = aug,
+	year = {2019},
+	note = {arXiv: 1709.01620},
+	keywords = {Computer Science - Machine Learning, Computer Science - Sound},
+	annote = {Comment: 209 pages. This paper is a simplified version of the book: J.-P. Briot, G. Hadjeres and F.-D. Pachet, Deep Learning Techniques for Music Generation, Computational Synthesis and Creative Systems, Springer, 2019},
+	file = {Briot et al. - 2019 - Deep Learning Techniques for Music Generation -- A.pdf:/Users/jack/Zotero/storage/KI9RMY6A/Briot et al. - 2019 - Deep Learning Techniques for Music Generation -- A.pdf:application/pdf}
+}
+
+@article{dong_pypianoroll_nodate,
+	title = {Pypianoroll: {Open} {Source} {Python} {Package} for {Handling} {Multitrack} {Pianoroll}},
+	abstract = {The pianoroll representation represents music data as timepitch matrices. Although it has been used widely as a way to visualize music data, it has not been much used in computational modeling of music. To promote its usage, we present in this paper a new, open source Python package called Pypianoroll for handling multitrack pianorolls. The core element of Pypianoroll is a new, lightweight multitrack pianoroll format that contains additional tempo and program information along with the pianoroll matrices. It provides tools for creating, manipulating, storing, analyzing and visualizing multitrack pianorolls in an intuitive way. Code and documentation are available at https: //github.com/salu133445/pypianoroll.},
+	language = {en},
+	author = {Dong, Hao-Wen and Hsiao, Wen-Yi},
+	pages = {2},
+	file = {Dong and Hsiao - Pypianoroll Open Source Python Package for Handli.pdf:/Users/jack/Zotero/storage/4X5RN6FL/Dong and Hsiao - Pypianoroll Open Source Python Package for Handli.pdf:application/pdf}
+}
+
+@misc{noauthor_flow_nodate,
+	title = {Flow {Machines} – {AI} assisted music production},
+	url = {https://www.flow-machines.com/},
+	abstract = {AI assisted music production},
+	language = {en},
+	urldate = {2021-05-02},
+	journal = {Flow Machines}
+}
+
+@misc{chen_generating_2021,
+	title = {Generating {Music} {Using} {LSTM} {Neural} {Network}},
+	url = {https://becominghuman.ai/generating-music-using-lstm-neural-network-545f3ac57552},
+	abstract = {Have you ever wondered what goes into a creative mind? Creativity, especially artistic creativity, has long been considered innately human…},
+	language = {en},
+	urldate = {2021-05-02},
+	journal = {Medium},
+	author = {Chen, Linan},
+	month = feb,
+	year = {2021},
+	file = {Snapshot:/Users/jack/Zotero/storage/8PFRGHDI/generating-music-using-lstm-neural-network-545f3ac57552.html:text/html}
+}
+
+@misc{issa_generating_2019,
+	title = {Generating {Original} {Classical} {Music} with an {LSTM} {Neural} {Network} and {Attention}},
+	url = {https://medium.com/@alexissa122/generating-original-classical-music-with-an-lstm-neural-network-and-attention-abf03f9ddcb4},
+	abstract = {By: Anushree Biradar, Michael Herrington, Alex Issa, Jake Nimergood, Isabelle Rogers, Arjun Singh},
+	language = {en},
+	urldate = {2021-05-02},
+	journal = {Medium},
+	author = {Issa, Alex},
+	month = jul,
+	year = {2019},
+	file = {Snapshot:/Users/jack/Zotero/storage/AZGZN8EJ/generating-original-classical-music-with-an-lstm-neural-network-and-attention-abf03f9ddcb4.html:text/html}
+}
+
+@article{kang_project_nodate,
+	title = {Project milestone: {Generating} music with {Machine} {Learning}},
+	abstract = {Composing music is a very interesting challenge that tests the composer’s creative capacity, whether it a human or a computer. Although there have been many arguments on the matter, almost all of music is some regurgitation or alteration of a sonic idea created before. Thus, with enough data and the correct algorithm, machine learning should be able to make music that would sound human. This report outlines various approaches to music composition through Naive Bayes and Neural Network models, and although there were some mixed results by the model, it is evident that musical ideas can be gleaned from these algorithms in hopes of making a new piece of music.},
+	language = {en},
+	author = {Kang, David and Kim, Jung Youn and Ringdahl, Simen},
+	pages = {6},
+	file = {Kang et al. - Project milestone Generating music with Machine L.pdf:/Users/jack/Zotero/storage/CBDUWT5S/Kang et al. - Project milestone Generating music with Machine L.pdf:application/pdf}
+}
+
+@article{huzaifah_deep_2020,
+	title = {Deep generative models for musical audio synthesis},
+	url = {http://arxiv.org/abs/2006.06426},
+	abstract = {Sound modelling is the process of developing algorithms that generate sound under parametric control. There are a few distinct approaches that have been developed historically including modelling the physics of sound production and propagation, assembling signal generating and processing elements to capture acoustic features, and manipulating collections of recorded audio samples. While each of these approaches has been able to achieve high-quality synthesis and interaction for speciﬁc applications, they are all labour-intensive and each comes with its own challenges for designing arbitrary control strategies. Recent generative deep learning systems for audio synthesis are able to learn models that can traverse arbitrary spaces of sound deﬁned by the data they train on. Furthermore, machine learning systems are providing new techniques for designing control and navigation strategies for these models. This paper is a review of developments in deep learning that are changing the practice of sound modelling.},
+	language = {en},
+	urldate = {2021-05-04},
+	journal = {arXiv:2006.06426 [cs, eess, stat]},
+	author = {Huzaifah, M. and Wyse, L.},
+	month = nov,
+	year = {2020},
+	note = {arXiv: 2006.06426},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing, I.2.6, J.5},
+	annote = {Comment: This is the authors' own pre-submission version of a chapter for Handbook of Artificial Intelligence for Music: Foundations, Advanced Approaches, and Developments for Creativity, edited by Eduardo R. Miranda, for Springer},
+	file = {Huzaifah and Wyse - 2020 - Deep generative models for musical audio synthesis.pdf:/Users/jack/Zotero/storage/684REWFP/Huzaifah and Wyse - 2020 - Deep generative models for musical audio synthesis.pdf:application/pdf}
+}
+
+@misc{bird_jordan-birdkeras-lstm-music-generator_2021,
+	title = {jordan-bird/{Keras}-{LSTM}-{Music}-{Generator}},
+	url = {https://github.com/jordan-bird/Keras-LSTM-Music-Generator},
+	abstract = {Generate music with LSTMs in Keras. Contribute to jordan-bird/Keras-LSTM-Music-Generator development by creating an account on GitHub.},
+	urldate = {2021-05-04},
+	author = {Bird, Jordan J.},
+	month = may,
+	year = {2021},
+	note = {original-date: 2020-08-29T21:37:45Z}
+}
+
+@misc{alexissa32_alexissa32datasciencemusic_2021,
+	title = {alexissa32/{DataScienceMusic}},
+	url = {https://github.com/alexissa32/DataScienceMusic},
+	abstract = {Contribute to alexissa32/DataScienceMusic development by creating an account on GitHub.},
+	urldate = {2021-05-04},
+	author = {alexissa32},
+	month = mar,
+	year = {2021},
+	note = {original-date: 2019-05-11T18:59:41Z}
+}
+
+@inproceedings{may_handling_2009,
+	address = {Paris, France},
+	title = {Handling missing values in {GPS} surveys using survival analysis: a {GPS} case study of outdoor advertising},
+	isbn = {978-1-60558-671-7},
+	shorttitle = {Handling missing values in {GPS} surveys using survival analysis},
+	url = {http://portal.acm.org/citation.cfm?doid=1592748.1592759},
+	doi = {10.1145/1592748.1592759},
+	abstract = {GPS technology has made it possible to evaluate the performance of outdoor advertising campaigns in an objective manner. Given the GPS trajectories of a sample of test persons over several days, their passages with arbitrary poster campaigns can be calculated. However, inference is complicated by the early dropout of persons. Other than in most demonstrations of spatial data mining algorithms where the structure of the data sample is usually disregarded, poster performance measures such as reach and gross impressions evolve continuously over time and require non-intermittent observations. In this paper, we investigate the applicability of survival analysis to compensate for missing measurement days. We formalize the task of modeling the visit potential of geographic locations based on trajectory data as our variable of interest results from dispersed events in space-time. We perform experiments on the cities of Zurich and Bern simulating diﬀerent dropout mechanisms and dropout rates and show the adequacy of the applied method. Our modeling technique is at present part of a business solution for the Swiss outdoor advertising branch and serves as pricing basis for the majority of Swiss poster locations.},
+	language = {en},
+	urldate = {2021-05-08},
+	booktitle = {Proceedings of the {Third} {International} {Workshop} on {Data} {Mining} and {Audience} {Intelligence} for {Advertising} - {ADKDD} '09},
+	publisher = {ACM Press},
+	author = {May, Michael and Körner, Christine and Hecker, Dirk and Pasquier, Martial and Hofmann, Urs and Mende, Felix},
+	year = {2009},
+	pages = {78--84},
+	file = {May et al. - 2009 - Handling missing values in GPS surveys using survi.pdf:/Users/jack/Zotero/storage/FQSSB9LM/May et al. - 2009 - Handling missing values in GPS surveys using survi.pdf:application/pdf}
+}
+
+@article{ycart_learning_2020-1,
+	title = {Learning and {Evaluation} {Methodologies} for {Polyphonic} {Music} {Sequence} {Prediction} {With} {LSTMs}},
+	volume = {28},
+	issn = {2329-9304},
+	doi = {10.1109/TASLP.2020.2987130},
+	abstract = {Music language models play an important role for various music signal and symbolic music processing tasks, such as music generation, symbolic music classification, or automatic music transcription (AMT). In this article, we investigate Long Short-Term Memory (LSTM) networks for polyphonic music prediction, in the form of binary piano rolls. A preliminary experiment, assessing the influence of the timestep of piano rolls on system performance, highlights the need for more musical evaluation metrics. We introduce a range of metrics, focusing on temporal and harmonic aspects. We propose to combine them into a parametrisable loss to train our network. We then conduct a range of experiments with this new loss, both for polyphonic music prediction (intrinsic evaluation) and using our predictive model as a language model for AMT (extrinsic evaluation). Intrinsic evaluation shows that tuning the behaviour of a model is possible by adjusting loss parameters, with consistent results across timesteps. Extrinsic evaluation shows consistent behaviour across timesteps in terms of precision and recall with respect to the loss parameters, leading to an improvement in AMT performance without changing the complexity of the model. In particular, we show that intrinsic performance (in terms of cross entropy) is not related to extrinsic performance, highlighting the importance of using custom training losses for each specific application. Our model also compares favourably with previously proposed MLMs.},
+	journal = {IEEE/ACM Transactions on Audio, Speech, and Language Processing},
+	author = {Ycart, Adrien and Benetos, Emmanouil},
+	year = {2020},
+	note = {Conference Name: IEEE/ACM Transactions on Audio, Speech, and Language Processing},
+	keywords = {automatic music transcription (AMT), Computational modeling, Hidden Markov models, long short-term memory (LSTM), Multiple signal classification, Music, Music language models (MLMs), polyphonic music sequence prediction, Predictive models, recurrent neural networks, Speech processing},
+	pages = {1328--1341},
+	file = {IEEE Xplore Full Text PDF:/Users/jack/Zotero/storage/AUPPGKH6/Ycart and Benetos - 2020 - Learning and Evaluation Methodologies for Polyphon.pdf:application/pdf}
+}
+
+@article{sigtia_end--end_2016,
+	title = {An {End}-to-{End} {Neural} {Network} for {Polyphonic} {Piano} {Music} {Transcription}},
+	url = {http://arxiv.org/abs/1508.01774},
+	abstract = {We present a supervised neural network model for polyphonic piano music transcription. The architecture of the proposed model is analogous to speech recognition systems and comprises an acoustic model and a music language model. The acoustic model is a neural network used for estimating the probabilities of pitches in a frame of audio. The language model is a recurrent neural network that models the correlations between pitch combinations over time. The proposed model is general and can be used to transcribe polyphonic music without imposing any constraints on the polyphony. The acoustic and language model predictions are combined using a probabilistic graphical model. Inference over the output variables is performed using the beam search algorithm. We perform two sets of experiments. We investigate various neural network architectures for the acoustic models and also investigate the effect of combining acoustic and music language model predictions using the proposed architecture. We compare performance of the neural network based acoustic models with two popular unsupervised acoustic models. Results show that convolutional neural network acoustic models yields the best performance across all evaluation metrics. We also observe improved performance with the application of the music language models. Finally, we present an efficient variant of beam search that improves performance and reduces run-times by an order of magnitude, making the model suitable for real-time applications.},
+	urldate = {2021-05-10},
+	journal = {arXiv:1508.01774 [cs, stat]},
+	author = {Sigtia, Siddharth and Benetos, Emmanouil and Dixon, Simon},
+	month = feb,
+	year = {2016},
+	note = {arXiv: 1508.01774},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound}
+}
+
+@article{sigtia_end--end_2016-1,
+	title = {An {End}-to-{End} {Neural} {Network} for {Polyphonic} {Piano} {Music} {Transcription}},
+	url = {http://arxiv.org/abs/1508.01774},
+	abstract = {We present a supervised neural network model for polyphonic piano music transcription. The architecture of the proposed model is analogous to speech recognition systems and comprises an acoustic model and a music language model. The acoustic model is a neural network used for estimating the probabilities of pitches in a frame of audio. The language model is a recurrent neural network that models the correlations between pitch combinations over time. The proposed model is general and can be used to transcribe polyphonic music without imposing any constraints on the polyphony. The acoustic and language model predictions are combined using a probabilistic graphical model. Inference over the output variables is performed using the beam search algorithm. We perform two sets of experiments. We investigate various neural network architectures for the acoustic models and also investigate the effect of combining acoustic and music language model predictions using the proposed architecture. We compare performance of the neural network based acoustic models with two popular unsupervised acoustic models. Results show that convolutional neural network acoustic models yields the best performance across all evaluation metrics. We also observe improved performance with the application of the music language models. Finally, we present an efficient variant of beam search that improves performance and reduces run-times by an order of magnitude, making the model suitable for real-time applications.},
+	urldate = {2021-05-10},
+	journal = {arXiv:1508.01774 [cs, stat]},
+	author = {Sigtia, Siddharth and Benetos, Emmanouil and Dixon, Simon},
+	month = feb,
+	year = {2016},
+	note = {arXiv: 1508.01774},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound}
+}
+
+@article{sigtia_end--end_2016-2,
+	title = {An {End}-to-{End} {Neural} {Network} for {Polyphonic} {Piano} {Music} {Transcription}},
+	url = {http://arxiv.org/abs/1508.01774},
+	abstract = {We present a supervised neural network model for polyphonic piano music transcription. The architecture of the proposed model is analogous to speech recognition systems and comprises an acoustic model and a music language model. The acoustic model is a neural network used for estimating the probabilities of pitches in a frame of audio. The language model is a recurrent neural network that models the correlations between pitch combinations over time. The proposed model is general and can be used to transcribe polyphonic music without imposing any constraints on the polyphony. The acoustic and language model predictions are combined using a probabilistic graphical model. Inference over the output variables is performed using the beam search algorithm. We perform two sets of experiments. We investigate various neural network architectures for the acoustic models and also investigate the effect of combining acoustic and music language model predictions using the proposed architecture. We compare performance of the neural network based acoustic models with two popular unsupervised acoustic models. Results show that convolutional neural network acoustic models yields the best performance across all evaluation metrics. We also observe improved performance with the application of the music language models. Finally, we present an efficient variant of beam search that improves performance and reduces run-times by an order of magnitude, making the model suitable for real-time applications.},
+	urldate = {2021-05-10},
+	journal = {arXiv:1508.01774 [cs, stat]},
+	author = {Sigtia, Siddharth and Benetos, Emmanouil and Dixon, Simon},
+	month = feb,
+	year = {2016},
+	note = {arXiv: 1508.01774},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound}
+}
+
+@misc{noauthor_notitle_nodate-1,
+	url = {http://www-etud.iro.umontreal.ca/~boulanni/icml2012},
+	urldate = {2021-05-10},
+	file = {www-etud.iro.umontreal.ca/~boulanni/icml2012:/Users/jack/Zotero/storage/FSZW5KRL/icml2012.html:text/html}
+}
+
+@misc{johnson_composing_2015,
+	title = {Composing {Music} {With} {Recurrent} {Neural} {Networks}},
+	url = {https://www.danieldjohnson.com/2015/08/03/composing-music-with-recurrent-neural-networks/},
+	abstract = {(Update: A paper based on this work has been accepted at EvoMusArt 2017! See here for more details.)},
+	language = {en},
+	urldate = {2021-05-10},
+	journal = {Daniel D. Johnson},
+	author = {Johnson, Daniel},
+	month = aug,
+	year = {2015},
+	file = {Snapshot:/Users/jack/Zotero/storage/V9KPGKNI/composing-music-with-recurrent-neural-networks.html:text/html}
+}
+
+@article{boulanger-lewandowski_modeling_2012,
+	title = {Modeling {Temporal} {Dependencies} in {High}-{Dimensional} {Sequences}: {Application} to {Polyphonic} {Music} {Generation} and {Transcription}},
+	shorttitle = {Modeling {Temporal} {Dependencies} in {High}-{Dimensional} {Sequences}},
+	url = {http://arxiv.org/abs/1206.6392},
+	abstract = {We investigate the problem of modeling symbolic sequences of polyphonic music in a completely general piano-roll representation. We introduce a probabilistic model based on distribution estimators conditioned on a recurrent neural network that is able to discover temporal dependencies in high-dimensional sequences. Our approach outperforms many traditional models of polyphonic music on a variety of realistic datasets. We show how our musical language model can serve as a symbolic prior to improve the accuracy of polyphonic transcription.},
+	urldate = {2021-05-10},
+	journal = {arXiv:1206.6392 [cs, stat]},
+	author = {Boulanger-Lewandowski, Nicolas and Bengio, Yoshua and Vincent, Pascal},
+	month = jun,
+	year = {2012},
+	note = {arXiv: 1206.6392},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound},
+	annote = {Comment: Appears in Proceedings of the 29th International Conference on Machine Learning (ICML 2012)},
+	file = {arXiv.org Snapshot:/Users/jack/Zotero/storage/5H2TPPA9/1206.html:text/html;arXiv Fulltext PDF:/Users/jack/Zotero/storage/TMVLVIAF/Boulanger-Lewandowski et al. - 2012 - Modeling Temporal Dependencies in High-Dimensional.pdf:application/pdf}
+}
+
+@article{kumar_polyphonic_2019,
+	title = {Polyphonic {Music} {Composition} with {LSTM} {Neural} {Networks} and {Reinforcement} {Learning}},
+	url = {http://arxiv.org/abs/1902.01973},
+	abstract = {In the domain of algorithmic music composition, machine learning-driven systems eliminate the need for carefully hand-crafting rules for composition. In particular, the capability of recurrent neural networks to learn complex temporal patterns lends itself well to the musical domain. Promising results have been observed across a number of recent attempts at music composition using deep RNNs. These approaches generally aim at first training neural networks to reproduce subsequences drawn from existing songs. Subsequently, they are used to compose music either at the audio sample-level or at the note-level. We designed a representation that divides polyphonic music into a small number of monophonic streams. This representation greatly reduces the complexity of the problem and eliminates an exponential number of probably poor compositions. On top of our LSTM neural network that learnt musical sequences in this representation, we built an RL agent that learnt to find combinations of songs whose joint dominance produced pleasant compositions. We present Amadeus, an algorithmic music composition system that composes music that consists of intricate melodies, basic chords, and even occasional contrapuntal sequences.},
+	urldate = {2021-05-10},
+	journal = {arXiv:1902.01973 [cs, eess, stat]},
+	author = {Kumar, Harish and Ravindran, Balaraman},
+	month = mar,
+	year = {2019},
+	note = {arXiv: 1902.01973},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing},
+	file = {arXiv.org Snapshot:/Users/jack/Zotero/storage/8PR5W6ED/1902.html:text/html;arXiv Fulltext PDF:/Users/jack/Zotero/storage/CYZM9PKC/Kumar and Ravindran - 2019 - Polyphonic Music Composition with LSTM Neural Netw.pdf:application/pdf}
+}
+
+@article{balaji_memory-enhanced_nodate,
+	title = {Memory-{Enhanced} {Machine} {Learning} {Models} for {Music} {Generation}},
+	abstract = {The problem of training a model to generate novel music falls under the broader umbrella of generative modeling for sequential data. Prior to the deep learning era, generative models for sequential data were often addressed with Markov-modelbased approaches. In recent years, deep learning has taken over as state-of-the-art. We examine and thoroughly analyze a variety of different music representations and generative models (particularly Markov chains and recurrent neural networks), with the goal of learning and generating longer-term musical structure. After studying the limitations of standard Markov chains, we proceed to develop a novel hybrid approach: a kth-order Markov chain with an external memory, better-suited for learning long-term structure. We also demonstrate how a thoughtfully-chosen data representation can lead LSTMs to generate very pleasant music even without external memory.},
+	language = {en},
+	author = {Balaji, Ramesh and Dabral, Tanmaya and Karp, Stefani},
+	pages = {10},
+	file = {Balaji et al. - Memory-Enhanced Machine Learning Models for Music .pdf:/Users/jack/Zotero/storage/F38B9X5U/Balaji et al. - Memory-Enhanced Machine Learning Models for Music .pdf:application/pdf}
+}
+
+@misc{lianghsia_lianghsiamidi-s2_2021,
+	title = {{LiangHsia}/{MIDI}-{S2}},
+	url = {https://github.com/LiangHsia/MIDI-S2},
+	abstract = {Contribute to LiangHsia/MIDI-S2 development by creating an account on GitHub.},
+	urldate = {2021-05-10},
+	author = {LiangHsia},
+	month = feb,
+	year = {2021},
+	note = {original-date: 2019-07-15T20:36:44Z}
+}
+
+@article{liang_midi-sandwich2_2019,
+	title = {{MIDI}-{Sandwich2}: {RNN}-based {Hierarchical} {Multi}-modal {Fusion} {Generation} {VAE} networks for multi-track symbolic music generation},
+	shorttitle = {{MIDI}-{Sandwich2}},
+	url = {http://arxiv.org/abs/1909.03522},
+	abstract = {Currently, almost all the multi-track music generation models use the Convolutional Neural Network (CNN) to build the generative model, while the Recurrent Neural Network (RNN) based models can not be applied in this task. In view of the above problem, this paper proposes a RNN-based Hierarchical Multi-modal Fusion Generation Variational Autoencoder (VAE) network, MIDI-Sandwich2, for multi-track symbolic music generation. Inspired by VQ-VAE2, MIDI-Sandwich2 expands the dimension of the original hierarchical model by using multiple independent Binary Variational Autoencoder (BVAE) models without sharing weights to process the information of each track. Then, with multi-modal fusion technology, the upper layer named Multi-modal Fusion Generation VAE (MFG-VAE) combines the latent space vectors generated by the respective tracks, and uses the decoder to perform the ascending dimension reconstruction to simulate the inverse operation of multi-modal fusion, multi-modal generation, so as to realize the RNN-based multi-track symbolic music generation. For the multi-track format pianoroll, we also improve the output binarization method of MuseGAN, which solves the problem that the refinement step of the original scheme is difficult to differentiate and the gradient is hard to descent, making the generated song more expressive. The model is validated on the Lakh Pianoroll Dataset (LPD) multi-track dataset. Compared to the MuseGAN, MIDI-Sandwich2 can not only generate harmonious multi-track music, the generation quality is also close to the state of the art level. At the same time, by using the VAE to restore songs, the semi-generated songs reproduced by the MIDI-Sandwich2 are more beautiful than the pure autogeneration music generated by MuseGAN. Both the code and the audition audio samples are open source on https://github.com/LiangHsia/MIDI-S2.},
+	urldate = {2021-05-10},
+	journal = {arXiv:1909.03522 [cs, eess]},
+	author = {Liang, Xia and Wu, Junmin and Cao, Jing},
+	month = sep,
+	year = {2019},
+	note = {arXiv: 1909.03522},
+	keywords = {Computer Science - Machine Learning, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing},
+	file = {arXiv.org Snapshot:/Users/jack/Zotero/storage/P5YVTDUX/1909.html:text/html;arXiv Fulltext PDF:/Users/jack/Zotero/storage/8BJV3HY4/Liang et al. - 2019 - MIDI-Sandwich2 RNN-based Hierarchical Multi-modal.pdf:application/pdf}
+}
+
+@misc{bayle_ybayleawesome-deep-learning-music_2021,
+	title = {ybayle/awesome-deep-learning-music},
+	copyright = {MIT License         ,                 MIT License},
+	url = {https://github.com/ybayle/awesome-deep-learning-music},
+	abstract = {List of articles related to deep learning applied to music},
+	urldate = {2021-05-10},
+	author = {Bayle, Yann},
+	month = may,
+	year = {2021},
+	note = {original-date: 2017-08-15T17:36:33Z},
+	keywords = {article, audio, audio-processing, awesome, awesome-list, bib, deep-learning, deep-neural-networks, deeplearning, list, lists, machine-learning, music, music-genre-classification, music-information-retrieval, neural-network, neural-networks, research, resources, unicorns}
+}
+
+@misc{adrienycart_adrienycartpolymusicpredlstm_2020,
+	title = {adrienycart/{PolyMusicPredLSTM}},
+	url = {https://github.com/adrienycart/PolyMusicPredLSTM},
+	abstract = {Polyphonic music sequence prediction with LSTM networks},
+	urldate = {2021-05-10},
+	author = {adrienycart},
+	month = jun,
+	year = {2020},
+	note = {original-date: 2020-03-05T22:33:12Z}
+}
+
+@article{wang_performancenet_2018,
+	title = {{PerformanceNet}: {Score}-to-{Audio} {Music} {Generation} with {Multi}-{Band} {Convolutional} {Residual} {Network}},
+	shorttitle = {{PerformanceNet}},
+	url = {http://arxiv.org/abs/1811.04357},
+	abstract = {Music creation is typically composed of two parts: composing the musical score, and then performing the score with instruments to make sounds. While recent work has made much progress in automatic music generation in the symbolic domain, few attempts have been made to build an AI model that can render realistic music audio from musical scores. Directly synthesizing audio with sound sample libraries often leads to mechanical and deadpan results, since musical scores do not contain performance-level information, such as subtle changes in timing and dynamics. Moreover, while the task may sound like a text-to-speech synthesis problem, there are fundamental differences since music audio has rich polyphonic sounds. To build such an AI performer, we propose in this paper a deep convolutional model that learns in an end-to-end manner the score-to-audio mapping between a symbolic representation of music called the piano rolls and an audio representation of music called the spectrograms. The model consists of two subnets: the ContourNet, which uses a U-Net structure to learn the correspondence between piano rolls and spectrograms and to give an initial result; and the TextureNet, which further uses a multi-band residual network to refine the result by adding the spectral texture of overtones and timbre. We train the model to generate music clips of the violin, cello, and flute, with a dataset of moderate size. We also present the result of a user study that shows our model achieves higher mean opinion score (MOS) in naturalness and emotional expressivity than a WaveNet-based model and two commercial sound libraries. We open our source code at https://github.com/bwang514/PerformanceNet},
+	language = {en},
+	urldate = {2021-05-12},
+	journal = {arXiv:1811.04357 [cs, eess]},
+	author = {Wang, Bryan and Yang, Yi-Hsuan},
+	month = nov,
+	year = {2018},
+	note = {arXiv: 1811.04357},
+	keywords = {Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing, Computer Science - Multimedia},
+	annote = {Comment: 8 pages, 6 figures, AAAI 2019 camera-ready version},
+	file = {Wang and Yang - 2018 - PerformanceNet Score-to-Audio Music Generation wi.pdf:/Users/jack/Zotero/storage/W7TM22PK/Wang and Yang - 2018 - PerformanceNet Score-to-Audio Music Generation wi.pdf:application/pdf}
+}
+
+@article{cuthbert_music21_2010,
+	title = {music21: {A} {Toolkit} for {Computer}-{Aided} {Musicology} and {Symbolic} {Music} {Data}},
+	abstract = {Music21 is an object-oriented toolkit for analyzing, searching, and transforming music in symbolic (scorebased) forms. The modular approach of the project allows musicians and researchers to write simple scripts rapidly and reuse them in other projects. The toolkit aims to provide powerful software tools integrated with sophisticated musical knowledge to both musicians with little programming experience (especially musicologists) and to programmers with only modest music theory skills.},
+	language = {en},
+	author = {Cuthbert, Michael Scott and Ariza, Christopher},
+	year = {2010},
+	pages = {6},
+	file = {Cuthbert and Ariza - 2010 - music21 A Toolkit for Computer-Aided Musicology a.pdf:/Users/jack/Zotero/storage/6TU6QXT6/Cuthbert and Ariza - 2010 - music21 A Toolkit for Computer-Aided Musicology a.pdf:application/pdf}
+}
+
+@article{cuthbert_feature_nodate,
+	title = {{FEATURE} {EXTRACTION} {AND} {MACHINE} {LEARNING}},
+	abstract = {Machine learning and artificial intelligence have great potential to help researchers understand and classify musical scores and other symbolic musical data, but the difficulty of preparing and extracting characteristics (features) from symbolic scores has hindered musicologists (and others who examine scores closely) from using these techniques. This paper describes the “feature” capabilities of music21, a general-purpose, open source toolkit for analyzing, searching, and transforming symbolic music data. The features module of music21 integrates standard featureextraction tools provided by other toolkits, includes new tools, and also allows researchers to write new and powerful extraction methods quickly. These developments take advantage of the system’s built-in capacities to parse diverse data formats and to manipulate complex scores (e.g., by reducing them to a series of chords, determining key or metrical strength automatically, or integrating audio data). This paper’s demonstrations combine music21 with the data mining toolkits Orange and Weka to distinguish works by Monteverdi from works by Bach and German folk music from Chinese folk music.},
+	language = {en},
+	author = {Cuthbert, Michael Scott and Ariza, Christopher and Friedland, Lisa},
+	pages = {6},
+	file = {Cuthbert et al. - FEATURE EXTRACTION AND MACHINE LEARNING.pdf:/Users/jack/Zotero/storage/9SCT4KJG/Cuthbert et al. - FEATURE EXTRACTION AND MACHINE LEARNING.pdf:application/pdf}
+}
+
+@misc{cuthbert_music21_nodate,
+	title = {music21: a {Toolkit} for {Computer}-{Aided} {Musicology}},
+	url = {https://web.mit.edu/music21/},
+	urldate = {2021-05-15},
+	author = {Cuthbert, Michael},
+	file = {music21\: a Toolkit for Computer-Aided Musicology:/Users/jack/Zotero/storage/I75QQTGV/music21.html:text/html}
+}
+
+@misc{noauthor_google_nodate,
+	title = {Google {Colaboratory}},
+	url = {https://colab.research.google.com/github/cpmpercussion/creative-prediction/blob/master/notebooks/3-zeldic-musical-RNN.ipynb},
+	language = {en},
+	urldate = {2021-05-16},
+	file = {Snapshot:/Users/jack/Zotero/storage/2D3EH6B9/3-zeldic-musical-RNN.html:text/html}
+}
+
+@misc{cerliani_time_2020,
+	title = {Time {Series} generation with {VAE} {LSTM}},
+	url = {https://towardsdatascience.com/time-series-generation-with-vae-lstm-5a6426365a1c},
+	abstract = {Filling Time Series with Generative Deep Learning Models},
+	language = {en},
+	urldate = {2021-05-19},
+	journal = {Medium},
+	author = {Cerliani, Marco},
+	month = dec,
+	year = {2020},
+	file = {Snapshot:/Users/jack/Zotero/storage/P6NJ9FRN/time-series-generation-with-vae-lstm-5a6426365a1c.html:text/html}
+}
+
+@misc{noauthor_cerlymarcomedium_notebook_nodate,
+	title = {cerlymarco/{MEDIUM}\_NoteBook},
+	url = {https://github.com/cerlymarco/MEDIUM_NoteBook},
+	abstract = {Repository containing notebooks of my posts on Medium - cerlymarco/MEDIUM\_NoteBook},
+	language = {en},
+	urldate = {2021-05-19},
+	journal = {GitHub},
+	file = {Snapshot:/Users/jack/Zotero/storage/UMNDHZQ4/VAE_TimeSeries.html:text/html}
+}
+
+@misc{noauthor_keras_2018,
+	title = {Keras: {Multiple} outputs and multiple losses},
+	shorttitle = {Keras},
+	url = {https://www.pyimagesearch.com/2018/06/04/keras-multiple-outputs-and-multiple-losses/},
+	abstract = {Learn how to use multiple fully-connected heads and multiple loss functions to create a multi-output deep neural network using Python, Keras, and deep learning.},
+	language = {en-US},
+	urldate = {2021-05-20},
+	journal = {PyImageSearch},
+	month = jun,
+	year = {2018},
+	file = {Snapshot:/Users/jack/Zotero/storage/M2IMVNPD/keras-multiple-outputs-and-multiple-losses.html:text/html}
+}
+
+@misc{noauthor_generate_nodate,
+	title = {Generate music with {Variational} {AutoEncoder}},
+	url = {https://kaggle.com/basu369victor/generate-music-with-variational-autoencoder},
+	abstract = {Explore and run machine learning code with Kaggle Notebooks {\textbar} Using data from GTZAN Dataset - Music Genre Classification},
+	language = {en},
+	urldate = {2021-05-20},
+	file = {Snapshot:/Users/jack/Zotero/storage/98LYGUWM/generate-music-with-variational-autoencoder.html:text/html}
+}
+
+@misc{ub_musicvae_2019,
+	title = {{MUSICVAE} — {Understanding} of the google’s work for interpolating two music sequences},
+	url = {https://medium.com/@musicvaeubcse/musicvae-understanding-of-the-googles-work-for-interpolating-two-music-sequences-621dcbfa307c},
+	abstract = {Overview : Music VAE},
+	language = {en},
+	urldate = {2021-05-20},
+	journal = {Medium},
+	author = {ub, Music\_VAE},
+	month = may,
+	year = {2019},
+	file = {Snapshot:/Users/jack/Zotero/storage/C4RK4N93/musicvae-understanding-of-the-googles-work-for-interpolating-two-music-sequences-621dcbfa307c.html:text/html}
+}
+
+@article{brunner_midi-vae_2018,
+	title = {{MIDI}-{VAE}: {Modeling} {Dynamics} and {Instrumentation} of {Music} with {Applications} to {Style} {Transfer}},
+	shorttitle = {{MIDI}-{VAE}},
+	url = {http://arxiv.org/abs/1809.07600},
+	abstract = {We introduce MIDI-VAE, a neural network model based on Variational Autoencoders that is capable of handling polyphonic music with multiple instrument tracks, as well as modeling the dynamics of music by incorporating note durations and velocities. We show that MIDI-VAE can perform style transfer on symbolic music by automatically changing pitches, dynamics and instruments of a music piece from, e.g., a Classical to a Jazz style. We evaluate the efficacy of the style transfer by training separate style validation classifiers. Our model can also interpolate between short pieces of music, produce medleys and create mixtures of entire songs. The interpolations smoothly change pitches, dynamics and instrumentation to create a harmonic bridge between two music pieces. To the best of our knowledge, this work represents the first successful attempt at applying neural style transfer to complete musical compositions.},
+	urldate = {2021-05-21},
+	journal = {arXiv:1809.07600 [cs, eess, stat]},
+	author = {Brunner, Gino and Konrad, Andres and Wang, Yuyi and Wattenhofer, Roger},
+	month = sep,
+	year = {2018},
+	note = {arXiv: 1809.07600},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing, H.5.5, I.2.6, I.2.1, I.2.4},
+	annote = {Comment: Paper accepted at the 19th International Society for Music Information Retrieval Conference, ISMIR 2018, Paris, France},
+	file = {arXiv.org Snapshot:/Users/jack/Zotero/storage/J8MB2WDT/1809.html:text/html;arXiv Fulltext PDF:/Users/jack/Zotero/storage/2DMW2YGT/Brunner et al. - 2018 - MIDI-VAE Modeling Dynamics and Instrumentation of.pdf:application/pdf}
+}
+
+@article{brunner_midi-vae_2018-1,
+	title = {{MIDI}-{VAE}: {Modeling} {Dynamics} and {Instrumentation} of {Music} with {Applications} to {Style} {Transfer}},
+	shorttitle = {{MIDI}-{VAE}},
+	url = {http://arxiv.org/abs/1809.07600},
+	abstract = {We introduce MIDI-VAE, a neural network model based on Variational Autoencoders that is capable of handling polyphonic music with multiple instrument tracks, as well as modeling the dynamics of music by incorporating note durations and velocities. We show that MIDI-VAE can perform style transfer on symbolic music by automatically changing pitches, dynamics and instruments of a music piece from, e.g., a Classical to a Jazz style. We evaluate the efficacy of the style transfer by training separate style validation classifiers. Our model can also interpolate between short pieces of music, produce medleys and create mixtures of entire songs. The interpolations smoothly change pitches, dynamics and instrumentation to create a harmonic bridge between two music pieces. To the best of our knowledge, this work represents the first successful attempt at applying neural style transfer to complete musical compositions.},
+	urldate = {2021-05-21},
+	journal = {arXiv:1809.07600 [cs, eess, stat]},
+	author = {Brunner, Gino and Konrad, Andres and Wang, Yuyi and Wattenhofer, Roger},
+	month = sep,
+	year = {2018},
+	note = {arXiv: 1809.07600},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing, H.5.5, I.2.6, I.2.1, I.2.4},
+	annote = {Comment: Paper accepted at the 19th International Society for Music Information Retrieval Conference, ISMIR 2018, Paris, France},
+	file = {arXiv.org Snapshot:/Users/jack/Zotero/storage/RS98YZBU/1809.html:text/html;arXiv Fulltext PDF:/Users/jack/Zotero/storage/92RR795T/Brunner et al. - 2018 - MIDI-VAE Modeling Dynamics and Instrumentation of.pdf:application/pdf}
+}
+
+@article{donahue_lakhnes_2019,
+	title = {{LakhNES}: {Improving} multi-instrumental music generation with cross-domain pre-training},
+	shorttitle = {{LakhNES}},
+	url = {http://arxiv.org/abs/1907.04868},
+	abstract = {We are interested in the task of generating multi-instrumental music scores. The Transformer architecture has recently shown great promise for the task of piano score generation; here we adapt it to the multi-instrumental setting. Transformers are complex, high-dimensional language models which are capable of capturing long-term structure in sequence data, but require large amounts of data to fit. Their success on piano score generation is partially explained by the large volumes of symbolic data readily available for that domain. We leverage the recently-introduced NES-MDB dataset of four-instrument scores from an early video game sound synthesis chip (the NES), which we find to be well-suited to training with the Transformer architecture. To further improve the performance of our model, we propose a pre-training technique to leverage the information in a large collection of heterogeneous music, namely the Lakh MIDI dataset. Despite differences between the two corpora, we find that this transfer learning procedure improves both quantitative and qualitative performance for our primary task.},
+	urldate = {2021-05-30},
+	journal = {arXiv:1907.04868 [cs, eess, stat]},
+	author = {Donahue, Chris and Mao, Huanru Henry and Li, Yiting Ethan and Cottrell, Garrison W. and McAuley, Julian},
+	month = jul,
+	year = {2019},
+	note = {arXiv: 1907.04868
+version: 1},
+	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing, Computer Science - Multimedia},
+	annote = {Comment: Published as a conference paper at ISMIR 2019},
+	file = {arXiv.org Snapshot:/Users/jack/Zotero/storage/7RU9XCCJ/1907.html:text/html;arXiv Fulltext PDF:/Users/jack/Zotero/storage/E92RRLSY/Donahue et al. - 2019 - LakhNES Improving multi-instrumental music genera.pdf:application/pdf}
+}
+
+@misc{noauthor_nnormandinconditional_vae_nodate,
+	title = {nnormandin/{Conditional}\_VAE},
+	url = {https://github.com/nnormandin/Conditional_VAE},
+	abstract = {conditional variational autoencoder written in Keras [not actively maintained] - nnormandin/Conditional\_VAE},
+	language = {en},
+	urldate = {2021-05-28},
+	journal = {GitHub},
+	file = {Snapshot:/Users/jack/Zotero/storage/64KN4MLF/Conditional_VAE.html:text/html}
+}
+
+@incollection{correia_generating_2017,
+	address = {Cham},
+	title = {Generating {Polyphonic} {Music} {Using} {Tied} {Parallel} {Networks}},
+	volume = {10198},
+	isbn = {978-3-319-55749-6 978-3-319-55750-2},
+	url = {http://link.springer.com/10.1007/978-3-319-55750-2_9},
+	abstract = {We describe a neural network architecture which enables prediction and composition of polyphonic music in a manner that preserves translationinvariance of the dataset. Speciﬁcally, we demonstrate training a probabilistic model of polyphonic music using a set of parallel, tied-weight recurrent networks, inspired by the structure of convolutional neural networks. This model is designed to be invariant to transpositions, but otherwise is intentionally given minimal information about the musical domain, and tasked with discovering patterns present in the source dataset. We present two versions of the model, denoted TP-LSTMNADE and BALSTM, and also give methods for training the network and for generating novel music. This approach attains high performance at a musical prediction task and successfully creates note sequences which possess measure-level musical structure.},
+	language = {en},
+	urldate = {2021-05-25},
+	booktitle = {Computational {Intelligence} in {Music}, {Sound}, {Art} and {Design}},
+	publisher = {Springer International Publishing},
+	author = {Johnson, Daniel D.},
+	editor = {Correia, João and Ciesielski, Vic and Liapis, Antonios},
+	year = {2017},
+	doi = {10.1007/978-3-319-55750-2_9},
+	note = {Series Title: Lecture Notes in Computer Science},
+	pages = {128--143},
+	file = {Johnson - 2017 - Generating Polyphonic Music Using Tied Parallel Ne.pdf:/Users/jack/Zotero/storage/X7XMYB9G/Johnson - 2017 - Generating Polyphonic Music Using Tied Parallel Ne.pdf:application/pdf}
+}
+
+@misc{noauthor_tutorial_2019,
+	title = {({Tutorial}) {Using} {TENSORFLOW} 2.0 to {Compose} {Music}},
+	url = {https://www.datacamp.com/community/tutorials/using-tensorflow-to-compose-music},
+	abstract = {In this tutorial, you will learn how to train generative models to compose music in TensorFlow 2.0.},
+	urldate = {2021-05-22},
+	journal = {DataCamp Community},
+	month = dec,
+	year = {2019},
+	file = {Snapshot:/Users/jack/Zotero/storage/2GQA2CJW/using-tensorflow-to-compose-music.html:text/html}
+}
+
+@misc{noauthor_weights_nodate,
+	title = {Weights \& {Biases}},
+	url = {https://wandb.ai/gudgud96/music-vae/reports/Generating-and-Interpolating-Music-Snippets-with-MusicVAE--Vmlldzo0MzY4MjU},
+	abstract = {Weights \& Biases, developer tools for machine learning},
+	language = {en},
+	urldate = {2021-06-02},
+	journal = {W\&B},
+	file = {Snapshot:/Users/jack/Zotero/storage/NEIMEA8S/Generating-and-Interpolating-Music-Snippets-with-MusicVAE--Vmlldzo0MzY4MjU.html:text/html}
+}
+
+  @misc{ enwiki:995309040,
+    author = "{Wikipedia contributors}",
+    title = "Musikalisches Würfelspiel --- {Wikipedia}{,} The Free Encyclopedia",
+    year = "2020",
+    url = "https://en.wikipedia.org/w/index.php?title=Musikalisches_W%C3%BCrfelspiel&oldid=995309040",
+    note = "[Online; accessed 5-June-2021]"
+  }
+
+@article{dong_pypianoroll_2018,
+	title = {Pypianoroll: Open Source Python Package for Handling Multitrack Pianoroll},
+	abstract = {The pianoroll representation represents music data as timepitch matrices. Although it has been used widely as a way to visualize music data, it has not been much used in computational modeling of music. To promote its usage, we present in this paper a new, open source Python package called Pypianoroll for handling multitrack pianorolls. The core element of Pypianoroll is a new, lightweight multitrack pianoroll format that contains additional tempo and program information along with the pianoroll matrices. It provides tools for creating, manipulating, storing, analyzing and visualizing multitrack pianorolls in an intuitive way. Code and documentation are available at https: //github.com/salu133445/pypianoroll.},
+	pages = {2},
+	author = {Dong, Hao-Wen and Hsiao, Wen-Yi},
+	langid = {english},
+	year = {2018},
+	file = {Dong and Hsiao - Pypianoroll Open Source Python Package for Handli.pdf:/home/alex/Zotero/storage/4X5RN6FL/Dong and Hsiao - Pypianoroll Open Source Python Package for Handli.pdf:application/pdf},
+}
