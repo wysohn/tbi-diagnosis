@@ -1,0 +1,70 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{enwiki:995309040}
+\citation{oord_wavenet_2016}
+\citation{mehri_samplernn_2017}
+\citation{vasquez_melnet_2019-1}
+\citation{engel_gansynth_2019}
+\citation{wang_performancenet_2018}
+\@writefile{toc}{\contentsline {section}{Abstract}{1}{section*.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{1}{section.2}\protected@file@percent }
+\citation{thickstun_learning_2017}
+\citation{dong_pypianoroll_2018}
+\citation{cuthbert_music21_2010}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Methods}{2}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Datasets}{2}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Data Preprocessing}{2}{subsection.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces The data preprocessing pipeline consists of five steps.\relax }}{2}{figure.caption.4}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{preprocessing}{{1}{2}{The data preprocessing pipeline consists of five steps.\relax }{figure.caption.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Model Design}{2}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}LSTM Model}{2}{subsubsection.3.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.2}Bidirectional LSTM Model}{2}{subsubsection.3.3.2}\protected@file@percent }
+\citation{oord_wavenet_2016}
+\citation{oord_wavenet_2016}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Architecture of the LSTM model.\relax }}{3}{figure.caption.5}\protected@file@percent }
+\newlabel{lstm_model}{{2}{3}{Architecture of the LSTM model.\relax }{figure.caption.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Architecture of the bidirectional LSTM model.\relax }}{3}{figure.caption.6}\protected@file@percent }
+\newlabel{bidirect_lstm_model}{{3}{3}{Architecture of the bidirectional LSTM model.\relax }{figure.caption.6}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.3}Bidirectional LSTM Model with Attention}{3}{subsubsection.3.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.4}WaveNet-Style 1-D Convolutional Neural Network}{3}{subsubsection.3.3.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces The attention mechanism is encapsulated in an attention block that has a set of attention weights (W) and attention biases (b). The attention biases are added to the dot product result of the previous LSTM layer's hidden state and attention weights. The results are then fed into a tanh function and a softmax function to generate attention outputs (A).\relax }}{3}{figure.caption.7}\protected@file@percent }
+\newlabel{attention_mechanism}{{4}{3}{The attention mechanism is encapsulated in an attention block that has a set of attention weights (W) and attention biases (b). The attention biases are added to the dot product result of the previous LSTM layer's hidden state and attention weights. The results are then fed into a tanh function and a softmax function to generate attention outputs (A).\relax }{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Architecture of the bidirectional LSTM model with attention mechanism. The Customized Attention layer is derived from Keras Layer object.\relax }}{3}{figure.caption.8}\protected@file@percent }
+\newlabel{att_lstm_model}{{5}{3}{Architecture of the bidirectional LSTM model with attention mechanism. The Customized Attention layer is derived from Keras Layer object.\relax }{figure.caption.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces The core of WaveNet is dilated causal convolutuon. (A) Causal convolution ensures that the output at time step t is the result of only previous time steps with no input from the future. (B) With dilated convolution, the convolutional kernel has a larger receptive field, increasing the number of input elements that an output captures. Figures are adopted from the WaveNet paper \citep  {oord_wavenet_2016}.\relax }}{4}{figure.caption.9}\protected@file@percent }
+\newlabel{causal_conv}{{6}{4}{The core of WaveNet is dilated causal convolutuon. (A) Causal convolution ensures that the output at time step t is the result of only previous time steps with no input from the future. (B) With dilated convolution, the convolutional kernel has a larger receptive field, increasing the number of input elements that an output captures. Figures are adopted from the WaveNet paper \cite {oord_wavenet_2016}.\relax }{figure.caption.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Architecture of the WaveNet-style 1-D dilated causal convolutional neural network.\relax }}{4}{figure.caption.10}\protected@file@percent }
+\newlabel{wavenet_model}{{7}{4}{Architecture of the WaveNet-style 1-D dilated causal convolutional neural network.\relax }{figure.caption.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Generating New Music}{4}{subsection.3.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces The process of generating a new sequence of musical notes and chords using an initial condition. The solid lines represent the forward path to the output sequence. The dashed line indicates the backward path via which the output note/chord at a step is appends to the end of the input sequence.\relax }}{4}{figure.caption.11}\protected@file@percent }
+\newlabel{generate_music}{{8}{4}{The process of generating a new sequence of musical notes and chords using an initial condition. The solid lines represent the forward path to the output sequence. The dashed line indicates the backward path via which the output note/chord at a step is appends to the end of the input sequence.\relax }{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Model Evaluation}{4}{subsection.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Experiments and Results}{4}{section.4}\protected@file@percent }
+\bibstyle{ACM-Reference-Format}
+\bibdata{paper}
+\newlabel{tocindent-1}{0pt}
+\newlabel{tocindent0}{0pt}
+\newlabel{tocindent1}{4.185pt}
+\newlabel{tocindent2}{10.34999pt}
+\newlabel{tocindent3}{18.198pt}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Sample Outputs}{5}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion and Discussion}{5}{section.6}\protected@file@percent }
+\newlabel{TotPages}{{5}{5}{}{page.5}{}}
