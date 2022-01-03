@@ -18,21 +18,30 @@
 
 2. Overall Description
     2.1 User Needs
-
+    The user of this system are medical personnels who operate a Terason ultrasound system
+    to dianose patients with suspected brain injuries. The machine learning model will be
+    deployed on the Terason system and provide overlaid dianostic information on standard
+    b-mode ultrasound.
 
     2.2 Assumptions and Dependencies
-
+        2.2.1   Assumptions
+        -   The input data (images) will be similar in size before processing.
+        2.2.2   Dependencies
+        -   Processing capability of the Terason system.
+        -   Quality of the input ultrasound data.
 
 3. System Features and Requirements
+    3.1 Data 
+        Tissue pulsatility ultrasound
 
+    3.2 Functional Requirements
+        3.2.1   Minimum performance level
+        3.2.3   Specificity
+        3.2.4   Sensitivity
+        3.2.5   Dice coefficient
 
-    3.1 Functional Requirements
-
-
-    3.2 External Interface Requirements
-    
-
-    3.3 System Features
-
+    3.3 External Interface Requirements
+        N/A
 
     3.4 Nonfunctional Requirements
+        3.4.1   Maximum inference speed
