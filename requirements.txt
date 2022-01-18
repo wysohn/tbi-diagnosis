@@ -45,3 +45,26 @@
 
     3.4 Nonfunctional Requirements
         3.4.1   Maximum inference speed
+
+Detection of at least of one blob of bleed of one 1cm across.
+next to the skull or away from the skull
+GCS score: glasgow coma scale
+Is there something big and bloody? Small little things dont matter much
+Which scans/patients show large blobs of bleed?
+How large is a lession to be serious? Depends on the type of TBI.
+    Starting from 1cm, it becomes problematic
+Whether the bleed is away from the skull or closer to the skull?
+
+Thinking about doing cloud computing with will
+Get information from Jon as soon as possible
+
+The task could be: yes or no if there is a bleed in the image of the size >= 1cm
+
+If the GCS score is high enough, surgery could save the patient. The output of the model
+    could be a decision whether surgery is necessary.
+
+GCS and CT are used to evaluate if a patient should go for surgery. We want to subtitude
+    CT with ultrasound.
+
+Find John's Matlab.
+
