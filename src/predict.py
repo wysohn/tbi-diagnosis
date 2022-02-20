@@ -51,21 +51,21 @@ def visualize_result(label, prediction, displacement, name, xAxis, yAxis):
     label = np.squeeze(label, axis=-1)
     prediction = np.squeeze(np.squeeze(prediction, axis=-1), axis=0)
     displacement = np.squeeze(displacement, axis=-1)
+    
+    name = name.split('.')[0]
+    
     # display
     fig, ax = plt.subplots(1, 3, figsize=(24, 6))
     fig.patch.set_facecolor('white')
     fig.suptitle(name, fontsize=16)
-
     # label
     ax[1].pcolormesh(xAxis, -yAxis, label, shading='auto', cmap='magma')
     ax[1].title.set_text("Ground Truth")
     ax[1].axis('off')
-
     # prediction
     ax[2].pcolormesh(xAxis, -yAxis, prediction, shading='auto', cmap='magma')
     ax[2].title.set_text("Prediction")
     ax[2].axis('off')
-
     # displacement
     ax[0].pcolormesh(xAxis, -yAxis, displacement, shading='auto')
     ax[0].title.set_text("Standardized Displacement")
@@ -79,7 +79,7 @@ def show_prediction(model, dataset, sample_num):
     names = dataset['filename']
     name = names[sample_num]
     sample = x[sample_num]
-    y_true = one_hot(y[sample_num])
+    y_true = one_hot_raw(y[sample_num])
     y_pred = model.predict(np.expand_dims(sample, axis=0))
     visualize_result(y_true, y_pred, sample, name.decode('utf-8'), xAxis, yAxis)
 
@@ -139,7 +139,7 @@ def make_and_save_prediction(model, data_dir, save_dir):
     f = h5py.File(data_dir, 'r')
     test = f['test']
     x = np.array(test['x'])
-    y = one_hot(test['y'])
+    y = one_hot_raw(test['y'])
     names = list(test['filename'])
     f.close()
     
@@ -157,13 +157,17 @@ def make_and_save_prediction(model, data_dir, save_dir):
         fig, ax = plt.subplots(1, 3, figsize=(24, 6))
         fig.patch.set_facecolor('white')
         fig.suptitle(name, fontsize=16)
+
         # label
         ax[1].pcolormesh(xAxis, -yAxis, label, shading='auto', cmap='magma')
         ax[1].title.set_text("Ground Truth")
+        ax[1].axis('off')
         # prediction
         ax[2].pcolormesh(xAxis, -yAxis, prediction, shading='auto', cmap='magma')
         ax[2].title.set_text("Prediction")
+        ax[2].axis('off')
         # displacement
         ax[0].pcolormesh(xAxis, -yAxis, displacement, shading='auto')
         ax[0].title.set_text("Standardized Displacement")
+        ax[0].axis('off')
         plt.savefig(path)

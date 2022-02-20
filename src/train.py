@@ -36,6 +36,7 @@ from statistics import mean, pstdev
 from unet import *
 from losses import *
 from metrics import *
+from tensorflow.keras.utils import plot_model
 
 
 def train(model, hdf5_file: str, checkpoint_dir: str, log_dir: str, epochs=50):
@@ -68,8 +69,7 @@ def train(model, hdf5_file: str, checkpoint_dir: str, log_dir: str, epochs=50):
         model.fit(training_generator,
                   validation_data=validation_generator,
                   callbacks=[tb_callback, checkpoint],
-                  epochs=epochs,
-                  verbose=2)
+                  epochs=epochs)
         
         dataset.close()
 
@@ -77,13 +77,14 @@ def train(model, hdf5_file: str, checkpoint_dir: str, log_dir: str, epochs=50):
 hdf5_dir = '/DATA/phan92/tbi_diagnosis/data/processed/skull_displacementNorm_data.hdf5'
 
 K.clear_session()
-input_layer = Input((256, 80, 1))
-output_layer = build_unet_model(input_layer, 32, 0.5)
-model = Model(input_layer, output_layer)
+model = create_segmentation_model(256, 80, 32, architecture='unet_plus_plus', level = 4, dropout_rate=0.5)
+
+plot_model(model)
+
 model.compile(optimizer='adam', 
-              #loss=soft_dice_loss(epsilon=0.00001),
+              loss=soft_dice_loss(epsilon=0.00001),
               #loss=weighted_bce(beta=5),
-              loss=hybrid_loss(beta=5, epsilon=0.00001),
+              #loss=hybrid_loss(beta=5, epsilon=0.00001),
               metrics=[dice_coefficient, iou, Recall(), Precision()])
 
 train(model, 
