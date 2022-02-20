@@ -4,15 +4,12 @@ import config
 import random
 import math
 import cmath
-import multiprocessing
-import random
 import time
 import matplotlib
 import keras
 import tensorflow as tf
 from tensorflow.keras import backend as K 
 from sklearn.model_selection import KFold
-from matplotlib import pyplot as plt
 import h5py
 from datetime import datetime
 from tensorflow.python.keras.callbacks import ModelCheckpoint, TensorBoard, LambdaCallback
@@ -78,10 +75,11 @@ def train(model, hdf5_file: str, checkpoint_dir: str, log_dir: str, epochs=50):
 
 
 if __name__ == '__main__':
-    hdf5_dir = os.path.join(config.PROCESSED_DATA_DIR, 'skull_displacementNorm_data.hdf5')
-
+    dataFile = 'skull_displacementNorm_data.hdf5'
+    hdf5_dir = os.path.join(config.PROCESSED_DATA_DIR, dataFile)
+    architecture = 'unet'
     K.clear_session()
-    model = create_segmentation_model(256, 80, 32, architecture='unet', level = 4, dropout_rate=0.5)
+    model = create_segmentation_model(256, 80, 32, architecture=architecture, level = 4, dropout_rate=0.5)
 
     plot_model(model)
 
@@ -96,3 +94,5 @@ if __name__ == '__main__':
         checkpoint_dir=config.CHECKPOINT_DIR,
         log_dir=config.TENSORFLOW_LOG_DIR, 
         epochs=50)
+    
+    model.save(os.path.join(config.TRAINED_MODELS_DIR, datetime.now().strftime('%Y%m%d-%H%M%S') + '_' + architecture + '.h5'))

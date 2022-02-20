@@ -1,39 +1,22 @@
 import config
+from losses import *
+from utils import *
 import numpy as np
 import os
-import random
-import math
-import cmath
-import multiprocessing
-import random
 import time
-import matplotlib
+import matplotlib.pyplot as plt
 import keras
 import tensorflow as tf
 from tensorflow.keras import backend as K 
-from sklearn.model_selection import KFold
-from matplotlib import pyplot as plt
 import h5py
 from datetime import datetime
-from tensorflow.python.keras.callbacks import ModelCheckpoint, TensorBoard, LambdaCallback
-from sklearn.metrics import confusion_matrix
-from tensorflow.keras import Input, Model
-from tensorflow.keras.layers import (
-    Activation,
-    Conv2D,
-    Conv2DTranspose,
-    MaxPooling2D,
-    UpSampling2D,
-    Dropout
-)
-from tensorflow.keras.metrics import (
-    Recall,
-    Precision
-)
-from tensorflow.keras.layers import concatenate
-from tensorflow.keras.optimizers import Adam
-from keras import Model
-from statistics import mean, pstdev
+from tensorflow.keras.models import load_model
+
+
+# extract generic axis information
+axisPath = config.PROCESSED_DATA_DIR
+rand_input_file = os.path.join(config.RAW_DATA_DIR, 'DoD001','DoD001_Ter030_LC5_Displacement_Normalized_3.mat')
+xAxis, yAxis = extract_axis(rand_input_file, axisPath)
 
 
 def visualize_result(label, prediction, displacement, name, xAxis, yAxis):
@@ -80,7 +63,7 @@ def show_prediction(model, dataset, sample_num):
     names = dataset['filename']
     name = names[sample_num]
     sample = x[sample_num]
-    y_true = one_hot_raw(y[sample_num])
+    y_true = one_hot_float(y[sample_num])
     y_pred = model.predict(np.expand_dims(sample, axis=0))
     visualize_result(y_true, y_pred, sample, name.decode('utf-8'), xAxis, yAxis)
 
@@ -140,7 +123,7 @@ def make_and_save_prediction(model, data_dir, save_dir):
     f = h5py.File(data_dir, 'r')
     test = f['test']
     x = np.array(test['x'])
-    y = one_hot_raw(test['y'])
+    y = one_hot_float(test['y'])
     names = list(test['filename'])
     f.close()
     
@@ -175,7 +158,10 @@ def make_and_save_prediction(model, data_dir, save_dir):
 
 
 if __name__ == '__main__':
-    save_dir = os.path.join(config.INFERENCE_DIR, '02192022-skull_hybrid_32_filters_unet_with_attention')
+    model_path = os.path.join(config.TRAINED_MODELS_DIR, '20220220-003518_unet.h5')
+    model = load_model(model_path, compile=False)
+    data_dir = os.path.join(config.PROCESSED_DATA_DIR, "skull_displacementNorm_data.hdf5")
+    save_dir = os.path.join(config.INFERENCE_DIR, 'test')
     if not os.path.isdir(save_dir):
         os.makedirs(save_dir)
-    make_and_save_prediction(model, hdf5_dir, save_dir)
+    make_and_save_prediction(model, data_dir, save_dir)
