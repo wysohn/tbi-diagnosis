@@ -1,5 +1,6 @@
 import numpy as np
 import os
+import config
 import random
 import math
 import cmath
@@ -38,6 +39,8 @@ from losses import *
 from metrics import *
 from tensorflow.keras.utils import plot_model
 
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+
 
 def train(model, hdf5_file: str, checkpoint_dir: str, log_dir: str, epochs=50):
         """
@@ -74,21 +77,22 @@ def train(model, hdf5_file: str, checkpoint_dir: str, log_dir: str, epochs=50):
         dataset.close()
 
 
-hdf5_dir = '/DATA/phan92/tbi_diagnosis/data/processed/skull_displacementNorm_data.hdf5'
+if __name__ == '__main__':
+    hdf5_dir = os.path.join(config.PROCESSED_DATA_DIR, 'skull_displacementNorm_data.hdf5')
 
-K.clear_session()
-model = create_segmentation_model(256, 80, 32, architecture='unet_plus_plus', level = 4, dropout_rate=0.5)
+    K.clear_session()
+    model = create_segmentation_model(256, 80, 32, architecture='unet', level = 4, dropout_rate=0.5)
 
-plot_model(model)
+    plot_model(model)
 
-model.compile(optimizer='adam', 
-              loss=soft_dice_loss(epsilon=0.00001),
-              #loss=weighted_bce(beta=5),
-              #loss=hybrid_loss(beta=5, epsilon=0.00001),
-              metrics=[dice_coefficient, iou, Recall(), Precision()])
+    model.compile(optimizer='adam', 
+                loss=soft_dice_loss(epsilon=0.00001),
+                #loss=weighted_bce(beta=5),
+                #loss=hybrid_loss(beta=5, epsilon=0.00001),
+                metrics=[dice_coefficient, iou, Recall(), Precision()])
 
-train(model, 
-      hdf5_file=hdf5_dir,
-      checkpoint_dir='/DATA/phan92/model_checkpoints',
-      log_dir='/DATA/phan92/tensorflow_logging', 
-      epochs=50)
+    train(model, 
+        hdf5_file=hdf5_dir,
+        checkpoint_dir=config.CHECKPOINT_DIR,
+        log_dir=config.TENSORFLOW_LOG_DIR, 
+        epochs=50)

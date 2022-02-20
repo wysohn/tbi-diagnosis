@@ -83,7 +83,7 @@ def build_unet_model(input_layer, start_filters, dropout):
     return output_layer
 
 
-def build_unet(input_shape):
+def build_unet_model(input_shape):
     """
     Build a UNET model
 
@@ -170,6 +170,43 @@ def build_unet(model_input, filters, kernel_size, dropout_rate):
     uconv1 = up_conv_block(uconv2, conv1, 2, filters, kernel_size, dropout_rate)
 
     uconv0 = up_conv_block(uconv1, conv0, 1, filters, kernel_size, dropout_rate)
+
+    return uconv0
+
+
+def build_attention_unet(model_input, filters, kernel_size, dropout_rate):
+    # Downsampling / encoding portion
+    conv0 = down_conv_block(model_input, 1, filters, kernel_size)
+    pool0 = layers.MaxPooling2D((2, 2))(conv0)
+    pool0 = Dropout(dropout_rate)(pool0)
+
+    conv1 = down_conv_block(pool0, 2, filters, kernel_size)
+    pool1 = layers.MaxPooling2D((2, 2))(conv1)
+    pool1 = Dropout(dropout_rate)(pool1)
+
+    conv2 = down_conv_block(pool1, 4, filters, kernel_size)
+    pool2 = layers.MaxPooling2D((2, 2))(conv2)
+    pool2 = Dropout(dropout_rate)(pool2)
+
+    conv3 = down_conv_block(pool2, 8, filters, kernel_size)
+    pool3 = layers.MaxPooling2D((2, 2))(conv3)
+    pool3 = Dropout(dropout_rate)(pool3)
+
+    # Middle of network
+    conv4 = down_conv_block(pool3, 16, filters, kernel_size)
+
+    # Upsampling / decoding portion
+    attn3 = AttnGateBlock(conv3, conv4, filters * 16)
+    uconv3 = up_conv_block(conv4, attn3, 8, filters, kernel_size, dropout_rate)
+
+    attn2 = AttnGateBlock(conv2, uconv3, filters * 8)
+    uconv2 = up_conv_block(uconv3, attn2, 4, filters, kernel_size, dropout_rate)
+
+    attn1 = AttnGateBlock(conv1, uconv2, filters * 4)
+    uconv1 = up_conv_block(uconv2, attn1, 2, filters, kernel_size, dropout_rate)
+
+    attn0 = AttnGateBlock(conv0, uconv1, filters * 2)
+    uconv0 = up_conv_block(uconv1, attn0, 1, filters, kernel_size, dropout_rate)
 
     return uconv0
 
@@ -288,10 +325,64 @@ def build_unet_plus_plus(model_input, filters, kernel_size, dropout_rate, level)
     return out
 
 
+def expand_as(tensor, rep):
+    # Anonymous lambda function to expand the specified axis by a factor of argument, rep.
+    # If tensor has shape (256,80,N), lambda will return a tensor of shape (256,80,N*rep), if specified axis=2
+    my_repeat = Lambda(lambda x, repnum: K.repeat_elements(x, repnum, axis=3),
+                       arguments={'repnum': rep})(tensor)
+    return my_repeat
+
+
+def AttnGateBlock(x, g, inter_shape):
+    shape_x = K.int_shape(x)
+    shape_g = K.int_shape(g)
+    
+    # Getting the gating signal to the same number of filters as the inter_shape
+    phi_g = Conv2D(filters=inter_shape, 
+                   kernel_size=1, 
+                   strides=1, 
+                   padding='same')(g)
+
+    # Getting the x signal to the same shape as the gating signal
+    theta_x = Conv2D(filters=inter_shape, 
+                     kernel_size=3, 
+                     strides=(shape_x[1] // shape_g[1], shape_x[2] // shape_g[2]), 
+                     padding='same')(x)
+
+    # Element-wise addition of the gating and x signals
+    add_xg = tf.math.add(phi_g, theta_x)
+    add_xg = Activation('relu')(add_xg)
+
+    # 1x1x1 convolution
+    psi = Conv2D(filters=1, kernel_size=1, padding='same')(add_xg)
+    psi = Activation('sigmoid')(psi)
+    shape_sigmoid = K.int_shape(psi)
+
+    # Upsampling psi back to the original dimensions of x signal
+    upsample_sigmoid_xg = UpSampling2D(size=(shape_x[1] // shape_sigmoid[1], 
+                                             shape_x[2] // shape_sigmoid[2])
+                                      )(psi)
+
+    # Expanding the filter axis to the number of filters in the original x signal
+    upsample_sigmoid_xg = expand_as(upsample_sigmoid_xg, shape_x[3])
+
+    # Element-wise multiplication of attention coefficients back onto original x signal
+    attn_coefficients = tf.math.multiply(upsample_sigmoid_xg, x)
+
+    # Final 1x1 convolution to consolidate attention signal to original x dimensions
+    output = Conv2D(filters=shape_x[3], 
+                    kernel_size=1, strides=1, 
+                    padding='same')(attn_coefficients)
+    
+    output = layers.BatchNormalization()(output)
+    
+    return output
+
+
 def create_segmentation_model(input_height, 
                               input_width, 
                               filters, 
-                              architecture='unet_plus_plus', 
+                              architecture, 
                               level, 
                               dropout_rate):
     """
@@ -314,6 +405,8 @@ def create_segmentation_model(input_height,
         model_output = build_unet_plus_plus(model_input, filters, (3, 3), dropout_rate, level)
     elif architecture == 'unet':
         model_output = build_unet(model_input, filters, (3, 3), dropout_rate)
+    elif architecture == 'attention_unet':
+        model_output = build_attention_unet(model_input, filters, (3, 3), dropout_rate)
     else:
         raise AttributeError(f'Network architecture {architecture} does not exist.')
     
@@ -325,6 +418,6 @@ def create_segmentation_model(input_height,
                                  name='output_conv')(model_output)
     
     model = models.Model(inputs=model_input, outputs=output_layer)
-    model.summary()
+    #model.summary()
     
     return model

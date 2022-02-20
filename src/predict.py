@@ -1,3 +1,4 @@
+import config
 import numpy as np
 import os
 import random
@@ -171,3 +172,10 @@ def make_and_save_prediction(model, data_dir, save_dir):
         ax[0].title.set_text("Standardized Displacement")
         ax[0].axis('off')
         plt.savefig(path)
+
+
+if __name__ == '__main__':
+    save_dir = os.path.join(config.INFERENCE_DIR, '02192022-skull_hybrid_32_filters_unet_with_attention')
+    if not os.path.isdir(save_dir):
+        os.makedirs(save_dir)
+    make_and_save_prediction(model, hdf5_dir, save_dir)
