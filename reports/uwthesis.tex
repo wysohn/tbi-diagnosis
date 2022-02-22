@@ -1,5 +1,5 @@
 %  ========================================================================
-%  Copyright (c) 1985 The University of Washington
+%  Copyright (c) 2022 The University of Washington
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
@@ -16,8 +16,8 @@
 %
 
 % Documentation for University of Washington thesis LaTeX document class
-% by Jim Fox
-% fox@washington.edu
+% by Nhut Minh Phan
+% phan92@uw.edu
 %
 %    Revised 2020/02/24, added \caption()[]{} option.  No ToC.
 %
@@ -88,17 +88,15 @@
 %
 % ----- copyright and title pages
 %
-\Title{The Suitability of the \LaTeX\ Text Formatter\\
-  for Thesis Preparation by Technical and\\
-  Non-technical Degree Candidates}
-\Author{Jim Fox}
-\Year{1995}
-\Program{IT Infrastructure}
+\Title{Deep Learning Methods to Identify Intracranial Hemorrhage 
+Using Tissue Pulsatility Ultrasound Imaging}
+\Author{Nhut Minh Phan}
+\Year{2022}
+\Program{Computer Science \& Software Engineering}
 
-\Chair{Name of Chairperson}{Title of Chair}{Department of Chair}
-\Signature{First committee member}
-\Signature{Next committee member}
-\Signature{etc}
+\Chair{Dr. Erika Parsons}{Dr.}{Computer Science \& Software Engineering}
+\Signature{Dr. Pierre Mourad}
+\Signature{Dr. Michael Stiber}
 
 \copyrightpage
 
@@ -150,50 +148,16 @@ formatting challenges found in thesis production.
 \thispagestyle{plain}
 %
 \begin{glossary}
-\item[argument] replacement text which customizes a \LaTeX\ macro for
-each particular usage.
-\item[back-up] a copy of a file to be used when catastrophe strikes
-the original.  People who make no back-ups deserve
-no sympathy.
-\item[control sequence] the normal form of a command to \LaTeX.
-\item[delimiter] something, often a character, that indicates
-the beginning and ending of an argument.
-More generally, a delimiter is a field separator.
-\item[document class] a file of macros that tailors \LaTeX\ for
-a particular document.  The macros described by this thesis
-constitute a document class.
-\item[document option] a macro or file of macros
-that further modifies \LaTeX\ for
-a particular document.  The option {\tt[chapternotes]}
-constitutes a document option.
-\item[figure] illustrated material, including graphs,
-diagrams, drawings and photographs.
-\item[font] a character set (the alphabet plus digits
-and special symbols) of a particular size and style.  A couple of fonts
-used in this thesis are twelve point roman and {\sl twelve point roman
-slanted}.
-\item[footnote] a note placed at the bottom of a page, end of a chapter,
-or end of a thesis that comments on or cites a reference
-for a designated part of the text.
-\item[formatter] (as opposed to a word-processor) arranges printed
-material according to instructions embedded in the text.
-A word-processor, on the other hand, is normally controlled
-by keyboard strokes that move text about on a display.
-\item[\LaTeX] simply the ultimate in computerized typesetting.
-\item[macro]  a complex control sequence composed of 
-other control sequences.
-\item[pica] an archaic unit of length.  One pica is twelve points and
-six picas is about an inch.
-\item[point] a unit of length.  72.27 points equals one inch.
-\item[roman]  a conventional printing typestyle using serifs.
-the decorations on the ends of letter strokes.
-This thesis is set in roman type.
-\item[rule] a straight printed line; e.g., \hrulefill.
-\item[serif] the decoration at the ends of letter strokes.
-\item[table] information placed in a columnar arrangement.
-\item[thesis] either a master's thesis or a doctoral dissertation.
-This document also refers to itself as a thesis, although it
-really is not one.
+
+\item[cranium] the part of the skull that encloses the brain
+\item[CT] Computer Tomography
+\item[IED] Improvised Explosive Device.
+\item[Intracranial hemorrhage] bleeding inside the brain
+\item[TBI] Traumatic Brain Injury.
+\item[TPI] Tissue Pulsatility Imaging.
+\item[cTBI] closed Traumatric Brain Injury.
+\item[pTBI] penetrating Traumatic Brain Injury.
+\item[WHO] World Health Organization
  
 \end{glossary}
  
@@ -202,17 +166,21 @@ really is not one.
 %
 \acknowledgments{% \vskip2pc
   % {\narrower\noindent
-  The author wishes to express sincere appreciation to
-  University of Washington, where he has had the opportunity
-  to work with the \TeX\ formatting system,
-  and to the author of \TeX, Donald Knuth, {\it il miglior fabbro}.
+  I would like to express sincere appreciation to Dr. Pierre Mourad and Dr. 
+  Michael Stiber for accepting my request to be on the commitee for this capstone
+  project. I am also grateful for the support received from Dr. John C. Kucewicz
+  and Nina LaPiana. Without their contribution, this project would not happen.
+  Finally, I offer my very special thanks to Dr. Erika Parsons for being the Chair
+  of my committee and without whose support and guidance, this project would be have
+  been possible.
   % \par}
 }
 
 %
 % ----- dedication
 %
-\dedication{\begin{center}to my dear wife, Joanna\end{center}}
+\dedication{\begin{center}To my parents, sister, and dear wife without whose support
+  I would not have been able to achieve my goals.\end{center}}
 
 %
 % end of the preliminary pages
@@ -225,6 +193,141 @@ really is not one.
 
 \textpages
  
+% ========== Chapter 1
+
+\chapter {Introduction}
+
+\section{Background}
+
+What is TBI?
+Brain injury may happen in one of two ways: close brain injury (cTBI) and penetrating 
+brain injury (pTBI)\cite{TBI}. Closed brain injuries happen when an injury is nonpenetrating
+and does not cause any break in the skull. The source of these injuries are rapid forward and/or
+backward movements and shaking of the brain inside the bony skull that results in bruising
+and tearing of brain tissue and blood vessels. Penetrating brain injuries happen when a foreign 
+object penetrates the skull and then traverses through the brain parenchyma. 
+For instance, a bullet travels through the head, piercing the brain.
+
+What why is TBI important for civilians and battle field?
+TBI in the battle field:
+A large percentage of deployed U.S. sodiers (40\% to 60\% of surviving soldiers)
+suffer from closed-head injuries caused by the blast effect of IED explosion\cite{explosive}. 
+These injuries could result in intracranial hemorrhage, causing long-term neurological damages
+if left untreated. For severe TBI cases, the patients must be evacuated to the nearest combat
+hospital that has equipment to support neurosergery, airway protection, mechaincal ventilation,
+among other means for critical care. However, severe cTBI patients often do not survive more than
+one year post injury\cite{explosive}. Thus, early diagnosis is critical not only to improve the clinical 
+outcome, but also to provide medical personnel with information to make decision when resources are 
+scarce.
+
+Besides the relevance on the battle field, TBI is a pressing public health and medical problem
+around the world. According to the World Health Organization (WHO), TBI affects an estimate of 10 million 
+people annually\cite{hyder_impact_2007}. Low and middle income countries face higher risk factors
+for causes of TBI due to inadequate health care systems.
+
+Early diagnosis is extremely important since it allows timely responses that may reduce further
+brain damages, improving the clinical outcomes for TBI patients. Computer Tomography (CT) and Magnetic
+Resonance Imaging (MRI) are the current standard methods for identifying  intracranial 
+hemorrhage\cite{heit_imaging_2017}. The main disadvantage of these imaging modalities is the
+complexity, size, and cost of the required equipment, making them inaccessible in the combat settings
+and in low income countries. In contrast, ultrasound imaging could be used with relatively affordable
+equipment that are as small as a standard tablet. An example of such systems is a tablet-like device 
+from Terason (the company website is at https://www.terason.com). Ultrasound imaging has a major
+drawback: ultrasound waves do not penetrate bones very well, making ultrasound imaging more suitable
+for infants up to about 18 months old at which age the craniums are yet fused together\cite{cranial_ult}.
+
+A team of researchers from the University of Washington  developed a novel ultrasound technique called
+tissue pulsatility imaging (TPI) that captures the pulsation of the brain tissue as blood infuses the
+brain during a cardiac cycle. The team collected data from civilian patients who suffer moderate to severe
+cTBI. The working hypothesis is that the difference in the movements of brain tissue versus bleed allows
+one to detect intracanial hemorrhage through computer assisted means. This project aims to employ the power
+of deep learning to produce an algorithm that can automatically identifying intracranial hemorrhage from TPI data.
+
+\section{Existing System}
+Talk about Caren's work.
+
+\section{Problem Statement and Scope}
+
+
+
+\subsection{Data Genetion}
+
+
+\subsection{Data Preprocessing}
+
+
+
+\subsection{Skull Identification}
+
+
+\subsection{Ventricle Identification}
+
+
+\subsection{Brain Mass Identification}
+
+
+
+\subsection{Hemorrhage Diagnosis}
+
+
+
+\subsection{Diagnosis}
+
+
+
+
+
+
+
+\section{Outline}
+
+
+
+
+% ========== Chapter 2
+
+\chapter {Related Work}
+
+
+
+
+
+% ========== Chapter 3
+
+\chapter {Method}
+
+\section{Data Reprocessing}
+
+
+
+
+
+
+% ========== Chapter 4
+
+\chapter {Experiment and Result}
+
+
+
+
+% ========== Chapter 5
+
+\chapter {Conclusion and Future Work}
+
+\section{Conclusion}
+
+
+
+\section{Limitation}
+Talk about the unique differences of bTBI and other cTBI as point out in this 
+paper \cite{explosive} and that data available to the study are related to 
+cTBI instead of bTBI.
+
+
+\section{Future work}
+
+
+
 % ========== Chapter 1
  
 \chapter {Introduction}
