@@ -2,3 +2,4 @@ data/
 models/
 *.env
 .ipynb_checkpoints/
+.DS_Store
