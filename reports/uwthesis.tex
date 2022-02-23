@@ -59,6 +59,8 @@
 % --- sample stuff only -----
 % These format the sample code in this document
 
+\usepackage{pgf}
+\usepackage{pgfplots}
 \usepackage{alltt}  % 
 \newenvironment{demo}
   {\begin{alltt}\leftskip3em
@@ -149,15 +151,16 @@ formatting challenges found in thesis production.
 %
 \begin{glossary}
 
-\item[cranium] the part of the skull that encloses the brain
-\item[CT] Computer Tomography
+\item[cranium] the part of the skull that encloses the brain.
+\item[CT] Computer Tomography.
 \item[IED] Improvised Explosive Device.
-\item[Intracranial hemorrhage] bleeding inside the brain
+\item[IRB] Institutional Review Board.
+\item[Intracranial hemorrhage] bleeding inside the brain.
 \item[TBI] Traumatic Brain Injury.
 \item[TPI] Tissue Pulsatility Imaging.
 \item[cTBI] closed Traumatric Brain Injury.
 \item[pTBI] penetrating Traumatic Brain Injury.
-\item[WHO] World Health Organization
+\item[WHO] World Health Organization.
  
 \end{glossary}
  
@@ -224,8 +227,8 @@ around the world. According to the World Health Organization (WHO), TBI affects 
 people annually\cite{hyder_impact_2007}. Low and middle income countries face higher risk factors
 for causes of TBI due to inadequate health care systems.
 
-Early diagnosis is extremely important since it allows timely responses that may reduce further
-brain damages, improving the clinical outcomes for TBI patients. Computer Tomography (CT) and Magnetic
+Early diagnosis and immediate medical care is extremely important in improving the clinical outcomes for 
+TBI patients\cite{management_2000}. Computer Tomography (CT) and Magnetic
 Resonance Imaging (MRI) are the current standard methods for identifying  intracranial 
 hemorrhage\cite{heit_imaging_2017}. The main disadvantage of these imaging modalities is the
 complexity, size, and cost of the required equipment, making them inaccessible in the combat settings
@@ -237,10 +240,53 @@ for infants up to about 18 months old at which age the craniums are yet fused to
 
 A team of researchers from the University of Washington  developed a novel ultrasound technique called
 tissue pulsatility imaging (TPI) that captures the pulsation of the brain tissue as blood infuses the
-brain during a cardiac cycle. The team collected data from civilian patients who suffer moderate to severe
+brain during a cardiac cycle\cite{kucewicz_tissue_2008}. The team collected data from civilian patients who suffer moderate to severe
 cTBI. The working hypothesis is that the difference in the movements of brain tissue versus bleed allows
 one to detect intracanial hemorrhage through computer assisted means. This project aims to employ the power
 of deep learning to produce an algorithm that can automatically identifying intracranial hemorrhage from TPI data.
+
+\section{Data Collection}
+The data used in this project were collected from actual humans, thus the data collection is under controlled
+by the policies of the University of Washington's Human Subjects Division. Data collection was approved by 
+the Institutional Review Board (IRB) through a Zipline application, the Human Subjects Division's e-IRB system.
+
+The data was collected from patients admitted to Harborview Medical Center (HMC) in Seattle, the only Level 1 trauma 
+center in the area capable of providing total care for every aspect of traumatic injuries to the brain\cite{trauma_care}.
+The criteria for selecting patients are:
+\begin{itemize}
+  \item Moderate to severe cTBI at HMC;s Neuro ICU, with or without polytrauma
+  \item Patients 18 years or older
+  \item Not prisoners
+  \item Not from Native American or non-U.S. indigenous populations through a tribe, tribe-focused organization, or similar community-based organization
+\end{itemize}
+The last two criteria are to simplify the Zipline application.
+The patients received life saving treatment if necessary, but sometimes it is best to not intervene with surgery and
+just monitor the TBI and let the brain heal itself. When TBI patients arrived at HMC, a research coordinator screened
+them for the inclusion criteria. If they had an injury the team is interested in, then the coordinator asked them or
+their family for consent. A sonographer then used a Terason device in the hospital room to collect ultrasound data.
+Data could come from patients hours after an injury or days after an injury. Data collection happened after the patients
+were diagnosed using CT or MRI, and did not interfere or interrupt routine hospital clinical care.
+
+The sonographer collected data through the temporal window of the head (See Figure \ref{ultrasound_angle}) without
+shaving the head, spending approximately five minutes aiming the ultrasound toward the known intracranial hemorrhage with 
+each of the following orientations: coronal, axial, and oblique. The axial is a horizontal slice of the brain at zero degree; 
+coronal is a 90-degree slice of the brain; oblique is a slice at any angle from one degree to 179 degrees excluding the coronal. 
+Data were collected from the left and right side of the head. The sonographer also used a pulse oximeter to capture
+phases of the cardiac cycle. Any patient identifying information, including name, age, and gender, was removed from the data. 
+Patients are distingushed by three-digit numbers.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1\linewidth]{figures/ultrasound_angle.png}
+  \caption{The orientations at which ultrasound data are collected: left or right side of the head and at axial, coronal, or oblique
+  (source: the team's sonographer).}
+  \label{ultrasound_angle}
+\end{figure}
+
+\section{Signal Processing}
+
+Signal processing is not in the scope of my project. It was done by a scientist in the team, Dr. John Kucewicz.
+
 
 \section{Existing System}
 Talk about Caren's work.
@@ -250,31 +296,28 @@ The reported results were poor and the model did not seem to learn anything usef
 
 \section{Problem Statement and Scope}
 This capstone project focuses on the core algorithm that detects the regions of intracranial
-hemorrhage with in a patient's brain tissue.
+hemorrhage with in a patient's brain tissue. The scope is limited to data preprocessing, skull detection,
+ventricle detection, brain mass detection, and intracranial hemorrhage diagnosis.
 
 
 \subsection{Data Preprocessing}
 
 
-\subsection{Data Preprocessing}
 
 
-
-\subsection{Skull Identification}
-
-
-\subsection{Ventricle Identification}
+\subsection{Skull Detection}
 
 
-\subsection{Brain Mass Identification}
+\subsection{Ventricle Detection}
+
+
+\subsection{Brain Mass Detection}
 
 
 
 \subsection{Hemorrhage Diagnosis}
 
 
-
-\subsection{Diagnosis}
 
 
 
@@ -325,6 +368,12 @@ hemorrhage with in a patient's brain tissue.
 Talk about the unique differences of bTBI and other cTBI as point out in this 
 paper \cite{explosive} and that data available to the study are related to 
 cTBI instead of bTBI.
+
+From an interview with the sonographer on the team, one of the many difficulties in this
+study is that the team do not know the exact time of the injury. If the more data could be
+collected, she believes that it would be best if data were collected as soon as possible after
+a patient is admitted. This way, the data would be "fresh", more representative of the data that
+would be scanned by the medics on the battle field.
 
 
 \section{Future work}
