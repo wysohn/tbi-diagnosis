@@ -61,6 +61,7 @@
 
 \usepackage{pgf}
 \usepackage{pgfplots}
+%\usepackage{url}
 \usepackage{alltt}  % 
 \newenvironment{demo}
   {\begin{alltt}\leftskip3em
@@ -260,12 +261,14 @@ The criteria for selecting patients are:
   \item Not from Native American or non-U.S. indigenous populations through a tribe, tribe-focused organization, or similar community-based organization
 \end{itemize}
 The last two criteria are to simplify the Zipline application.
-The patients received life saving treatment if necessary, but sometimes it is best to not intervene with surgery and
-just monitor the TBI and let the brain heal itself. When TBI patients arrived at HMC, a research coordinator screened
-them for the inclusion criteria. If they had an injury the team is interested in, then the coordinator asked them or
-their family for consent. A sonographer then used a Terason device in the hospital room to collect ultrasound data.
-Data could come from patients hours after an injury or days after an injury. Data collection happened after the patients
-were diagnosed using CT or MRI, and did not interfere or interrupt routine hospital clinical care.
+When TBI patients arrived at HMC, the patients received life saving treatment if necessary, including diagnosis of TBI via CT imaging.
+A research coordinator then screened them for the inclusion criteria. If they had an injury the team is interested in, then 
+the coordinator asked them or their family for consent. Ultrasound raw data were collected using a Terason (Burlington, MA) u3200t, a tablet-based, 
+general purpose scanner with a 4V-2 phased array transducer (64 elements, 2.5 MHz RF sampling frequency, 128 scanlines
+per frame). The scan rate was fixed by the manufacture at 30 frames per second. A certified medical sonographer used the Terason 
+device in the hospital room to collect ultrasound data. Data could come from patients hours after an injury or days after 
+an injury. Data collection happened after the patients were diagnosed using CT or MRI, and did not interfere or interrupt 
+routine hospital clinical care.
 
 The sonographer collected data through the temporal window of the head (See Figure \ref{ultrasound_angle}) without
 shaving the head, spending approximately five minutes aiming the ultrasound toward the known intracranial hemorrhage with 
@@ -273,26 +276,78 @@ each of the following orientations: coronal, axial, and oblique. The axial is a 
 coronal is a 90-degree slice of the brain; oblique is a slice at any angle from one degree to 179 degrees excluding the coronal. 
 Data were collected from the left and right side of the head. The sonographer also used a pulse oximeter to capture
 phases of the cardiac cycle. Any patient identifying information, including name, age, and gender, was removed from the data. 
-Patients are distingushed by three-digit numbers.
+Patients are distinguished by three-digit numbers.
+
+Prior to restrictions imposed due to COVID-19 virus, the sonographer collected 15 scans from each side of the head equally divided between
+the three scan planes. The amount of date collected following COVID-19 restriction, the data were limited to 1 axial, 1 coronal and 4 oblique
+scans from each side of the head.
 
 \begin{figure}
   \centering
   \includegraphics[width=1\linewidth]{figures/ultrasound_angle.png}
-  \caption{The orientations at which ultrasound data are collected: left or right side of the head and at axial, coronal, or oblique
-  (source: the team's sonographer).}
+  \caption{The planes at which ultrasound data are collected: left or right side of the head and at axial, coronal, or oblique.}
   \label{ultrasound_angle}
 \end{figure}
 
 \section{Signal Processing}
 
-Signal processing is not in the scope of my project. It was done by a scientist in the team, Dr. John Kucewicz.
+Signal processing is not in the scope of my project. It was done by an ultrasound signal processing expert, Dr. John Kucewicz.
+Tissue Pulsatility Imaging (TPI) relies on the deformation of the brain tissue in response to changes in 
+blood volume over a cardiac cycle. During systole, blood accumulates in the tissue due to more blood entering the arterial 
+vasculature than leaving leaving through the venous vasculature. The amount of tissue expansion is by a fraction of a percent.
+During diastole, more blood leaves through the venous vasculature returning the tissue to presystole volume\cite{hemodynamics, pulsatile_echo}.
+The central working hypothesis of the larger research effort is that this pulsation could help distinguished lesion from
+healthy brain tissue. Dr. John Kucewicz works with the raw ultrasound signals from the Terason device to measure sub-micron
+tissue displacement. The technique is developed based on plethysmography, an non-ultrasound method for measuring expansion of tissues
+due to perfusion\cite{kucewicz_tissue_2008}.
+
+Using well-established ultrasound signal processing techiques and the synchronization to cardiac cycles through pulse oximetry,
+the raw ultrasound data were converted into displacement data (See Figure \ref{signal_processing}). At a high level, the ultrasound RF signal 
+is converted into velocity of tissue movement, then into tissue displacement. First, the velocity of tissue movement was calculated from the 
+frame-to-frame change in phase of the RF signal. The displacement then was calculated by taking the time integral of the velocity and 
+band-pass filtered. Each scan results in an eight-second time series of tissue displacement at each pixel in a 2D image frame.
+
+Each pixel in the ultrasound plane has a time series of tissue displacement, sampled at 30 Hz. The displacement amplitude at each pixel was 
+computed by using a band pass filter in a narrow band (0.6 Hz wide) centered near the cardiac cycle frequency. A Hilbert transform is then 
+applied to the narrow band filtered signal to extract the instantaneous brain displacement ampliture as a function of time. 
+
+The process of creating masks is called registration. It entails matching the CT images for each patients obtained as part of their medical
+care procedure. The team developed a procedure in MATLAB to insert and refine the placement of a 2D B-Mode data plane into a 3D CT data projection
+(See Figure \ref{registration}). An example output is shown in Figure \ref{registration_output}.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\linewidth]{figures/registration.png}
+  \caption{Registering a 2D ultrasound scan plane to the 3D CT data. The 2D B-mode scane is shown relative to a point cloud representing 
+  the skin surface of the head in the 3D CT data.}
+  \label{registration}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\linewidth]{figures/registration_output.png}
+  \caption{CT brain mask constructed by registration with B-Mode ultrasound for patient \# 16 at the right oblique plane. 
+  (a) B-mode ultrasound data. (b) An overlay of the ultrasound plane on the CT image. 
+  (c) Resulting brain mask (cyan) and skull mask (blue).}
+  \label{registration_output}
+\end{figure}
 
 
 \section{Existing System}
-Talk about Caren's work.
 
-The previous work uses the data in a different way and there was no clear indication that anything was working.
-The reported results were poor and the model did not seem to learn anything useful.
+A previous student approached the problem of detecting intracranial hemorrhage using a different representation of 
+tissue displacement data, whose description is not in the scope of this writing. The student attempted several different 
+deep learning models, including MobileNetV2\cite{sandler_mobilenetv2_2019}, pix2pix\cite{isola_image_image_2018}, 
+and ResNeSt\cite{zhang_resnest_2020}. The architectures of the mentioned models were used unmodified. The loss function used for model 
+optimization was categorical loss entropy. The metrics used for evaluation are precision and recall. The best model 
+was reported to be ResNeSt. with a reported precision score of about 0.07 and recall of about 0.2 after 70 training epochs.
+
+The evaluation results showed that the previous deep learning methods and data preprocessing might not be suitable for the 
+detection of intracranial hemorrhage from displacement data. In addition, the choice of loss function and evaluation metrics 
+is poor. Categorical loss entropy considers the predicted results of all pixel an image equally. The result is that the loss 
+value could be very low, but the predictive power for a class of interest is very low. The precision and recall scores evaluate 
+the quantity of true positive, true negative, false positive, and false negative in relation to each other, but they do not 
+indicate how well a model learn the correct label of a pixel or how well the ground truth overlaps with the detected area.
 
 \section{Problem Statement and Scope}
 This capstone project focuses on the core algorithm that detects the regions of intracranial
@@ -342,7 +397,7 @@ ventricle detection, brain mass detection, and intracranial hemorrhage diagnosis
 
 \chapter {Method}
 
-\section{Data Reprocessing}
+\section{Data Description and Preprocessing}
 
 
 
