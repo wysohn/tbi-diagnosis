@@ -97,9 +97,9 @@ Using Tissue Pulsatility Ultrasound Imaging}
 \Year{2022}
 \Program{Computer Science \& Software Engineering}
 
-\Chair{Dr. Erika Parsons}{Dr.}{Computer Science \& Software Engineering}
-\Signature{Dr. Pierre Mourad}
-\Signature{Dr. Michael Stiber}
+\Chair{Erika Parsons}{Dr.}{Computer Science \& Software Engineering}
+\Signature{Pierre Mourad}
+\Signature{Michael Stiber}
 
 \copyrightpage
 
@@ -116,24 +116,8 @@ Using Tissue Pulsatility Ultrasound Imaging}
 
 
 \setcounter{page}{-1}
-\abstract{%
-This sample dissertation is an aid to students who are attempting
-to format their theses with \LaTeX, a sophisticated
-text formatter widely used by mathematicians and scientists everywhere.
- 
-\begin{itemize}
-\item It describes the use of a specialized
-macro package developed specifically for thesis production
-at the University.
-The macros customize \LaTeX\ for the correct thesis style,
-allowing the student to concentrate on the substance of
-his or her text.%
-\footnote{See Appendix A to obtain the source to this
- thesis and the class file.}
-\item It demonstrates the solutions to a variety of
-formatting challenges found in thesis production.
-\item It serves as a template for a real dissertation.
-\end{itemize}
+\abstract{
+TBD
 }
  
 %
@@ -157,6 +141,8 @@ formatting challenges found in thesis production.
 \item[IED] Improvised Explosive Device.
 \item[IRB] Institutional Review Board.
 \item[Intracranial hemorrhage] bleeding inside the brain.
+\item[LSTM] Long Short-Term Memory. 
+\item[RNN] Recurrent Neural Network. 
 \item[TBI] Traumatic Brain Injury.
 \item[TPI] Tissue Pulsatility Imaging.
 \item[cTBI] closed Traumatric Brain Injury.
@@ -202,7 +188,7 @@ formatting challenges found in thesis production.
 \section{Background}
 
 Brain injury may happen in one of two ways: close brain injury (cTBI) and penetrating 
-brain injury (pTBI)\cite{TBI}. Closed brain injuries happen when an injury is nonpenetrating
+brain injury (pTBI) \cite{TBI}. Closed brain injuries happen when an injury is nonpenetrating
 and does not cause any break in the skull. The source of these injuries are rapid forward and/or
 backward movements and shaking of the brain inside the bony skull that results in bruising
 and tearing of brain tissue and blood vessels. Penetrating brain injuries happen when a foreign 
@@ -212,34 +198,34 @@ For instance, a bullet travels through the head, piercing the brain.
 What why is TBI important for civilians and battle field?
 TBI in the battle field:
 A large percentage of deployed U.S. sodiers (40\% to 60\% of surviving soldiers)
-suffer from closed-head injuries caused by the blast effect of IED explosion\cite{explosive}. 
+suffer from closed-head injuries caused by the blast effect of IED explosion \cite{explosive}. 
 These injuries could result in intracranial hemorrhage, causing long-term neurological damages
 if left untreated. For severe TBI cases, the patients must be evacuated to the nearest combat
 hospital that has equipment to support neurosergery, airway protection, mechaincal ventilation,
 among other means for critical care. However, severe cTBI patients often do not survive more than
-one year post injury\cite{explosive}. Thus, early diagnosis is critical not only to improve the clinical 
+one year post injury \cite{explosive}. Thus, early diagnosis is critical not only to improve the clinical 
 outcome, but also to provide medical personnel with information to make decision when resources are 
 scarce.
 
 Besides the relevance on the battle field, TBI is a pressing public health and medical problem
 around the world. According to the World Health Organization (WHO), TBI affects an estimate of 10 million 
-people annually\cite{hyder_impact_2007}. Low and middle income countries face higher risk factors
+people annually \cite{hyder_impact_2007}. Low and middle income countries face higher risk factors
 for causes of TBI due to inadequate health care systems.
 
 Early diagnosis and immediate medical care is extremely important in improving the clinical outcomes for 
-TBI patients\cite{management_2000}. Computer Tomography (CT) and Magnetic
+TBI patients \cite{management_2000}. Computer Tomography (CT) and Magnetic
 Resonance Imaging (MRI) are the current standard methods for identifying  intracranial 
-hemorrhage\cite{heit_imaging_2017}. The main disadvantage of these imaging modalities is the
+hemorrhage \cite{heit_imaging_2017}. The main disadvantage of these imaging modalities is the
 complexity, size, and cost of the required equipment, making them inaccessible in the combat settings
 and in low income countries. In contrast, ultrasound imaging could be used with relatively affordable
 equipment that are as small as a standard tablet. An example of such systems is a tablet-like device 
 from Terason (the company website is at https://www.terason.com). Ultrasound imaging has a major
 drawback: ultrasound waves do not penetrate bones very well, making ultrasound imaging more suitable
-for infants up to about 18 months old at which age the craniums are yet fused together\cite{cranial_ult}.
+for infants up to about 18 months old at which age the craniums are yet fused together \cite{cranial_ult}.
 
 A team of researchers from the University of Washington  developed a novel ultrasound technique called
 tissue pulsatility imaging (TPI) that captures the pulsation of the brain tissue as blood infuses the
-brain during a cardiac cycle\cite{kucewicz_tissue_2008}. The team collected data from civilian patients who 
+brain during a cardiac cycle \cite{kucewicz_tissue_2008}. The team collected data from civilian patients who 
 suffer moderate to severe cTBI. The working hypothesis is that the difference in the movements of brain tissue versus 
 TBI lesion allows one to detect intracanial hemorrhage through computer assisted means. This project aims to employ the power
 of deep learning to produce an algorithm that can automatically identifying intracranial hemorrhage from TPI data.
@@ -250,7 +236,7 @@ by the policies of the University of Washington's Human Subjects Division. Data 
 the Institutional Review Board (IRB) through a Zipline application, the Human Subjects Division's e-IRB system.
 
 The data was collected from patients admitted to Harborview Medical Center (HMC) in Seattle, the only Level 1 trauma 
-center in the area capable of providing total care for every aspect of traumatic injuries to the brain\cite{trauma_care}.
+center in the area capable of providing total care for every aspect of traumatic injuries to the brain \cite{trauma_care}.
 The criteria for selecting patients are:
 \begin{itemize}
   \item Moderate to severe cTBI at HMC;s Neuro ICU, with or without polytrauma
@@ -297,7 +283,7 @@ During diastole, more blood leaves through the venous vasculature returning the 
 The central working hypothesis of the larger research effort is that this pulsation could help distinguished lesion from
 healthy brain tissue. Dr. John Kucewicz works with the raw ultrasound signals from the Terason device to measure sub-micron
 tissue displacement. The technique is developed based on plethysmography, an non-ultrasound method for measuring expansion of tissues
-due to perfusion\cite{kucewicz_tissue_2008}.
+due to perfusion \cite{kucewicz_tissue_2008}.
 
 Using well-established ultrasound signal processing techiques and the synchronization to cardiac cycles through pulse oximetry,
 the raw ultrasound data were converted into displacement data (See Figure \ref{signal_processing}). At a high level, the ultrasound RF signal 
@@ -343,8 +329,8 @@ care procedure. The team developed a procedure in MATLAB to insert and refine th
 
 A previous student approached the problem of detecting intracranial hemorrhage using a different representation of 
 tissue displacement data, whose description is not in the scope of this writing. The student attempted several different 
-deep learning models, including MobileNetV2\cite{sandler_mobilenetv2_2019}, pix2pix\cite{isola_image_image_2018}, 
-and ResNeSt\cite{zhang_resnest_2020}. The architectures of the mentioned models were used unmodified. The loss function used for model 
+deep learning models, including MobileNetV2 \cite{sandler_mobilenetv2_2019}, pix2pix \cite{isola_image_image_2018}, 
+and ResNeSt \cite{zhang_resnest_2020}. The architectures of the mentioned models were used unmodified. The loss function used for model 
 optimization was categorical loss entropy. The metrics used for evaluation are precision and recall. The best model 
 was reported to be ResNeSt. with a reported precision score of about 0.07 and recall of about 0.2 after 70 training epochs.
 
@@ -385,8 +371,299 @@ ventricle detection, brain mass detection, and intracranial hemorrhage diagnosis
 
 \chapter {Related Work}
 
+\section{Overview}
+Medical image segmentation aims to identify structures such as organs or lesions in 
+an image; it plays a key role in computer aid diagnosis. The two categories of image 
+segmentation tasks are semantic segmentation and instant segmentation \cite{lei_medical_2020}. 
+Semantic segmentation involves pixel-level classification, assigning a corresponding category 
+for each pixel in an image. Instant segmentation is more complex, distinguishing instances 
+on the basis of specific categories in addition to outputting the basic semantic segmentation’s 
+result. This project focuses on semantic segmentation; for the remaining sections of 
+this writing, image segmentation means semantic segmentation. Depends on the availability 
+of labeled data, different flavors of deep learning (or general machine learning) 
+could be applied to solve a problem, supervised learning, weakly supervised learning, 
+and unsupervised learning. When the data are carefully labeled, supervised learning 
+is the popular choice. The disadvantage of this method is that it is difficult to obtain 
+a large number of labeled medical images. Unsupervised learning does not require labeled 
+data but the difficulty of learning is significantly higher. On the other hand, when a 
+dataset contains both labeled and unlabeled images, weakly supervised learning is another 
+option. Deep learning has been used widely for medical image segmentation with 
+huge success compared to early approaches, including edge detection, template matching 
+techniques, statistical shape models, active contours, etc \cite{lei_medical_2020}. 
+This chapter discusses the recent progress in the field of medical image segmentation. 
+The discussion focuses on the applications of deep-learning based medical image segmentation, 
+supervised deep learning techniques, and data augmentation.
+
+\section{Application}
+
+Popular medical image segmentation tasks includes, but not limited to, liver 
+and liver-tumor segmentation \cite{ li_automatic_2015, vivanti_automatic_nodate}, 
+brain and brain-tumor segmentation \cite{menze_multimodal_2015, cherukuri_learning_2018}, 
+optic disc segmentation \cite{ cheng_superpixel_2013, fu_joint_2018}, cell 
+segmentation \cite{navab_u-net_2015, song_dual-channel_2017}, lung segmentation 
+and segmentation of pulmonary nodules \cite{ wang_central_2017, onishi_multiplanar_2019}. 
+The data used for medical diagnosis are commonly 2D gray scale or three-channel RBG images 
+and 3D volumetric data. Deep learning practitioners get their data mostly from the four popular 
+imaging modalities, X-ray, Computed Tomography (CT), Magnetic Resonance Imaging (MRI), and 
+ultrasound \cite{lei_medical_2020}. When the structures of interest is at cellular scale, 
+the images often come from Electron Microscopy (EM) \cite{navab_u-net_2015}.
+
+\section{Supervised Learning}
+
+Supervised learning is the most popular method for medical image segmentation tasks. 
+This section reviews the existing methods that deep learning researchers have attempted 
+to solve medical image segmentation problems. Specifically, I will discuss the two 
+important components of a deep learning model, the backbone network and the network block.
+
+\subsection{Backbone network}
+
+The backbone network is the high-level architecture of a deep learning model. 
+It draws a big picture of the way different pixel-level computational operations 
+are chained together to process the input and output a segmentation map. In the 
+last decade, researchers have proposed various backbone architectures for deep 
+learning, U-Net, 3D Net, Recurrent Neural Network (RNN), skip connection, cascade 
+of 2D and 3D models.
+
+\paragraph{U-Net}
+
+One of the most popular deep learning architectures in the field of general image 
+segmentation is the encoder-decoder structure. U-Net \cite{ navab_u-net_2015}, 
+fully convolution network (FCN) \cite{long_fully_nodate}, and Deeplab \cite{chen_rethinking_2017} 
+are examples of the encoder-decoder structure. As the name suggest, encoder-decoder 
+architectures have two main parts, the encoder and decoder. The encoder reduces the 
+dimensions of the inputs and extracts image features while the decoder restores these 
+features to the original size and output the segmentation maps. U-Net has been used 
+widely for medical image segmentation and has become the benchmark for most medical 
+image segmentation tasks\cite{}. Many modern architectures were inspired by U-Net 
+\cite{wang_non-local_2020, zhou_unet_2020, jha_doubleu-net_2020, alom_recurrent_nodate}. 
+Figure \ref{unet} shows the architecture of the U-Net. The left side of the U-Net works 
+as a encoder. It consists of a series of convolutional filters that extract features 
+and max pooling layers that shrink the inputs. The right side is the decoder that 
+recovers the original image dimensions by four up-convolution operations. The U-Net 
+is perfectly symmetric, allowing skip connections to concatenate the input features 
+of the encoder to the features of the decoder. This structure effectively fuses 
+low-level (high resolution) and high-level (low resolution) image features through 
+skip connections. By these connections, the U-Net allows segmentation of medical 
+images, which often contain noise and show blurred boundaries.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\linewidth]{figures/unet.png}
+  \caption{The U-Net architecture. The left and right side are the encoder and decoder, respectively\cite{navab_u-net_2015}.}
+  \label{unet}
+\end{figure}
+
+\paragraph{3D Net}
+
+Motivated by the success of U-Net, the author of the U-Net paper extended the 
+architecture to work with 3D medical data \cite{cicek_3d_2016}. Such data are 
+very common in the form of volumetric CT and MRI data. Inherently, this architecture 
+has more parameters and requires much higher computer resource than the U-Net. Due 
+to insufficient computing capability, the authors limited the 3D U-Net to only 
+three down-sampling layers, reducing the model’s segmentation accuracy when tested. 
+Figure \ref{3dunet} depicts this architecture. Milletari et al. proposed a similar 
+structure called V-Net, \cite{milletari_v-net_2016} as shown in Figure \ref{vnet}. 
+V-Net was developed to allow stacking more network layers, providing better feature 
+representation. One problem that deep neural networks face is vanishing gradient 
+\cite{he_deep_2015}. The gradients (derivative) of a neural network are found using 
+back propagation during the training process. By the chain rule, the derivatives of 
+the hidden layers are multiplied from the output layer to the input layer to compute 
+the derivative of the initial layer. If the derivatives are small, multiplication 
+causes the gradient to decrease quickly, causing vanishing gradient. Residual connection 
+is one of the solution for this problem \cite{he_deep_2015}. The residual connection 
+(identity), as shown in Figure \ref{residual}, is essentially a skip connection that 
+brings weights from an earlier stage to a later stage. These weights do not go through 
+the activation function, so do not suffer from vanishing gradient. The V-Net employs 
+residual connection in the design, allowing it to have four down-sampling layers.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\linewidth]{figures/3dunet.png}
+  \caption{The 3D U-Net architecture\cite{cicek_3d_2016}.}
+  \label{3dunet}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1\linewidth]{figures/vnet.png}
+  \caption{The V-Net architecture\cite{milletari_v-net_2016}.}
+  \label{vnet}
+\end{figure}
 
 
+\begin{figure}
+  \centering
+  \includegraphics[width=0.4\linewidth]{figures/residual.png}
+  \caption{Residual connection\cite{he_deep_2015}.}
+  \label{residual}
+\end{figure}
+
+
+\paragraph{Recurrent Neural Network}
+
+Recurrent neural network (RNN) is intended for sequence problems such as 
+voice recognition, language translation, and time-series sequences to name 
+a few. One of the most popular RNNs is the Long Short-Term Memory (LSTM) 
+network, developed by Hochreiter et al. in 1997 \cite{ hochreiter_long_1997}. 
+It can mitigate the vanishing gradient problem by introducing self-loop. RNN 
+has been used to model the time dependence of image sequences. Alom et al. 
+proposed the Recurrent Convolutional Neural Network based on U-Net (RU-Net), 
+as shown in Figure \ref{rnnunet}, that improves feature representation for 
+medical image segmentation tasks by recursive residual convolutional layers 
+\cite{alom_recurrent_nodate}. Gao et al. proposed  the Fully Convolutional 
+Structured LSTM (FCSLSTM), a combination of LSTM and CNN, to model the temporal 
+relationship between different brain MRI slices \cite{gao_fully_2018}. Another 
+work from Bai et al. joined FCN with RNN to extract the spatiotemporal information 
+from aortic image sequences \cite{bai_recurrent_2018}.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1\linewidth]{figures/rnnunet.png}
+  \caption{RU-Net architecture with convolutional encoding and decoding units using 
+  recurrent convolutional layers (RCL) based on U-Net architecture.\cite{alom_recurrent_nodate}.}
+  \label{rnnunet}
+\end{figure}
+
+
+\paragraph{Skip connection}
+
+As aforementioned, the skip connection of U-Net fuses low-resolution and high resolutions 
+features to improve feature representation. A disadvantage of the skip connection is that 
+there is a large semantic gap between low-resolution and high-resolution features, leading 
+to blurred feature maps \cite{ lei_medical_2020}. Ibtehaz et al. improved the original 
+U-Net multiple ways, including replacing the ordinary skip connection with convolution 
+operations on the encoder’s features before fusing with the decoder’s features 
+\cite{ibtehaz_multiresunet_2020}. They tested the model on five different dataset, 
+including EM images for cell segmentation and endoscopy images for colon cancer detection, 
+and reported better performance than U-Net. Two additional work by Seo et al. \cite{seo_modified_2020} 
+and Chen et al. \cite{chen_feature_2019} also added convolution operations to the skip connection 
+to improve performance of liver-lesion segmentation tasks.
+
+
+\paragraph{Cascade Models}
+
+The accuracy of segmentation tasks could be improved by training multiple models and chaining 
+their input/output together. This type of architecture has three main categories, coarse-fine 
+segmentation, detection segmentation, and mixed segmentation \cite{lei_medical_2020}. In this 
+writing, I am interested mostly in the coarse-fine segmentation type. In coarse-fine segmentation 
+networks, a cascade of two 2D networks is used. The first network provides a coarse segmentation, 
+and the second network refines the coarse segmentation with details. Many researchers have 
+developed this type of networks for liver and liver tumor segmentation using 3D. Christ et al. 
+proposed the Cascaded fully convolutional neural networks (CFCNs) for liver and liver tumor 
+segmentation\cite{christ_automatic_2016}. In their work, they used an FCN to segment the liver, 
+then fed the result to a second FCN for liver tumor segmentation. Other coarse-fine segmentation 
+networks for liver and liver tumor segmentation are described in \cite{ tang_dsl_2018, 
+kaluva_2d-densely_2018, feng_automatic_2018}.
+
+\subsection{Netwok Block}
+
+Within the larger backbone network, there are the network blocks that perform the 
+computations on the inputs to generate the features maps. For instance, The network 
+blocks of the vanilla U-Net model are simple convolutional layers. Researchers have 
+devised a variety of network blocks to effectively extract features maps within a 
+larger network from medical images. In this section, I will discuss three of these 
+network blocks: dense connection, inception, and attention mechanism.
+
+\paragraph{Dense Connection}
+
+In a dense connection network, the input of the previous layers are fed into subsequence 
+layers. Guan et al. replaced the last block in a layer of the U-Net model with a dense 
+block as shown in Figure \ref{dense_connection} \cite{guan_fully_2020}. They named this 
+architecture fully dense UNet (FD-UNet). The architecture was showed to outperform U-Net 
+for removing artifacts from reconstructed 2D photoacoustic tomography images. Zhou et al. 
+\cite{zhou_unet_2020} extended this idea to the larger model as shown in Figure \ref{unetpp} 
+and named the new architecture UNet++. This network contains intermediate layers and skip connections, 
+resulting in a highly flexible feature fusion scheme. The downside is that the number of parameters 
+is much higher than the basic U-Net due to dense connection. UNet++ outperforms U-Net in 
+cell segmentation, brain tumor segmentation, liver segmentation, and lung nodule segmentation.
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1\linewidth]{figures/dense_connection.png}
+  \caption{The dense block with four layers. The feature maps from previous layers are concatenated together as input
+  to the following layers. BN stands for batch normalization \cite{guan_fully_2020}.}
+  \label{dense_connection}
+\end{figure}
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.6\linewidth]{figures/unet_pp.png}
+  \caption{The U-Net++ architecture. Solid up and down arrows represent the encoding and decoding path,
+  respectively, while dotted arrows represents skip connections. The yellow circles are
+  convolutional blocks \cite{guan_fully_2020}.}
+  \label{unetpp}
+\end{figure}
+
+
+\paragraph{Inception}
+
+Deep CNN networks often perform better than shallows ones, but they suffer from 
+problems, including vanishing gradient, difficulty of network convergence, large 
+memory usage \cite{lei_medical_2020}. Gu et al. proposed CE-Net by introducing 
+the inception structure into the U-Net architecture before the middle layer 
+\cite{gu_ce-net_2019}. Figure \ref{dac} depicts this structure. The inception 
+structure contains various atrous convolution blocks to extract features on a 
+wide reception field. The inception structure improves the problems of deep CNN 
+but is complex, leading to difficulty of model modification \cite{lei_medical_2020}. 
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.6\linewidth]{figures/dense_atrous.png}
+  \caption{Inception structure or dense atrous convolutional block from CE-Net \cite{gu_ce-net_2019}.}
+  \label{dac}
+\end{figure}
+
+
+\paragraph{Attention Mechanism}
+
+Another network block that has been shown to improve a network’s performance 
+for medical image segmentation is the attention block. The basic of the attention 
+block is that it can assign different weights to the input features according 
+to the importance. Oktay et al. incorporated the attention mechanism into the U-Net 
+and proposed attention U-Net \cite{oktay_attention_nodate}. Figure \ref{attentionUnet} 
+shows the overall architecture of attention U-Net. It is very similar to the original 
+U-Net besides the addition of the attention gate, as shown in Figure \ref{attentionGate}. 
+This network block modifies the output of the encoder before it is concatenated 
+to the decoder features. The attention gate effectively controls the feature importance 
+of input pixels. 
+
+The U-Net and many of its variations have two important limitations. The first one 
+is low effectiveness: the encoder and decoder depend on local operators; the second 
+is low efficiency: a large amount of feature maps are generated due to doubling of 
+output channels at each step \cite{wang_non-local_2020}. Wang et al. proposed Non-local
+ U-Net to solve these problems \cite{wang_non-local_2020}. Non-local U-Net contains 
+ global aggregation blocks based on self-attention operator to aggregate global 
+ information without a deep encoder.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\linewidth]{figures/attentionUnet.png}
+  \caption{The architecture of the attention U-Net \cite{oktay_attention_nodate}.}
+  \label{attentionUnet}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\linewidth]{figures/attentionGate.png}
+  \caption{Attention gate from Attention U-Net\cite{oktay_attention_nodate}, redrawn by Lei et al. \cite{lei_medical_2020}.}
+  \label{attentionGate}
+\end{figure}
+
+
+\subsection{Data Augmentation}
+
+The quality of the data dictates the segmentation results of deep learning models. However, 
+in the medical field, it is difficult to build high-quality datasets since the cost of data 
+acquisition and labeling is very high \cite{lei_medical_2020}. In the absence of large 
+labeled datasets, researchers have to rely on data augmentation. Conditional generative 
+adversarial nets (cGAN) is frequently used to generate additional data for various medical 
+segmentation tasks. Guibas et al. proposed an architecture that contains a GAN and a cGAN 
+to generate synthetic images of retinal fundi images \cite{guibas_synthetic_2018}. Another 
+work by Mahapatra et al. employed a cGAN to synthesize realistic chest X-ray images with 
+different disease characteristics by conditioning the model on real samples 
+\cite{mahapatra_efficient_2018}.
 
 
 % ========== Chapter 3
@@ -432,507 +709,6 @@ would be scanned by the medics on the battle field.
 
  
  
-% ========== Chapter 2
- 
-\chapter{A Brief \\ Description of \protect\TeX}
- 
-The \TeX\ formatting program is the creation of
-Donald Knuth of Stanford University.
-It has been implemented on nearly every general purpose computer and
-produces exactly the same copy on all machines.
- 
-\section{What is it; why is it spelled that way; 
-and what do
-really long section titles look like in the text and in the
-Table of Contents?}
- 
-\TeX\ is a formatter.  A document's format is controlled
-by commands embedded in the text.  
-\LaTeX\ is a special version of \TeX---preloaded
-with a voluminous set of macros that simplify most
-formatting tasks.
- 
-\TeX\ uses {\it control sequences} to control
-the formatting of a document.  These control sequences are usually
-words or groups of letters prefaced with the backslash character
-({\tt\char'134}).
-For example,
-Figure \ref{start-2} shows the text that printed the beginning
-of this chapter.  Note the control sequence \verb"\chapter" that
-instructed \TeX\ to start a new chapter, print the title, and
-make an entry in the table of contents.  It is an example
-of a macro defined by the \LaTeX\ macro package.
-The control sequence \verb"\TeX", which prints the word \TeX,
-is a standard macro from the {\it\TeX book}.
-The short control sequence \verb"\\" in the title instructed \TeX\ to
-break the title line at that point.
-This capability is an example of an extension to \LaTeX\
-provided by the uwthesis document class.
- 
-\begin{figure}
-\begin{demo}
-\uwsinglespace
-\\chapter\{A Brief\\\\Description of \\TeX\}
-
-The \\TeX\\ formatting program is the creation of
-Donald Knuth of Stanford University.
-\end{demo}
-\label{start-2}
-\caption{The beginning of the Chapter II text}
-\end{figure}
- 
-Most of the time \TeX\ is simply building paragraphs from
-text in your source files.  No control sequences are involved.
-New paragraphs are indicated by a blank line in the
-input file.
-Hyphenation is performed automatically.
- 
-\section{\TeX books}
- 
-The primary reference for \LaTeX\ is Lamport's second edition
-of the \textit{\LaTeX\ User's Guide}\cite{Lbook}.
-It is easily read and should be sufficient for thesis formatting.
-See also the \textsl{\LaTeX\ Companion}\cite{companion} for descriptions
-of many add-on macro packages.
-
-Although unnecessary for thesis writers, the \textsl{\TeX book}
-is the primary reference for \TeX sperts worldwide.
- 
-\section{Mathematics}
- 
-The thesis class does not expand on \TeX's
-or \LaTeX's
-comprehensive treatment of mathematical equation printing.%
-\label{c2note}\footnote{%
-% a long footnote indeed.
- Although many \TeX-formatted documents contain no
- mathematics except the page numbers, it seems appropriate
- that this paper, which is in some sense about \TeX,
- ought to demonstrate an equation or two.  Here then, is a statement 
- of the {\it Nonsense Theorem}.
- 
- \smallskip
- \def\RR{{\cal R\kern-.15em R}}
- {\narrower\hangindent\parindent Assume a universe $E$ and a symmetric function
-  $\$$ defined on $E$, such that for each $\$^{yy}$ there exists a
-  $\$^{\overline{yy}}$, where $\$^{yy} = \$^{\overline{yy}}$.
-  For each element $i$ of $E$ define
-  ${\cal S}(i)=\sum_i \$^{yy}+\$^{\overline{yy}}+0$.
-  Then if $\RR$ is that subset of $E$ where $1+1=3$,
-  for each $i$
-  $$\lim_{\$\to\infty}\int {\cal S}di =
-      \cases{0,&if $i\not\in\RR$;\cr
-             \infty,&if $i\in\RR$.\cr}$$
-  \par}} % end of the footnote
-%
-The {\it\TeX book}\cite{book}, {\it \LaTeX\ User's Guide}\cite{Lbook},
-and {\it The \LaTeX\ Companion}\cite{companion}
-thoroughly cover this topic.
- 
- 
-\section{Languages other than English}
- 
-Most \LaTeX\ implementations at the University are tailored
-for the English language.  However, \LaTeX\ will format many
-other languages.  Unfortunately, this author has never been successful in 
-learning more than a smattering of anything other than English.
-Consult your department or the Tex Users Group.
-\smallskip
-\begin{center}
-{\tt http://tug.org/},
-\end{center}
-\smallskip
-for assistance with non-English formatting.
-
-Unusual characters can be defined via the
-font maker \hbox{\mffont METAFONT} (documented by Knuth\cite{Metafont}).
-The definitions are not trivial.
-Students who attempt to print a thesis with
-custom fonts may soon proclaim,
- 
-% Note.  This is not the ideal way to print Greek
-\medskip
-\begin{center}
-``$\mathaccent"7027\alpha\pi o\kern1pt\theta\alpha\nu\epsilon\hat\iota\nu$
-\ $\theta\acute\epsilon\lambda\omega$.''
- 
-\end{center}
- 
-% ========== Chapter 3
- 
-\chapter{The Thesis Unformatted}
- 
-This chapter describes the uwthesis class (\texttt{uwthesis.cls},
-version dated 2014/11/13)
-in detail 
-and shows how it was used to format the thesis.
-A working knowledge of Lamport's \LaTeX\ manual\cite{Lbook} is assumed.
- 
-\section{The Control File}
- 
-The source to this sample thesis is a single file
-only because ease of distribution was a concern.
-You should not do this.  Your task will be much easier if you
-break your thesis into several files:  a file for the preliminary pages,
-a file for each chapter,  one for the glossary, and one for each
-appendix.  Then use a control file to tie them all together.
-This way you can edit and format parts of your thesis much more
-efficiently.
- 
-Figure~\ref{control-file} shows a control file that
-might have produced this thesis.
-It sets the document style, with options and parameters,
-and formats the various parts of the thesis---%
-but contains no text of its own.
- 
- 
-%  control file caption and figure
-%
-%
-\begin{figure}[p]
- \begin{fullpage}
-  \uwsinglespace
-  \begin{verbatim}
-    % LaTeX thesis control file
- 
-    \documentclass [11pt, proquest]{uwthesis}[2014/11/13]
- 
-    \begin{document}
- 
-    % preliminary pages
-    %
-    \prelimpages
-    \include{prelim}
- 
-    % text pages
-    %
-    \textpages
-    \include{chap1}
-    \include{chap2}
-    \include{chap3}
-    \include{chap4}
- 
-    % bibliography
-    %
-    \bibliographystyle{plain}
-    \bibliography{thesis}
- 
-    % appendices
-    %
-    \appendix
-    \include{appxa}
-    \include{appxb}
- 
-    \include{vita} 
-    \end{document}
-  \end{verbatim}
-  \caption[A thesis control file]%
-   {\narrower A thesis control file ({\tt thesis.tex}).
-   This file is the input to \LaTeX\ that will produce a
-   thesis.  It contains no text, only commands which
-   direct the formatting of the thesis.
-   }
-  \label{control-file}
- \end{fullpage}
-\end{figure}
- 
-The first section, from the \verb"\documentclass" to
-the \verb"\begin{document}", defines the document class and options.
-This sample thesis specifies the \texttt{proquest} style, which is now
-required by the Graduate School and is the default.  
-Two other, now dated, other styles are available:  \verb"twoside", which is similar but 
-produces a wider binding margin and is more suitable for paper printing; and
-\verb"oneside", which is really old fashoned.
-This sample also specified a font size
-of 11 points. 
-Possible font size options are: \verb"10pt", \verb"11pt", and \verb"12pt".
-Default is 12 points, which is the preference
-of the Graduate School. If you choose a smaller size be sure to
-check with the Graduate School for acceptability.  The smaller fonts
-can produce very small sub and superscripts.
-
-Include most additional formatting packages with \verb"\usepackage",
-as describe by Lamport\cite{Lbook}.  The one exception to this
-rule is the \verb"natbib" package.  Include it with the \verb"natbib"
-document option.
- 
-Use the \verb"\includeonly" command to format only a part of your
-thesis.  See Lamport\cite[sec. 4.4]{Lbook} for usage and limitations.
-
- 
-\section{The Text Pages}
- 
-A chapter is a major division of the thesis.  Each chapter begins
-on a new page and has a Table of Contents entry.
- 
-\subsection{Chapters, Sections, Subsections, and Appendices}
- 
- 
-Within the chapter title use a \verb"\\" control sequence to separate lines
-in the printed title (recall Figure \ref{start-2}.).
-The \verb"\\" does not affect the Table of Contents entry.
- 
-Format appendices just like chapters.
-The control sequence \verb"\appendix" instructs \LaTeX\ to
-begin using the term `Appendix' rather than `Chapter'.
- 
- 
-Specify sections and subsections of a chapter 
-with  \verb"\section" and \verb"\subsection", respectively.
-In this thesis chapter and section
-titles are written to the table of contents.
-Consult Lamport\cite[pg. 176]{Lbook} to see which
-subdivisions of the thesis can be written to the table of contents.
-The \verb"\\" control sequence is not permitted in section and
-subsection titles.
- 
- 
-\subsection{Footnotes}
- 
-\label{footnotes}
- Footnotes format as described in the \LaTeX\ book.  You can also
- ask for end-of-chapter or end-of-thesis notes.
- The thesis class will automatically set these up if
- you ask for the document class option \texttt{chapternotes}
- or \texttt{endnotes}.  
- 
-If selected, chapternotes will print automatically.  If you choose
-endnotes however you must explicitly indicate when to print the notes 
-with the command \verb"\printendnotes".  See the style guide for
-suitable endnote placement.  
-
-\subsection{Figures and Tables}
-Standard \LaTeX\ figures and tables, see Lamport\cite[sec.~C.9]{Lbook},
-normally provide the most convenient means to position the figure.
-Full page floats and facing captions are exceptions to this rule.
-
-If you want a figure or table to occupy a full page enclose the
-contents in a \texttt{fullpage} environment.  
-See figure~\ref{facing-caption}.
-
-\subsubsection{Facing pages}
-Facing page captions are an artifact of traditional, dead-tree printing,
-where a left-side (even) page faces a right-side (odd) page.
-
-In the \texttt{twoside} style, a facing caption
-is full page caption for a full page figure or table
-and should face the illustration to which it refers.
-You must explicitly format both pages. 
-The caption part appears on an even page
-(left side) and the figure or table
-comes on the following odd page (right side).
-Enclose the float contents for the caption 
-in a \texttt{leftfullpage} environment,
-and enclose the float contents for the figure or table 
-in a \texttt{fullpage} environment.
-The first page (left side) contains the caption. The second page
-(right side) could be left blank.  A picture or graph might be pasted onto
-this space. See figure~\ref{facing-caption}.
-
-
-\begin{figure}[t]
-\uwsinglespace
-\begin{verbatim}
-     \begin{figure}[p]% the left side caption
-       \begin{leftfullpage}
-         \caption{ . . . }
-       \end{leftfullpage}
-     \end{figure}
-     \begin{figure}[p]% the right side space
-       \begin{fullpage}
-          . . .
-          ( note.. no caption here )
-       \end{fullpage}
-     \end{figure}
-\end{verbatim}
-\caption[Generating a facing caption page]{This text would create a
-  double page figure in the two-side styles. }
-\label{facing-caption}
-\end{figure}
- 
-You can use these commands with the \texttt{proquest} style, but they have little
-effect on online viewing.
- 
- 
-\subsection{Horizontal Figures and Tables}
-Figures and tables may be formatted horizontally
-(a.k.a.\ landscape) as long as their captions appear
-horizontal also.  \LaTeX\ will format landscape material for you.
-
-Include the \texttt{rotating} package 
-\begin{demo}
-\\usepackage[figuresright]\{rotating\}
-\end{demo}
-and read the documentation that comes with the package. 
-
-Figure~\ref{sideways} is an example of how a landscape
-table might be formatted. 
-
-\begin{figure}[t]
-\uwsinglespace
-\begin{verbatim}
-     \begin{sidewaystable}
-         ...
-         \caption{ . . . }
-     \end{sidewaystable}
-\end{verbatim}
-\caption[Generating a landscape table]{This text would create a
-  landscape table with caption.}
-\label{sideways}
-\end{figure}
- 
-
-
-\subsection{Figure and Table Captions}
-Most captions are formatted with the \verb"\caption" macro as described 
-by Lamport\cite[sec. C.9]{Lbook}. 
-The uwthesis class extends this macro to allow
-continued figures and tables, and to provide multiple figures and
-tables with the same number, e.g., 3.1a, 3.1b, etc.
- 
-To format the caption for the first part of
-a figure or table that cannot fit
-onto a single page use the standard form:
-\begin{demo}
-\\caption[\textit{toc}]\{\textit{text}\}
-\end{demo}
-To format the caption for the subsequent parts of 
-the figure or table 
-use this caption:
-\begin{demo}
-\\caption(-)\{(continued)\}
-\end{demo}
-It will keep the same number and the text of the caption will be 
-{\em(continued)}.
-
-To format the caption for the first part of
-a multi-part figure or table
-use the format:
-\begin{demo}
-\\caption(a)[\textit{toc}]\{\textit{text}\}
-\end{demo}
-The figure or table will be lettered (with `a') as well as numbered.
-To format the caption for the subsequent parts of 
-the multi-part figure or table
-use the format:
-\begin{demo}
-\\caption(\textit{x})\{\textit{text}\}
-\end{demo}
-where {\em x} is {\tt b}, {\tt c}, \ldots.
-The parts will be lettered (with `b', `c', \ldots).
-
-If you want a normal caption, but don't want a ToC entry:
-\begin{demo}
-\\caption()\{\textit{text}\}
-\end{demo}
-Note that the caption number will increment.  You would normally use this 
-only to leave an entire chapter's captions off the ToC.
-
-
-\subsection{Line spacing}
-
-Normally line spacing will come out like it should. However, the 
-ProQuest style allows single spacing in certain situations:
-figure content, some lists, and etc.
-Use \verb"\uwsinglespace" to switch to single spacing within
-a \verb"\begin{}" and \verb"\end{}" block.
-The code examples in this document does this. 
-
-\section{The Preliminary Pages}
- 
-These are easy to format only because they are relatively invariant
-among theses.  Therefore the difficulties have already been encountered
-and overcome by \LaTeX\ and the thesis document classes.
-
-Start with the definitions that describe your thesis.
-This sample thesis was printed with the parameters:
-
-\begin{demo}
-\\Title\{The Suitability of the \\LaTeX\\ Text Formatter\\\\
-   for Thesis Preparation by Technical and\\\\
-   Non-technical Degree Candidates\}
-\\Author\{Jim Fox\}
-\\Program\{IT Infrastructure\}
-\\Year\{2012\}
-
-\\Chair\{Name of Chairperson\}\{title\}\{Chair's department\}
-\\Signature\{First committee member\}
-\\Signature\{Next committee member\}
-\\Signature\{etc\}
-
-\end{demo}
- 
-Use two or more \verb"\Chair" lines if you have co-chairs.
- 
-\subsection{Copyright page}
-Print the copyright page with \verb"\copyrightpage".
-
-\subsection{Title page}
-Print the title page with \verb"\titlepage".
-The title page of this thesis was printed with%
- 
-\begin{demo}
-\\titlepage
-\end{demo}
- 
-You may change default text on the title page with these
-macros.  You will have to redefine \verb"\Degreetext", for instance,
-if you're writing a Master's thesis instead of a dissertation.\footnote{If you use these they can
-be included with the other information before \\copyrightpage".}
-
-\begin{list}{}{\itemindent\parindent\itemsep0pt
-   \def\makelabel#1{\texttt{\char`\\#1}\hfill}\uwsinglespace}
-\item[Degree\char`\{{\it degree name}\char`\}]
-   defaults to ``Doctor of Philosophy''
-\item[School\char`\{{\it school name}\char`\}] defaults to
-``University of Washington''
-\item[Degreetext\char`\{{\it degree text}\char`\}] defaults to
-``A dissertation submitted \ldots''
-\item[textofCommittee\char`\{{\it committee label}\char`\}] defaults to
-``Reading Committee:''
-\item[textofChair\char`\{{\it chair label}\char`\}] defaults to
-``Chair of the Supervisory Committee:''
-\end{list}
-
-These definitions must appear \underline{before} the \verb"\titlepage" command.
-
- 
-\subsection{Abstract}
-Print the
-abstract with \verb"\abstract".
-It has one argument, which is the text of the abstract.
-All the names have already been defined.
-The abstract of this thesis was printed with
- 
-\begin{demo}
-\\abstract\{This sample . . . `real' dissertation.\}
-\end{demo}
- 
- 
-\subsection{Tables of contents}
-Use the standard \LaTeX\ commands to format these items.
- 
- 
-\subsection{Acknowledgments}
-Use the \verb"\acknowledgments" macro to format the acknowledgments page.
-It has one argument, which is the text of the acknowledgment.
-The acknowledgments of this thesis was printed with
- 
-\begin{demo}
-\\acknowledgments\{The author wishes . . . \{\\it il miglior fabbro\}.\\par\}\}
-\end{demo}
- 
- 
-\subsection{Dedication}
-Use the \verb"\dedication" macro to format the dedication page.
-It has one argument, which is the text of the dedication.
- 
-\subsection{Vita}
-Use the \verb"\vita" macro to format the curriculum vitae.
-It has one argument, which chronicles your life's accomplishments.
-
-Note that the Vita is not really a preliminary page.
-It appears at the end of your thesis, just after the appendices.
  
  
 %%  
@@ -960,42 +736,7 @@ It appears at the end of your thesis, just after the appendices.
 %
 \appendix
 \raggedbottom\sloppy
- 
-% ========== Appendix A
- 
-\chapter{Where to find the files}
- 
-The uwthesis class file, {\tt uwthesis.cls}, contains the parameter settings,
-macro definitions, and other \TeX nical commands which
-allow \LaTeX\ to format a thesis.  
-The source to
-the document you are reading, {\tt uwthesis.tex},
-contains many formatting examples
-which you may find useful.
-The bibliography database, {\tt uwthesis.bib}, contains instructions
-to BibTeX to create and format the bibliography.
-You can find the latest of these files on:
 
-\begin{itemize}
-\item My page.
-\begin{description}
-\item[] \verb%https://staff.washington.edu/fox/tex/thesis.shtml%
-\end{description}
-
-\item CTAN
-\begin{description}
-\item[]  \verb%http://tug.ctan.org/tex-archive/macros/latex/contrib/uwthesis/%
-\item[]  (not always as up-to-date as my site)
-\end{description}
-
-\end{itemize}
-
-\vita{Jim Fox is a Software Engineer with IT Infrastructure Division at the University of Washington.
-His duties do not include maintaining this package.  That is rather
-an avocation which he enjoys as time and circumstance allow.
-
-He welcomes your comments to {\tt fox@uw.edu}.
-}
 
 
 \end{document}
