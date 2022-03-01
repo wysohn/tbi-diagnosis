@@ -137,6 +137,7 @@ def make_label(rawData, x_dim, y_dim, objective):
     Objective = 0: find skull
     Objective = 1: find bleed
     Objective = 2: find brain
+    Objective = 3: find ventricle
     
     Args:
         rarData: data read from loadmat()
@@ -147,23 +148,20 @@ def make_label(rawData, x_dim, y_dim, objective):
     Return:
         label (numpy.arr): the label (x_dim, y_dim)
     """
-    # get the labels
-    bloodMask = np.array(list(rawData['bloodMaskThick']))
-    brainMask = np.array(list(rawData['brainMask']))
-    skullMask = np.array(list(rawData['skullMaskThick']))
+    # get label
+    if objective == 0:
+        # skull
+        mask = np.array(list(rawData['skullMaskThick']))
+    elif objective == 1:
+        # bleed
+        mask = np.array(list(rawData['bloodMaskThick']))
+    elif objective == 2:
+        mask = np.array(list(rawData['brainMask']))
+    else:
+        mask = np.array(list(rawData['ventMaskThick']))
     
     # resize the masks
-    bloodMask = cv2.resize(bloodMask, (y_dim, x_dim))
-    brainMask = cv2.resize(brainMask, (y_dim, x_dim))
-    skullMask = cv2.resize(skullMask, (y_dim, x_dim))
-    
-    # create label
-    if objective == 0:
-        label = skullMask
-    elif objective == 1:
-        label = bloodMask
-    else:
-        label = brainMask
+    label = cv2.resize(mask, (y_dim, x_dim))
     
     return label.astype('float32')
 
