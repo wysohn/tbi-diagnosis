@@ -11,8 +11,6 @@ from scipy.io import loadmat
 from multiprocessing import Process, Lock, Manager
 from PIL import Image
 
-data_dir = "/DATA/phan92/tbi_diagnosis/data/raw/cardiac_displacement_3_updated_Oct13"
-
 old_bad_patients = [1, 14, 22, 23, 27, 28, 32, 34, 35, 36, 37, 38, 39, 44, 49, 69, 71, 
                 78, 82, 90, 98, 101, 121, 124, 128, 133, 928]
 
@@ -506,5 +504,5 @@ def _add_dataset(group: h5py.Group, displacement, label, bMode, fileNames):
 if __name__ == '__main__':
     make_hdf5_by_patient_group('new_displacementNorm_data.hdf5', 
                            config.PROCESSED_DATA_DIR, 
-                           data_dir,
+                           config.RAW_DATA_DIR,
                            1)
