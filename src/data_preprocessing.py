@@ -500,7 +500,24 @@ def _add_dataset(group: h5py.Group, displacement, label, bMode, fileNames):
 
 
 if __name__ == '__main__':
-    make_hdf5_by_patient_group('new_displacementNorm_data.hdf5', 
+    # objective:
+    #   mode 0 = skull
+    #   mode 1 = bleed
+    #   mode 2 = brain
+    #   mode 3 = ventricle
+    mode = config.DATA_MODE
+    if mode == 0:
+        objective = 'skull'
+    elif mode == 1:
+        objective = 'bleed'
+    elif mode == 2:
+        objective = 'brain'
+    elif mode == 3:
+        objective = 'vent'
+    else:
+        raise ValueError("Enter a valid mode")
+
+    make_hdf5_by_patient_group(objective + '_displacementNorm_data.hdf5', 
                            config.PROCESSED_DATA_DIR, 
                            config.RAW_DATA_DIR,
-                           1)
+                           objective=mode)

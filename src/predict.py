@@ -158,10 +158,28 @@ def make_and_save_prediction(model, data_dir, save_dir):
 
 
 if __name__ == '__main__':
-    model_path = os.path.join(config.TRAINED_MODELS_DIR, '20220220-003518_unet.h5')
+    # objective:
+    #   mode 0 = skull
+    #   mode 1 = bleed
+    #   mode 2 = brain
+    #   mode 3 = ventricle
+    mode = config.DATA_MODE
+    if mode == 0:
+        objective = 'skull'
+    elif mode == 1:
+        objective = 'bleed'
+    elif mode == 2:
+        objective = 'brain'
+    elif mode == 3:
+        objective = 'vent'
+    else:
+        raise ValueError("Enter a valid mode")
+    
+    model_path = os.path.join(config.TRAINED_MODELS_DIR, '20220301-152033_unet_vent.h5')
     model = load_model(model_path, compile=False)
-    data_dir = os.path.join(config.PROCESSED_DATA_DIR, "skull_displacementNorm_data.hdf5")
-    save_dir = os.path.join(config.INFERENCE_DIR, 'test')
+
+    data_dir = os.path.join(config.PROCESSED_DATA_DIR, objective + "_displacementNorm_data.hdf5")
+    save_dir = os.path.join(config.INFERENCE_DIR, datetime.now().strftime('%Y%m%d-%H%M%S') + '_' + objective)
     if not os.path.isdir(save_dir):
         os.makedirs(save_dir)
     make_and_save_prediction(model, data_dir, save_dir)

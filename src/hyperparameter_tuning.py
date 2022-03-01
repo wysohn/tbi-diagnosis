@@ -104,7 +104,7 @@ def grid_search(hdf5_file, log_dir):
 
 if __name__ == '__main__':
     '''
-    # hyperparameters
+    # hyperparameters tuning with 10-fold cross validation
     start_filters = [8, 16, 32]
     batch_sizes = [10, 20, 30, 32]
     n_epochs = [30]

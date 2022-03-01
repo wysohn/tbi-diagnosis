@@ -75,7 +75,24 @@ def train(model, hdf5_file: str, checkpoint_dir: str, log_dir: str, epochs=50):
 
 
 if __name__ == '__main__':
-    dataFile = 'skull_displacementNorm_data.hdf5'
+    # objective:
+    #   mode 0 = skull
+    #   mode 1 = bleed
+    #   mode 2 = brain
+    #   mode 3 = ventricle
+    mode = config.DATA_MODE
+    if mode == 0:
+        objective = 'skull'
+    elif mode == 1:
+        objective = 'bleed'
+    elif mode == 2:
+        objective = 'brain'
+    elif mode == 3:
+        objective = 'vent'
+    else:
+        raise ValueError("Enter a valid mode")
+
+    dataFile = objective + '_displacementNorm_data.hdf5'
     hdf5_dir = os.path.join(config.PROCESSED_DATA_DIR, dataFile)
     architecture = 'unet'
     K.clear_session()
@@ -95,4 +112,6 @@ if __name__ == '__main__':
         log_dir=config.TENSORFLOW_LOG_DIR, 
         epochs=50)
     
-    model.save(os.path.join(config.TRAINED_MODELS_DIR, datetime.now().strftime('%Y%m%d-%H%M%S') + '_' + architecture + '.h5'))
+    model_saved_name = datetime.now().strftime('%Y%m%d-%H%M%S') + '_' + architecture + '_' + objective +'.h5'
+    model.save(os.path.join(config.TRAINED_MODELS_DIR, model_saved_name))
+    print('Saved trained model to' + model_saved_name)

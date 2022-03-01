@@ -3,7 +3,6 @@ import dotenv
 
 dotenv.load_dotenv()
 
-# Used in DataFilePlayGround_2.py
 # Path to raw data
 RAW_DATA_DIR = str(os.getenv("RAW_DATA_DIR"))
 # Path to processed numpy matrices
@@ -16,3 +15,9 @@ INFERENCE_DIR = str(os.getenv("INFERENCE_DIR"))
 TENSORFLOW_LOG_DIR = str(os.getenv("TENSORFLOW_LOG_DIR"))
 # path to training check point
 CHECKPOINT_DIR = str(os.getenv("CHECKPOINT_DIR"))
+# objective:
+    #   mode 0 = skull
+    #   mode 1 = bleed
+    #   mode 2 = brain
+    #   mode 3 = ventricle
+DATA_MODE = int(os.getenv('DATA_MODE'))
