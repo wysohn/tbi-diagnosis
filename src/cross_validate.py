@@ -108,5 +108,11 @@ def cross_validation(batch_size,
 
 
 if __name__ == '__main__':
+    batch_size = 32
+    filters = 8
+    dropout = 0.5
+    loss_fn = 'soft_dice_loss'
+    epochs = 30
+    kfold = 10
     data_dir = os.path.join(config.PROCESSED_DATA_DIR, "skull_displacementNorm_data.hdf5")
-    cross_validation(batch_size, filters, dropout, loss_fn, epochs, 10, data_dir)
+    cross_validation(batch_size, filters, dropout, loss_fn, epochs, kfold, data_dir)
