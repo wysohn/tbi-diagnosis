@@ -334,6 +334,11 @@ def expand_as(tensor, rep):
 
 
 def AttnGateBlock(x, g, inter_shape):
+    # attention gate as described in 
+    #   Ozan Oktay, Jo Schlemper, Loic Le Folgoc, Matthew Lee, Mattias Heinrich, 
+    #   Kazunari Misawa, Kensaku Mori, Steven McDonagh, Nils Y Hammerla, Bernhard 
+    #   Kainz, Ben Glocker, and Daniel Rueckert. Attention U-Net: Learning Where to 
+    #   Look for the Pancreas. arXiv, page 10, 2018
     shape_x = K.int_shape(x)
     shape_g = K.int_shape(g)
     

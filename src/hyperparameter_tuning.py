@@ -10,11 +10,11 @@ import numpy as np
 from tensorboard.plugins.hparams import api as hp
 from sklearn.model_selection import train_test_split
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 
 # setup hyperparameter experiment
-HP_FILTERS = hp.HParam('filters', hp.Discrete([8, 16, 32]))
+HP_FILTERS = hp.HParam('filters', hp.Discrete([8, 16, 32, 64]))
 HP_BATCH_SIZE = hp.HParam('batch size', hp.Discrete([10, 20, 30, 32]))
 HP_DROPOUT = hp.HParam('drop out', hp.Discrete([0.0, 0.1, 0.2, 0.3, 0.4, 0.5]))
 HP_OPTIMIZER = hp.HParam('optimizer', hp.Discrete(['adam', 'sgd', 'RMSprop']))

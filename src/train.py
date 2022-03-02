@@ -96,7 +96,12 @@ if __name__ == '__main__':
     hdf5_dir = os.path.join(config.PROCESSED_DATA_DIR, dataFile)
     architecture = 'unet'
     K.clear_session()
-    model = create_segmentation_model(256, 80, 32, architecture=architecture, level = 4, dropout_rate=0.5)
+    model = create_segmentation_model(input_height=256,
+                                      input_width=80, 
+                                      filters=32, 
+                                      architecture=architecture, 
+                                      level=4,
+                                      dropout_rate=0.5)
 
     plot_model(model)
 
