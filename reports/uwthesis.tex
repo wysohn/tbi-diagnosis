@@ -276,28 +276,38 @@ scans from each side of the head.
 \section{Signal Processing}
 
 Signal processing is not in the scope of my project. It was done by an ultrasound signal processing expert, Dr. John Kucewicz.
-Tissue Pulsatility Imaging (TPI) relies on the deformation of the brain tissue in response to changes in 
-blood volume over a cardiac cycle. During systole, blood accumulates in the tissue due to more blood entering the arterial 
-vasculature than leaving leaving through the venous vasculature. The amount of tissue expansion is by a fraction of a percent.
-During diastole, more blood leaves through the venous vasculature returning the tissue to presystole volume\cite{hemodynamics, pulsatile_echo}.
-The central working hypothesis of the larger research effort is that this pulsation could help distinguished lesion from
-healthy brain tissue. Dr. John Kucewicz works with the raw ultrasound signals from the Terason device to measure sub-micron
-tissue displacement. The technique is developed based on plethysmography, an non-ultrasound method for measuring expansion of tissues
-due to perfusion \cite{kucewicz_tissue_2008}.
+This section provide a summary of the Dr. John Kucewicz's signal processing algorithm.
 
-Using well-established ultrasound signal processing techiques and the synchronization to cardiac cycles through pulse oximetry,
-the raw ultrasound data were converted into displacement data (See Figure \ref{signal_processing}). At a high level, the ultrasound RF signal 
-is converted into velocity of tissue movement, then into tissue displacement. First, the velocity of tissue movement was calculated from the 
-frame-to-frame change in phase of the RF signal. The displacement then was calculated by taking the time integral of the velocity and 
-band-pass filtered. Each scan results in an eight-second time series of tissue displacement at each pixel in a 2D image frame.
+Medical, diagnostic ultrasound transmits and receives short bursts of high frequency sound typically between 1 and 10 MHz. 
+As sound propagates through the body, some fraction of the sound is scattered back towards the ultrasound transducer due 
+to differences in local acoustic impedance.  Because of the speed of sound in tissue is relatively constant, two-dimensional 
+images of tissue structure can be created based on the amplitude of the received ultrasound and the time between a sound 
+burst’s transmission and its reception.  Images of blood or tissue velocity can be created by transmitting 2 or more bursts 
+of ultrasound and measuring the spatially localized relative temporal shifts in the received ultrasound from burst to burst.  
+In ultrasound parlance, images of structure are referred to as B-Mode, i.e. brightness mode, images, and images of velocity are 
+referred to a Doppler ultrasound or tissue Doppler ultrasound if tissue velocity is being measured.
 
-Each pixel in the ultrasound plane has a time series of tissue displacement, sampled at 30 Hz. The displacement amplitude at each pixel was 
-computed by using a band pass filter in a narrow band (0.6 Hz wide) centered near the cardiac cycle frequency. A Hilbert transform is then 
-applied to the narrow band filtered signal to extract the instantaneous brain displacement ampliture as a function of time. 
+Tissue Pulsatility Imaging (TPI) is a variation of tissue Doppler designed to measure the naturally occurring pulsatile motion 
+of tissue due to blood flow \cite{kucewicz_functional_2007, kucewicz_tissue_2008}.  During systole, blood accumulates in the arterial vascular causing 
+tissue to expand by a fraction of a percent. Later in the cardiac cycle, accumulated blood flows through the capillary bed into 
+the venous vasculature and back towards the heart allowing tissue to relax to its pre-systolic blood volume.  TPI was inspired 
+by plethysmography, an older technology used to measure gross changes in tissue blood volume in, for example, an entire limb.  
+TPI extends this idea to measure local changes in tissue blood volume within the body.
 
-The process of creating masks is called registration. It entails matching the CT images for each patients obtained as part of their medical
-care procedure. The team developed a procedure in MATLAB to insert and refine the placement of a 2D B-Mode data plane into a 3D CT data projection
-(See Figure \ref{registration}). An example output is shown in Figure \ref{registration_output}.
+For this project, it is hypothesized that TPI can be used to detect variations in tissue pulsatility localized to areas of the 
+brain experiencing hemorrhage.  The measurement of the TPI signal is based on standard ultrasound signal processing methods 
+\cite{evans_chapter_2000}.  Ultrasound data was collected with a Terason (Burlington, MA) u3200T tablet-based ultrasound system 
+and 4V2 phased-array ultrasound transducer.  With functionality enabled by the manufacturer, we were able to collect 8 seconds 
+of raw ultrasound data at 30 frames per second for offline analysis in MATLAB (The Mathworks, Natick, MA).  The ultrasound data 
+was filtered into 8 frequency sub-bands, quadrature demodulated, lag 1 autocorrelation was used to compute the velocity for 
+each sub-band, and the velocities were averaged weighted by the power of the sub-band yielding an 8 second velocity waveform 
+for every pixel in the image sequence.
+
+Following the velocity calculation, an unpublished vector Doppler method was used to suppress common-mode motion introduced by 
+gross motion of the ultrasound transducer relative to the patient. Tissue displacement was calculated from the time integral of 
+velocity combined with a band-pass filter to emphasize cardiac pulsatility.  Lastly, individual cardiac cycles within the 8 seconds 
+were detected and resampled such that all cycles were of uniform duration. i.e. 30 samples per cardiac cycle. Figure 
+\ref{signal_processing} summarizes the signal processing steps.
 
 \begin{figure}
   \centering
