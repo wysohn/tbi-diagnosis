@@ -75,7 +75,7 @@ def cross_validation(batch_size,
         # build model
         model = create_segmentation_model(256, 80, 
                                           start_filters, 
-                                          architecture='unet', 
+                                          architecture='attention_unet', 
                                           level = 4, 
                                           dropout_rate=dropout)
         model.compile(optimizer='adam', 

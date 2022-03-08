@@ -10,7 +10,8 @@ from tensorflow.keras.layers import (
     Conv2DTranspose,
     MaxPooling2D,
     UpSampling2D,
-    Dropout
+    Dropout,
+    Lambda
 )
 from tensorflow.keras.layers import concatenate
 from tensorflow.keras.optimizers import Adam
