@@ -124,6 +124,8 @@ if __name__ == '__main__':
     
     sys.stdout.close()
     '''
+    
+
     data_dir = os.path.join(config.PROCESSED_DATA_DIR, "skull_displacementNorm_data.hdf5")
     log_dir = '/DATA/phan92/hparam_tuning'
     if not os.path.isdir(log_dir):

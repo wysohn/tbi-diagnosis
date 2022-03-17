@@ -22,7 +22,7 @@ from losses import *
 from generator import *
 
 
-def build_unet_model(input_layer, start_filters, dropout):
+def build_unet_output(input_layer, start_filters, dropout):
     # 128 -> 64
     conv1 = Conv2D(start_filters * 1, (3, 3), activation="relu", padding="same")(input_layer)
     conv1 = Conv2D(start_filters * 1, (3, 3), activation="relu", padding="same")(conv1)
@@ -427,3 +427,4 @@ def create_segmentation_model(input_height,
     #model.summary()
     
     return model
+    

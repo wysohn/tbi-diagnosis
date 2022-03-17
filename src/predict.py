@@ -175,11 +175,15 @@ if __name__ == '__main__':
     else:
         raise ValueError("Enter a valid mode")
     
-    model_path = os.path.join(config.TRAINED_MODELS_DIR, '20220301-152033_unet_vent.h5')
+    architecture = config.MODEL_TYPE
+
+    model_path = os.path.join(config.TRAINED_MODELS_DIR, '20220314-230711_unet_vent.h5')
     model = load_model(model_path, compile=False)
 
-    data_dir = os.path.join(config.PROCESSED_DATA_DIR, objective + "_displacementNorm_data.hdf5")
-    save_dir = os.path.join(config.INFERENCE_DIR, datetime.now().strftime('%Y%m%d-%H%M%S') + '_' + objective)
+    data_dir = os.path.join(config.PROCESSED_DATA_DIR, objective + '_displacementNorm_data.hdf5')
+    save_dir = os.path.join(config.INFERENCE_DIR, 
+                            datetime.now().strftime('%Y%m%d-%H%M%S') + '_' + architecture + '_' + objective)
+
     if not os.path.isdir(save_dir):
         os.makedirs(save_dir)
     make_and_save_prediction(model, data_dir, save_dir)

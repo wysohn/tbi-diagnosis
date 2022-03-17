@@ -24,7 +24,8 @@ from statistics import mean, pstdev
 os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 
-def cross_validation(batch_size, 
+def cross_validation(architecture,
+                     batch_size, 
                      start_filters, 
                      dropout,
                      loss_fn,
@@ -75,7 +76,7 @@ def cross_validation(batch_size,
         # build model
         model = create_segmentation_model(256, 80, 
                                           start_filters, 
-                                          architecture='attention_unet', 
+                                          architecture=architecture, 
                                           level = 4, 
                                           dropout_rate=dropout)
         model.compile(optimizer='adam', 
@@ -114,6 +115,20 @@ if __name__ == '__main__':
     loss_fn = 'soft_dice_loss'
     epochs = 30
     kfold = 10
+
+    mode = config.DATA_MODE
+    if mode == 0:
+        objective = 'skull'
+    elif mode == 1:
+        objective = 'bleed'
+    elif mode == 2:
+        objective = 'brain'
+    elif mode == 3:
+        objective = 'vent'
+    else:
+        raise ValueError("Enter a valid mode")
+
+    architecture = config.MODEL_TYPE
     
-    data_dir = os.path.join(config.PROCESSED_DATA_DIR, "skull_displacementNorm_data.hdf5")
-    cross_validation(batch_size, filters, dropout, loss_fn, epochs, kfold, data_dir)
+    data_dir = os.path.join(config.PROCESSED_DATA_DIR, model + '_displacementNorm_data.hdf5')
+    cross_validation(architecture, batch_size, filters, dropout, loss_fn, epochs, kfold, data_dir)

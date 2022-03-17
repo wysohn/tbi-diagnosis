@@ -94,7 +94,7 @@ if __name__ == '__main__':
 
     dataFile = objective + '_displacementNorm_data.hdf5'
     hdf5_dir = os.path.join(config.PROCESSED_DATA_DIR, dataFile)
-    architecture = 'unet'
+    architecture = config.MODEL_TYPE
     K.clear_session()
     model = create_segmentation_model(input_height=256,
                                       input_width=80, 
@@ -118,5 +118,7 @@ if __name__ == '__main__':
         epochs=50)
     
     model_saved_name = datetime.now().strftime('%Y%m%d-%H%M%S') + '_' + architecture + '_' + objective +'.h5'
-    model.save(os.path.join(config.TRAINED_MODELS_DIR, model_saved_name))
-    print('Saved trained model to' + model_saved_name)
+    save_path = os.path.join(config.TRAINED_MODELS_DIR, model_saved_name)
+
+    model.save(save_path)
+    print('Saved trained model to', save_path)
