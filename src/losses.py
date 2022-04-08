@@ -48,7 +48,7 @@ def weighted_bce(beta):
         y_pred = tf.cast(y_pred, tf.float64)
         y_true = K.clip(y_true, K.epsilon(), 1. - K.epsilon())
         y_pred = K.clip(y_pred, K.epsilon(), 1. - K.epsilon())
-        logloss = K.mean(-(y_true * K.log(y_pred) + (1. - y_true) * K.log(1. - y_pred)))
+        logloss = K.mean(- (beta * y_true * K.log(y_pred) + (1. - y_true) * K.log(1. - y_pred)))
         
         return logloss
     

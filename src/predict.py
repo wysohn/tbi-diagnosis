@@ -177,7 +177,7 @@ if __name__ == '__main__':
     
     architecture = config.MODEL_TYPE
 
-    model_path = os.path.join(config.TRAINED_MODELS_DIR, '20220314-230711_unet_vent.h5')
+    model_path = os.path.join(config.TRAINED_MODELS_DIR, '20220402-135844_attention_unet_vent.h5')
     model = load_model(model_path, compile=False)
 
     data_dir = os.path.join(config.PROCESSED_DATA_DIR, objective + '_displacementNorm_data.hdf5')

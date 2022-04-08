@@ -101,7 +101,7 @@ if __name__ == '__main__':
                                       filters=32, 
                                       architecture=architecture, 
                                       level=4,
-                                      dropout_rate=0.5)
+                                      dropout_rate=0)
 
     plot_model(model)
 
