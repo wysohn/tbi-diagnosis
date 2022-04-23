@@ -12,7 +12,13 @@ from tensorflow.keras import backend as K
 from sklearn.model_selection import KFold
 import h5py
 from datetime import datetime
-from tensorflow.python.keras.callbacks import ModelCheckpoint, TensorBoard, LambdaCallback
+from tensorflow.python.keras.callbacks import (
+    ModelCheckpoint, 
+    TensorBoard, 
+    LambdaCallback,
+    ReduceLROnPlateau,
+    EarlyStopping
+)
 from sklearn.metrics import confusion_matrix
 from tensorflow.keras import Input, Model
 from tensorflow.keras.layers import (
@@ -35,16 +41,20 @@ from unet import *
 from losses import *
 from metrics import *
 from tensorflow.keras.utils import plot_model
+from sklearn.model_selection import train_test_split
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 
-def train(model, hdf5_file: str, checkpoint_dir: str, log_dir: str, epochs=50):
+def train(model, stage, hdf5_file: str, checkpoint_dir: str, log_dir: str, batch_size:int, epochs=50):
         """
         Trains UNet model with data contained in given HDF5 file and saves
         trained model to the checkpoint directory after each epoch
         
         Args:
+            model: a complied model
+            stage: 'validate' or 'test'. denote validating on 20% of training set
+                or testing on unseen data
             hdf5_file: Path of hdf5 file which contains the dataset
             checkpoint_dir (str): Directory where checkpoints are saved
             log_dir (str): Directory where logs are saved
@@ -52,39 +62,76 @@ def train(model, hdf5_file: str, checkpoint_dir: str, log_dir: str, epochs=50):
         """
         dataset = h5py.File(hdf5_file, 'r')
         
-        training_generator = DataGenerator(dataset['dev'])
-        validation_generator = DataGenerator(dataset['test'])
-        
-        # callback for tensorboard logs
+         # make dir for tensorboard logging
         log_dir = os.path.join(log_dir, datetime.now().strftime("%Y%m%d-%H%M%S"))
         os.makedirs(log_dir)
-        tb_callback = TensorBoard(log_dir=log_dir, write_images=True)
         
         # callback to save trained model weights
         checkpoint_dir = os.path.join(checkpoint_dir, datetime.now().strftime("%Y%m%d-%H%M%S"))
         os.makedirs(checkpoint_dir)
         weights_file = os.path.join(checkpoint_dir, 'unet.weights.epoch_{epoch:02d}.hdf5')
-        checkpoint = ModelCheckpoint(weights_file, verbose=1)
         
-        model.fit(training_generator,
-                  validation_data=validation_generator,
-                  callbacks=[tb_callback, checkpoint],
-                  epochs=epochs)
+        # callback list
+        callback_list = [
+            TensorBoard(
+                log_dir=log_dir, 
+                write_images=True
+            ),
+            ModelCheckpoint(
+                weights_file, 
+                verbose=1
+            ),
+            ReduceLROnPlateau(
+                monitor='val_loss',
+                factor=0.1,
+                patience=5
+            ),
+        ]
+        '''
+        EarlyStopping(
+                monitor='val_dice_coefficient',
+                patience=10
+            )'''
         
+        # train and validate
+        if stage == 'validate':
+            training_generator = DataGenerator(dataset['dev'], batch_size)
+            validation_generator = DataGenerator(dataset['test'], batch_size)
+            model.fit(training_generator,
+                    validation_data=validation_generator,
+                    callbacks=callback_list,
+                    epochs=epochs)
+        
+        # train and test
+        if stage == 'test':
+            # get data
+            dev = dataset['dev']
+            x = np.array(dev['x'])
+            y = one_hot_float(dev['y'])
+
+            # split the dataset
+            X_train, X_val, Y_train, Y_val = train_test_split(x, y, test_size=0.2, random_state=0)
+
+            model.fit(X_train, Y_train,
+                    validation_data=(X_val, Y_val),
+                    batch_size=batch_size,
+                    callbacks=callback_list,
+                    epochs=epochs)
+
         dataset.close()
 
 
 if __name__ == '__main__':
     # objective:
     #   mode 0 = skull
-    #   mode 1 = bleed
+    #   mode 1 = blood
     #   mode 2 = brain
     #   mode 3 = ventricle
     mode = config.DATA_MODE
     if mode == 0:
         objective = 'skull'
     elif mode == 1:
-        objective = 'bleed'
+        objective = 'blood'
     elif mode == 2:
         objective = 'brain'
     elif mode == 3:
@@ -95,27 +142,37 @@ if __name__ == '__main__':
     dataFile = objective + '_displacementNorm_data.hdf5'
     hdf5_dir = os.path.join(config.PROCESSED_DATA_DIR, dataFile)
     architecture = config.MODEL_TYPE
+
+    print("Training for", objective, "with data", dataFile, "and model", architecture)
     K.clear_session()
     model = create_segmentation_model(input_height=256,
                                       input_width=80, 
-                                      filters=32, 
+                                      filters=16, 
                                       architecture=architecture, 
                                       level=4,
-                                      dropout_rate=0)
+                                      dropout_rate=0.5)
 
     plot_model(model)
 
-    model.compile(optimizer='adam', 
-                loss=soft_dice_loss(epsilon=0.00001),
-                #loss=weighted_bce(beta=5),
-                #loss=hybrid_loss(beta=5, epsilon=0.00001),
+    model.compile(optimizer=Adam(learning_rate=0.001), 
+                loss=soft_dice_loss(),
+                #loss=combo_loss(alpha=0.7, beta=0.5),
                 metrics=[dice_coefficient, iou, Recall(), Precision()])
 
-    train(model, 
+    # get the stage of the training from console: 
+    # enter 'validate' to validate on 20% of the training set
+    # enter 'test' to test on unseen data
+    stage = input("Enter training mode ('validate' or 'test'):")
+
+    train(
+        model, 
+        stage=stage,
         hdf5_file=hdf5_dir,
         checkpoint_dir=config.CHECKPOINT_DIR,
-        log_dir=config.TENSORFLOW_LOG_DIR, 
-        epochs=50)
+        log_dir=config.TENSORFLOW_LOG_DIR,
+        batch_size=32,
+        epochs=100
+    )
     
     model_saved_name = datetime.now().strftime('%Y%m%d-%H%M%S') + '_' + architecture + '_' + objective +'.h5'
     save_path = os.path.join(config.TRAINED_MODELS_DIR, model_saved_name)

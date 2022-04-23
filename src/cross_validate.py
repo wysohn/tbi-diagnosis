@@ -64,12 +64,21 @@ def cross_validation(architecture,
     print("Validating for: start filters = %d, batch size = %d, epochs = %d, dropout = %f, loss_fn = %s" % (start_filters, batch_size, epochs, dropout, loss_fn))
     
     if loss_fn == "soft_dice_loss":
-        loss_fn = soft_dice_loss(epsilon=0.00001)
+        loss_fn = soft_dice_loss()
     elif loss_fn == "wbce":
         loss_fn = weighted_bce(beta=5)
     elif loss_fn == "hybrid":
-        loss_fn = hybrid_loss(beta=5, epsilon=0.00001)
-        
+        loss_fn = hybrid_loss(beta=5)
+    
+    # callback list
+    callback_list = [
+        ReduceLROnPlateau(
+            monitor='val_loss',
+            factor=0.1,
+            patience=5
+        )
+    ]
+
     for train, test in kfold.split(x, y):
         K.clear_session()
         
@@ -84,7 +93,7 @@ def cross_validation(architecture,
                       metrics=[dice_coefficient, iou, Recall(), Precision()])
         
         print("Training for fold", fold_no, "....")
-        history = model.fit(x[train], y[train], batch_size=batch_size, epochs=epochs, verbose=0)
+        history = model.fit(x[train], y[train], batch_size=batch_size, callbacks=callback_list, epochs=epochs, verbose=0)
         score = model.evaluate(x[test], y[test], verbose=0)
 
         loss_per_fold.append(score[0])
@@ -120,7 +129,7 @@ if __name__ == '__main__':
     if mode == 0:
         objective = 'skull'
     elif mode == 1:
-        objective = 'bleed'
+        objective = 'blood'
     elif mode == 2:
         objective = 'brain'
     elif mode == 3:

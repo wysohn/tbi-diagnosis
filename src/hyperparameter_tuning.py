@@ -10,19 +10,37 @@ import numpy as np
 from tensorboard.plugins.hparams import api as hp
 from sklearn.model_selection import train_test_split
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 
 # setup hyperparameter experiment
 HP_FILTERS = hp.HParam('filters', hp.Discrete([8, 16, 32, 64]))
-HP_BATCH_SIZE = hp.HParam('batch size', hp.Discrete([10, 20, 30, 32]))
-HP_DROPOUT = hp.HParam('drop out', hp.Discrete([0.0, 0.1, 0.2, 0.3, 0.4, 0.5]))
-HP_OPTIMIZER = hp.HParam('optimizer', hp.Discrete(['adam', 'sgd', 'RMSprop']))
+HP_BATCH_SIZE = hp.HParam('batch size', hp.Discrete([10, 20, 30, 32, 64]))
+HP_DROPOUT = hp.HParam('drop out', hp.Discrete([0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]))
 METRIC = 'dice_coefficient'
 
-with tf.summary.create_file_writer('/DATA/phan92/hparam_tuning').as_default():
+# objective:
+#   mode 0 = skull
+#   mode 1 = blood
+#   mode 2 = brain
+#   mode 3 = ventricle
+mode = config.DATA_MODE
+if mode == 0:
+    objective = 'skull'
+elif mode == 1:
+    objective = 'blood'
+elif mode == 2:
+    objective = 'brain'
+elif mode == 3:
+    objective = 'vent'
+else:
+    raise ValueError("Enter a valid mode")
+# where to save results
+log_dir = os.path.join(config.HYPERPARAM, config.MODEL_TYPE + '_' + objective)
+
+with tf.summary.create_file_writer(log_dir).as_default():
     hp.hparams_config(
-        hparams=[HP_FILTERS, HP_BATCH_SIZE, HP_DROPOUT, HP_OPTIMIZER],
+        hparams=[HP_FILTERS, HP_BATCH_SIZE, HP_DROPOUT],
         metrics=[hp.Metric(METRIC, display_name='Dice')]
     )
 
@@ -45,16 +63,16 @@ def train_test_model(hdf5_file, hparams):
 
     model = create_segmentation_model(256, 80,
                                       filters = hparams[HP_FILTERS], 
-                                      architecture='unet', 
+                                      architecture=config.MODEL_TYPE, 
                                       level = 4, 
                                       dropout_rate=hparams[HP_DROPOUT])
 
-    model.compile(optimizer=hparams[HP_OPTIMIZER], 
-                    loss=soft_dice_loss(0.00001), 
+    model.compile(optimizer=Adam(learning_rate=0.001), 
+                    loss=soft_dice_loss(), 
                     metrics=[dice_coefficient])
 
     # train the model
-    model.fit(X_train, Y_train, batch_size=hparams[HP_BATCH_SIZE], epochs=30)
+    model.fit(X_train, Y_train, batch_size=hparams[HP_BATCH_SIZE], epochs=50)
     # evaluate
     _, dice = model.evaluate(X_test, Y_test)
 
@@ -88,18 +106,16 @@ def grid_search(hdf5_file, log_dir):
     for filters in HP_FILTERS.domain.values:
         for batch_size in HP_BATCH_SIZE.domain.values:
             for dropout_rate in HP_DROPOUT.domain.values:
-                for optimizer in HP_OPTIMIZER.domain.values:
-                    hparams = {
-                        HP_FILTERS: filters,
-                        HP_BATCH_SIZE: batch_size,
-                        HP_DROPOUT: dropout_rate,
-                        HP_OPTIMIZER: optimizer
-                    }
-                    run_name = "run-%d" % session_num
-                    print('--- Starting trial: %s' % run_name)
-                    print({h.name: hparams[h] for h in hparams})
-                    run(os.path.join(log_dir, run_name), hparams, hdf5_file)
-                    session_num += 1
+                hparams = {
+                    HP_FILTERS: filters,
+                    HP_BATCH_SIZE: batch_size,
+                    HP_DROPOUT: dropout_rate,
+                }
+                run_name = "run-%d" % session_num
+                print('--- Starting trial: %s' % run_name)
+                print({h.name: hparams[h] for h in hparams})
+                run(os.path.join(log_dir, run_name), hparams, hdf5_file)
+                session_num += 1
 
 
 if __name__ == '__main__':
@@ -125,9 +141,8 @@ if __name__ == '__main__':
     sys.stdout.close()
     '''
     
+    data_dir = os.path.join(config.PROCESSED_DATA_DIR, objective + "_displacementNorm_data.hdf5")
 
-    data_dir = os.path.join(config.PROCESSED_DATA_DIR, "skull_displacementNorm_data.hdf5")
-    log_dir = '/DATA/phan92/hparam_tuning'
     if not os.path.isdir(log_dir):
         os.mkdir(log_dir)
 

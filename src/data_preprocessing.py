@@ -502,14 +502,14 @@ def _add_dataset(group: h5py.Group, displacement, label, bMode, fileNames):
 if __name__ == '__main__':
     # objective:
     #   mode 0 = skull
-    #   mode 1 = bleed
+    #   mode 1 = blood
     #   mode 2 = brain
     #   mode 3 = ventricle
     mode = config.DATA_MODE
     if mode == 0:
         objective = 'skull'
     elif mode == 1:
-        objective = 'bleed'
+        objective = 'blood'
     elif mode == 2:
         objective = 'brain'
     elif mode == 3:

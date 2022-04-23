@@ -24,13 +24,23 @@ CHECKPOINT_DIR = str(os.getenv("CHECKPOINT_DIR"))
 # objective of the model
 # essentially the target for the model to detect:
     #   mode 0 = skull
-    #   mode 1 = bleed
+    #   mode 1 = blood
     #   mode 2 = brain
     #   mode 3 = ventricle
 DATA_MODE = int(os.getenv('DATA_MODE'))
+
+# where to store hyperparameter experiments
+HYPERPARAM = str(os.getenv('HYPERPARAM'))
 
 # the type of model
     # unet
     # unet_plus_plus
     # attention_unet
 MODEL_TYPE = str(os.getenv('MODEL_TYPE'))
+
+# cascade model or not
+isCascade = str(os.getenv('CASCADE'))
+if isCascade == 'yes':
+    CASCADE = True
+else:
+    CASCADE = False

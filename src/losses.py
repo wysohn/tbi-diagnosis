@@ -46,8 +46,10 @@ def weighted_bce(beta):
     def wbce(y_true, y_pred):
         y_true = tf.cast(y_true, tf.float64)
         y_pred = tf.cast(y_pred, tf.float64)
+        # clip to prevent NaN and Inf
         y_true = K.clip(y_true, K.epsilon(), 1. - K.epsilon())
         y_pred = K.clip(y_pred, K.epsilon(), 1. - K.epsilon())
+
         logloss = K.mean(- (beta * y_true * K.log(y_pred) + (1. - y_true) * K.log(1. - y_pred)))
         
         return logloss
@@ -62,7 +64,7 @@ def hybrid_loss(beta, epsilon=0.00001):
     Args:
         beta (int): weight factor for the positive class
     Return:
-        wbce (float): weighted binary cross entropy score
+        hybrid (float): weighted binary cross entropy score
     """
     def loss(y_true, y_pred):
         # Calculate soft dice loss
@@ -77,9 +79,67 @@ def hybrid_loss(beta, epsilon=0.00001):
         # Calculate weighted bce
         y_true = K.clip(y_true, K.epsilon(), 1. - K.epsilon())
         y_pred = K.clip(y_pred, K.epsilon(), 1. - K.epsilon())
-        wbce = K.mean(-(y_true * K.log(y_pred) + (1. - y_true) * K.log(1. - y_pred)))
+        wbce = K.mean(-(beta*y_true * K.log(y_pred) + (1. - y_true) * K.log(1. - y_pred)))
         
         hybrid = dice_loss + wbce
         return hybrid
     
     return loss
+
+
+def bce(beta):
+    """
+    Compute the balanced cross entropy loss according to
+        S. Jadon, “A survey of loss functions for semantic segmentation,” 
+        2020 IEEE Conference on Computational Intelligence in Bioinformatics 
+        and Computational Biology (CIBCB), pp. 1–7, Oct. 2020, doi: 10.1109/CIBCB48159.2020.9277638.
+    
+    Args:
+        beta (float): scaling coefficient for false negative and false positive
+    Return:
+        bce (float): balanced cross entropy score
+    """
+    def bce(y_true, y_pred):
+        y_true = tf.cast(y_true, tf.float64)
+        y_pred = tf.cast(y_pred, tf.float64)
+        # clip to prevent NaN and Inf
+        y_true = K.clip(y_true, K.epsilon(), 1. - K.epsilon())
+        y_pred = K.clip(y_pred, K.epsilon(), 1. - K.epsilon())
+
+        loss = K.mean(- (beta * y_true * K.log(y_pred) + (1 - beta) * (1. - y_true) * K.log(1. - y_pred)))
+        
+        return loss
+    
+    return bce
+
+
+def combo_loss(beta, alpha, epsilon=0.00001):
+    """
+    Compute a combo loss function which is sum of soft dice loss and balanced cross entropy
+    
+    Args:
+        alpha (float): weight factor for soft dice los and balanced cross entropy in the combo equation
+        beta (float): scaling coefficient for false negative and false positive
+        epsilon (float): small constant added to avoid divide by 0 error
+    Return:
+        combo_loss (float): the combo loss function
+    """
+    def combo_loss(y_true, y_pred):
+        # Calculate soft dice loss
+        y_true = tf.cast(y_true, tf.float64)
+        y_pred = tf.cast(y_pred, tf.float64)
+        y_true_f = K.flatten(y_true)
+        y_pred_f = K.flatten(y_pred)
+        dice_numerator = 2. * K.sum(y_true_f * y_pred_f) + epsilon
+        dice_denominator = K.sum(y_true_f**2) + K.sum(y_pred_f**2) + epsilon
+        dice_loss = 1. - K.mean(dice_numerator / dice_denominator)
+        
+        # Calculate weighted bce
+        y_true = K.clip(y_true, K.epsilon(), 1. - K.epsilon())
+        y_pred = K.clip(y_pred, K.epsilon(), 1. - K.epsilon())
+        bce = K.mean(-(beta*y_true * K.log(y_pred) + (1-beta)*(1. - y_true) * K.log(1. - y_pred)))
+        
+        combo = alpha * bce + (1-alpha) * dice_loss
+        return combo
+    
+    return combo_loss

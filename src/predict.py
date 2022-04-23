@@ -126,7 +126,7 @@ def make_and_save_prediction(model, data_dir, save_dir):
     y = one_hot_float(test['y'])
     names = list(test['filename'])
     f.close()
-    
+
     y_pred = model.predict(x)
     
     for idx in range(x.shape[0]):
@@ -160,14 +160,14 @@ def make_and_save_prediction(model, data_dir, save_dir):
 if __name__ == '__main__':
     # objective:
     #   mode 0 = skull
-    #   mode 1 = bleed
+    #   mode 1 = blood
     #   mode 2 = brain
     #   mode 3 = ventricle
     mode = config.DATA_MODE
     if mode == 0:
         objective = 'skull'
     elif mode == 1:
-        objective = 'bleed'
+        objective = 'blood'
     elif mode == 2:
         objective = 'brain'
     elif mode == 3:
@@ -177,13 +177,15 @@ if __name__ == '__main__':
     
     architecture = config.MODEL_TYPE
 
-    model_path = os.path.join(config.TRAINED_MODELS_DIR, '20220402-135844_attention_unet_vent.h5')
+    model_name = '20220419-083756_unet_skull.h5'
+    model_path = os.path.join(config.TRAINED_MODELS_DIR, model_name)
     model = load_model(model_path, compile=False)
 
     data_dir = os.path.join(config.PROCESSED_DATA_DIR, objective + '_displacementNorm_data.hdf5')
     save_dir = os.path.join(config.INFERENCE_DIR, 
                             datetime.now().strftime('%Y%m%d-%H%M%S') + '_' + architecture + '_' + objective)
 
+    print("Making prediction for", objective, "using model", model_name, "with data", data_dir)
     if not os.path.isdir(save_dir):
         os.makedirs(save_dir)
     make_and_save_prediction(model, data_dir, save_dir)
