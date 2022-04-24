@@ -53,8 +53,11 @@ def cross_validation(architecture,
     # get data
     f = h5py.File(hdf5_file, 'r')
     dev = f['dev']
-    x = dev['x']
+    x = np.array(dev['x'])
     y = one_hot_float(dev['y'])
+
+    if config.MODEL_TYPE == 'cascade_unet_conv' or config.MODEL_TYPE == 'cascade_unet_concat':
+        ROI = np.array(dev['ROI'])
     
     # Define the K-fold Cross Validator
     kfold = KFold(n_splits=num_folds, shuffle=True, random_state=0)
@@ -88,13 +91,18 @@ def cross_validation(architecture,
                                           architecture=architecture, 
                                           level = 4, 
                                           dropout_rate=dropout)
-        model.compile(optimizer='adam', 
+        model.compile(optimizer=Adam(learning_rate=0.001), 
                       loss=loss_fn, 
                       metrics=[dice_coefficient, iou, Recall(), Precision()])
         
         print("Training for fold", fold_no, "....")
-        history = model.fit(x[train], y[train], batch_size=batch_size, callbacks=callback_list, epochs=epochs, verbose=0)
-        score = model.evaluate(x[test], y[test], verbose=0)
+
+        if config.MODEL_TYPE == 'cascade_unet_conv' or config.MODEL_TYPE == 'cascade_unet_concat':
+            history = model.fit([x[train], ROI[train]], y[train], batch_size=batch_size, callbacks=callback_list, epochs=epochs, verbose=0)
+            score = model.evaluate([x[test], ROI[test]], y[test], verbose=0)
+        else:
+            history = model.fit(x[train], y[train], batch_size=batch_size, callbacks=callback_list, epochs=epochs, verbose=0)
+            score = model.evaluate(x[test], y[test], verbose=0)
 
         loss_per_fold.append(score[0])
         dice_per_fold.append(score[1])
@@ -139,5 +147,9 @@ if __name__ == '__main__':
 
     architecture = config.MODEL_TYPE
     
-    data_dir = os.path.join(config.PROCESSED_DATA_DIR, model + '_displacementNorm_data.hdf5')
+    if architecture == 'cascade_unet_conv' or architecture == 'cascade_unet_concat':
+        data_dir = os.path.join(config.PROCESSED_DATA_DIR, objective + '_cascade_displacementNorm_data.hdf5')
+    else:
+        data_dir = os.path.join(config.PROCESSED_DATA_DIR, objective + '_displacementNorm_data.hdf5')
+
     cross_validation(architecture, batch_size, filters, dropout, loss_fn, epochs, kfold, data_dir)

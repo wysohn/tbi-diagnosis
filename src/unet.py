@@ -21,6 +21,7 @@ from keras import Model
 from tensorflow.keras import models
 from losses import *
 from generator import *
+import config
 
 
 def down_conv_block(m, filter_mult, filters, kernel_size, name=None):
@@ -318,7 +319,7 @@ def build_cascade_unet_conv(model_input, ROI_input, filters, kernel_size, dropou
     #   image segmentation and relations prediction
 
     # extract filters from ROI and input
-    ROIconv = Conv2D(start_filters, (3, 3), padding="same")(ROI_input)
+    ROIconv = Conv2D(filters, (3, 3), padding="same")(ROI_input)
     
     # Downsampling / encoding portion
     conv0 = down_conv_block(model_input, 1, filters, kernel_size)
@@ -353,7 +354,7 @@ def build_cascade_unet_conv(model_input, ROI_input, filters, kernel_size, dropou
     return uconv0
 
 
-def build_cascade_unet_concate(model_input, ROI_input, filters, kernel_size, dropout_rate):
+def build_cascade_unet_concat(model_input, ROI_input, filters, kernel_size, dropout_rate):
     # Cascade U-Net inspired by Yizhe Zhang, Michael T. C. Ying, Lin Yang, Anil T. Ahuja, and Danny Z. Chen. 
     #   Coarse-to-fine stacked fully convolutional nets for lymph node segmentation in ultrasound images
 
@@ -421,22 +422,26 @@ def create_segmentation_model(input_height,
         model_output = build_unet(model_input, filters, (3, 3), dropout_rate)
     elif architecture == 'attention_unet':
         model_output = build_attention_unet(model_input, filters, (3, 3), dropout_rate)
-    elif architecture == 'cascade_unet_concate':
-        model_output = build_cascade_unet_concate(model_input, ROI_input, filters, (3, 3), dropout_rate)
+    elif architecture == 'cascade_unet_concat':
+        model_output = build_cascade_unet_concat(model_input, ROI_input, filters, (3, 3), dropout_rate)
     elif architecture == 'cascade_unet_conv':
         model_output = build_cascade_unet_conv(model_input, ROI_input, filters, (3, 3), dropout_rate)
     else:
         raise AttributeError(f'Network architecture {architecture} does not exist.')
     
     # the output layer
-    output_layer = Conv2D(1,
+    output_layer = Conv2D(
+                        1,
                         (1, 1), 
                         padding='same', 
                         activation='sigmoid', 
                         name='output_conv')(model_output
                     )
     
-    model = models.Model(inputs=model_input, outputs=output_layer)
+    if architecture == 'cascade_unet_conv' or architecture == 'cascade_unet_concat':
+        model = models.Model(inputs=[model_input, ROI_input], outputs=output_layer)
+    else:
+        model = models.Model(inputs=model_input, outputs=output_layer)
     #model.summary()
     
     return model

@@ -195,6 +195,25 @@ def get_bMode(rawData, x_dim, y_dim):
     return bMode
 
 
+def process_one_file(filePath)
+    rawData = loadmat(filePath)
+
+    # extract the displacement data
+    #displace_data = extract_single_frame_from_raw_displacement(rawData)
+    displace_data = extract_single_frame_from_displacementNorm(rawData)
+    # standardize
+    displace_data = standardize(displace_data, x_dim, y_dim)
+    displace_data = displace_data.reshape([x_dim, y_dim, 1])
+    
+    # get bMode images
+    bMode = get_bMode(rawData, x_dim, y_dim)
+    
+    # make label
+    label = make_label(rawData, x_dim, y_dim, objective)
+
+    return np.array(displace_data), np.array(bMode), np.array(label)
+
+
 def process_one_patient(path, x_dim, y_dim, objective):
     """
     Process the raw data for a patient
@@ -220,36 +239,15 @@ def process_one_patient(path, x_dim, y_dim, objective):
     # list of file names
     fileNames = []
     # process all file in the directory
-    for file in os.listdir(path):
-        if ".mat" in file:
-            filePath = os.path.join(path, file)
-            rawData = loadmat(filePath)
-            
-            # extract the displacement data
-            #displace_data = extract_single_frame_from_raw_displacement(rawData)
-            displace_data = extract_single_frame_from_displacementNorm(rawData)
-            # standardize
-            displace_data = standardize(displace_data, x_dim, y_dim)
-            displace_data = displace_data.reshape([x_dim, y_dim, 1])
-            
-            """
-            if objective == 1:
-                # delete non-brain from input
-                brainMask = np.array(list(rawData['brainMask']))
-                brainMask = cv2.resize(brainMask, (80, 256))
-                displace_data[:,:, 0] = np.where(brainMask == 0, 0.0, displace_data[:,:,0])
-            """
-
-            # get bMode images
-            bMode = get_bMode(rawData, x_dim, y_dim)
-            
-            # make label
-            label = make_label(rawData, x_dim, y_dim, objective)
+    for fileName in os.listdir(path):
+        if ".mat" in fileName:
+            filePath = os.path.join(path, fileName)
+            displace_data, bMode, label = process_one_file(filePath)
 
             displacement_list.append(displace_data)
             label_list.append(label)
             bMode_list.append(bMode)
-            fileNames.append(file)
+            fileNames.append(fileName)
             
     return (np.array(displacement_list), 
             np.array(label_list), 

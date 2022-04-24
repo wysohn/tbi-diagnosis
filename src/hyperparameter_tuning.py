@@ -9,6 +9,13 @@ import os
 import numpy as np
 from tensorboard.plugins.hparams import api as hp
 from sklearn.model_selection import train_test_split
+from tensorflow.python.keras.callbacks import (
+    ModelCheckpoint, 
+    TensorBoard, 
+    LambdaCallback,
+    ReduceLROnPlateau,
+    EarlyStopping
+)
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
@@ -16,7 +23,7 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 # setup hyperparameter experiment
 HP_FILTERS = hp.HParam('filters', hp.Discrete([8, 16, 32, 64]))
 HP_BATCH_SIZE = hp.HParam('batch size', hp.Discrete([10, 20, 30, 32, 64]))
-HP_DROPOUT = hp.HParam('drop out', hp.Discrete([0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]))
+HP_DROPOUT = hp.HParam('drop out', hp.Discrete([0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7]))
 METRIC = 'dice_coefficient'
 
 # objective:
@@ -71,10 +78,38 @@ def train_test_model(hdf5_file, hparams):
                     loss=soft_dice_loss(), 
                     metrics=[dice_coefficient])
 
-    # train the model
-    model.fit(X_train, Y_train, batch_size=hparams[HP_BATCH_SIZE], epochs=50)
-    # evaluate
-    _, dice = model.evaluate(X_test, Y_test)
+    callback_list = [
+        ReduceLROnPlateau(
+            monitor='val_loss',
+            factor=0.1,
+            patience=5
+        )
+    ]
+
+    epochs = 60
+
+    # train and evaluate the model
+    if config.MODEL_TYPE == 'cascade_unet_conv' or config.MODEL_TYPE == 'cascade_unet_concat':
+        ROI = np.array(dev['ROI'])
+        ROI_train, ROI_test = train_test_split(ROI, test_size=0.2, random_state=0)
+
+        model.fit(
+            [X_train, ROI_train], 
+            Y_train, 
+            callbacks=callback_list, 
+            batch_size=hparams[HP_BATCH_SIZE], 
+            epochs=epochs
+        )
+        _, dice, model.evaluate([X_train, ROI_train], Y_train)
+    else:
+        model.fit(
+            X_train, 
+            Y_train, 
+            callbacks=callback_list,
+            batch_size=hparams[HP_BATCH_SIZE], 
+            epochs=epochs
+        )
+        _, dice = model.evaluate(X_test, Y_test)
 
     f.close()
 
@@ -140,8 +175,10 @@ if __name__ == '__main__':
     
     sys.stdout.close()
     '''
-    
-    data_dir = os.path.join(config.PROCESSED_DATA_DIR, objective + "_displacementNorm_data.hdf5")
+    if config.MODEL_TYPE == 'cascade_unet_conv' or config.MODEL_TYPE == 'cascade_unet_concat':
+        data_dir = os.path.join(config.PROCESSED_DATA_DIR, objective + "_cascade_displacementNorm_data.hdf5")
+    else:
+        data_dir = os.path.join(config.PROCESSED_DATA_DIR, objective + "_displacementNorm_data.hdf5")
 
     if not os.path.isdir(log_dir):
         os.mkdir(log_dir)

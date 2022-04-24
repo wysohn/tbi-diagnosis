@@ -1,12 +1,13 @@
 import os
+import numpy as np
 import config
-
+from data_preprocessing import *
+import matplotlib.pyplot as plt
 
 skull_model_path = os.path.join(config.TRAINED_MODELS_DIR, )
 vent_model_path = os.path.join(config.TRAINED_MODELS_DIR, )
 blood_model_path = os.path.join(config.TRAINED_MODELS_DIR, )
 brain_model_path = os.path.join(config.TRAIN_MODELS_DIR, )
-
 
 def preprocess(input_path):
     """
@@ -15,9 +16,12 @@ def preprocess(input_path):
         input_path: the path to input displacement matrix
     Return: processed displacement frame
     """
-    pass
+    displacement, _, _ = process_one_file(input_path)
 
-def detect(objective, input):
+    return displacement
+
+
+def detect(objective, displacement):
     """
     Detect the structure of interest
     Args:
@@ -25,17 +29,44 @@ def detect(objective, input):
         input: processed displacement frame
     Return: mask for the detected structure
     """
-    pass
+    if objective == 'skull':
+        model = load_model(skull_model_path, compile=False)
+    elif objective == 'ventricle':
+        model = load_model(vent_model_path, compile=False)
+    elif objective == 'blood':
+        model = load_model(blood_model_path, compile=False)
+    else:
+        raise ValueError("Enter a valid objective")
+    
+    y_pred = model.predict(displacement)
+
+    return y_pred
+
+
+def display(y_pred, xAxis, yAxis, save_path):
+    """
+    Display the output
+    """
+    plt.pcolormesh(xAxis, -yAxis, prediction, shading='auto', cmap='magma')
+    plt.savefig(save_path)
 
 
 if __name__ == '__main__':
     print("This program takes a displacement matrix and predict the location of a structure of interest")
     print("The detection modes are (0) Skull, (1) Ventricle, (2) Blood")
     # get the objective from the user
-    objective = input("Enter the number code for the objective:")
-    input_path = input("Enter the path to input file:")
+    objective = input("Enter the objective: ")
+    input_path = input("Enter the path to input file: ")
+    output_path = input("Enter the path to saved output: ")
 
     processed_frame = preprocess(input_path)
 
     output = detect(objective, processed_frame)
+
+    display(
+        output, 
+        '/DATA/phan92/tbi_diagnosis/data/processed/xAxis.npy', 
+        '/DATA/phan92/tbi_diagnosis/data/processed/yAxis.npy',
+        output_path
+    )
 

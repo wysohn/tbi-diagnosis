@@ -36,11 +36,13 @@ HYPERPARAM = str(os.getenv('HYPERPARAM'))
     # unet
     # unet_plus_plus
     # attention_unet
+    # cascade_unet_conv
+    # cascade_unet_concat
 MODEL_TYPE = str(os.getenv('MODEL_TYPE'))
 
-# cascade model or not
-isCascade = str(os.getenv('CASCADE'))
-if isCascade == 'yes':
-    CASCADE = True
+# if using fullly cascaded model to make prediction
+cascade = str(os.getenv('FULL_CASCADE'))
+if cascade == 'yes':
+    FULL_CASCADE = True
 else:
-    CASCADE = False
+    FULL_CASCADE = False

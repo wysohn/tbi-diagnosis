@@ -12,6 +12,7 @@ import h5py
 from datetime import datetime
 from tensorflow.keras.models import load_model
 
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 # extract generic axis information
 axisPath = config.PROCESSED_DATA_DIR
@@ -125,9 +126,67 @@ def make_and_save_prediction(model, data_dir, save_dir):
     x = np.array(test['x'])
     y = one_hot_float(test['y'])
     names = list(test['filename'])
+
+    # make prediction
+    if config.MODEL_TYPE == 'cascade_unet_conv' or config.MODEL_TYPE == 'cascade_unet_concat':
+        ROI = np.array(test['ROI'])
+        y_pred = model.predict([x, ROI])
+    else:
+        y_pred = model.predict(x)
+    
     f.close()
 
-    y_pred = model.predict(x)
+    for idx in range(x.shape[0]):
+        name = names[idx].decode('utf-8')
+        name = name.split('.')[0]
+        path = os.path.join(save_dir, name + ".png")
+
+        label = np.squeeze(y[idx], axis=-1)
+        prediction = np.squeeze(y_pred[idx], axis=-1)
+        displacement = np.squeeze(x[idx], axis=-1)
+        # display
+        fig, ax = plt.subplots(1, 3, figsize=(24, 6))
+        fig.patch.set_facecolor('white')
+        fig.suptitle(name, fontsize=16)
+
+        # label
+        ax[1].pcolormesh(xAxis, -yAxis, label, shading='auto', cmap='magma')
+        ax[1].title.set_text("Ground Truth")
+        ax[1].axis('off')
+        # prediction
+        ax[2].pcolormesh(xAxis, -yAxis, prediction, shading='auto', cmap='magma')
+        ax[2].title.set_text("Prediction")
+        ax[2].axis('off')
+        # displacement
+        ax[0].pcolormesh(xAxis, -yAxis, displacement, shading='auto')
+        ax[0].title.set_text("Standardized Displacement")
+        ax[0].axis('off')
+        plt.savefig(path)
+
+
+def make_and_save_prediction_full_cascade(model, ROI_model, data_dir, save_dir):
+    """
+    Make a prediction for a sample using a trained model
+    and save the result image to a file
+    
+    Args:
+        model
+        data_dir
+        save_dir
+        save_name
+    """
+    f = h5py.File(data_dir, 'r')
+    test = f['test']
+    x = np.array(test['x'])
+    y = one_hot_float(test['y'])
+    names = list(test['filename'])
+    f.close()
+
+    # detect the brain tissue
+    ROI_pred = ROI_model.predict(x)
+
+    # make prediction using predicted ROI mask
+    y_pred = model.predict([x, ROI_pred])
     
     for idx in range(x.shape[0]):
         name = names[idx].decode('utf-8')
@@ -177,15 +236,29 @@ if __name__ == '__main__':
     
     architecture = config.MODEL_TYPE
 
-    model_name = '20220419-083756_unet_skull.h5'
+    # name of a trained model
+    model_name = '20220423-183927_cascade_unet_concat_vent.h5'
     model_path = os.path.join(config.TRAINED_MODELS_DIR, model_name)
     model = load_model(model_path, compile=False)
 
-    data_dir = os.path.join(config.PROCESSED_DATA_DIR, objective + '_displacementNorm_data.hdf5')
+    if config.MODEL_TYPE == 'cascade_unet_conv' or config.MODEL_TYPE == 'cascade_unet_concat':
+        data_dir = os.path.join(config.PROCESSED_DATA_DIR, objective + '_cascade_displacementNorm_data.hdf5')
+    else:
+        data_dir = os.path.join(config.PROCESSED_DATA_DIR, objective + '_displacementNorm_data.hdf5')
+
     save_dir = os.path.join(config.INFERENCE_DIR, 
                             datetime.now().strftime('%Y%m%d-%H%M%S') + '_' + architecture + '_' + objective)
 
     print("Making prediction for", objective, "using model", model_name, "with data", data_dir)
     if not os.path.isdir(save_dir):
         os.makedirs(save_dir)
-    make_and_save_prediction(model, data_dir, save_dir)
+
+    if FULL_CASCADE:
+        ROI_model_name = ''
+        ROI_model_path = os.path.join(config.TRAINED_MODELS_DIR, ROI_model_name)
+        ROI_model = load_model(ROI_model_path, compile=False)
+        save_dir = os.path.join(config.INFERENCE_DIR, 
+                                datetime.now().strftime('%Y%m%d-%H%M%S') + '_full_' + architecture + '_' + objective)
+        make_and_save_prediction_full_cascade(model, ROI_model, data_dir, save_dir)
+    else:
+        make_and_save_prediction(model, data_dir, save_dir)
