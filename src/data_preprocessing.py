@@ -23,36 +23,6 @@ IPH_patients = ['DoD008', 'DoD009', 'DoD010', 'DoD012', 'DoD022', 'DoD047', 'DoD
 bad_patients = ['DoD027', 'DoD028', 'DoD035', 'DoD036', 'DoD038', 'DoD049', 'DoD069', 'DoD090']
 
 
-def extract_axis(datapath, axisPath):
-    """
-    Extract axis information to produce cone-shape images
-
-    Args:
-        datapath: string: path to a raw .mat file
-        axisPath: string: path to store the axis
-    
-    Returns:
-        xaxis
-        yaxis
-    """
-    data = loadmat(datapath)
-
-    xaxis = np.array(list(data['xAxis']))
-    yaxis = np.array(list(data['zAxis']))
-
-    xaxis = cv2.resize(xaxis, (80, 256), interpolation=cv2.INTER_AREA)
-    yaxis = cv2.resize(yaxis, (80, 256), interpolation=cv2.INTER_AREA)
-
-    xaxis += 100
-    yaxis -= 4
-
-    print("saved axis info in : {}".format(axisPath))
-    np.save(os.path.join(axisPath, "xAxis.npy"), xaxis)
-    np.save(os.path.join(axisPath, "yAxis.npy"), yaxis)
-    
-    return xaxis, yaxis
-
-
 def standardize(displacement, x_dim, y_dim):
     """
     Standardize displacement data
@@ -195,7 +165,7 @@ def get_bMode(rawData, x_dim, y_dim):
     return bMode
 
 
-def process_one_file(filePath)
+def process_one_file(filePath, x_dim, y_dim, objective):
     rawData = loadmat(filePath)
 
     # extract the displacement data
@@ -242,7 +212,7 @@ def process_one_patient(path, x_dim, y_dim, objective):
     for fileName in os.listdir(path):
         if ".mat" in fileName:
             filePath = os.path.join(path, fileName)
-            displace_data, bMode, label = process_one_file(filePath)
+            displace_data, bMode, label = process_one_file(filePath, x_dim, y_dim, objective)
 
             displacement_list.append(displace_data)
             label_list.append(label)

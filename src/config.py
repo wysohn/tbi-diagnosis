@@ -42,7 +42,6 @@ MODEL_TYPE = str(os.getenv('MODEL_TYPE'))
 
 # if using fullly cascaded model to make prediction
 cascade = str(os.getenv('FULL_CASCADE'))
+FULL_CASCADE = False
 if cascade == 'yes':
     FULL_CASCADE = True
-else:
-    FULL_CASCADE = False

@@ -1,5 +1,6 @@
 import config
 from losses import *
+from metrics import *
 from utils import *
 import numpy as np
 import os
@@ -11,13 +12,17 @@ from tensorflow.keras import backend as K
 import h5py
 from datetime import datetime
 from tensorflow.keras.models import load_model
+from tensorflow.keras.metrics import (
+    Recall,
+    Precision
+)
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 # extract generic axis information
 axisPath = config.PROCESSED_DATA_DIR
 rand_input_file = os.path.join(config.RAW_DATA_DIR, 'DoD001','DoD001_Ter030_LC5_Displacement_Normalized_3.mat')
-xAxis, yAxis = extract_axis(rand_input_file, axisPath)
+xAxis, yAxis = extract_axis(rand_input_file)
 
 
 def visualize_result(label, prediction, displacement, name, xAxis, yAxis):
@@ -49,7 +54,7 @@ def visualize_result(label, prediction, displacement, name, xAxis, yAxis):
     ax[1].axis('off')
     # prediction
     ax[2].pcolormesh(xAxis, -yAxis, prediction, shading='auto', cmap='magma')
-    ax[2].title.set_text("Prediction")
+    ax[2].title.set_text("Output")
     ax[2].axis('off')
     # displacement
     ax[0].pcolormesh(xAxis, -yAxis, displacement, shading='auto')
@@ -110,6 +115,20 @@ def find_and_predict(dataset, file_name, model):
     return False
 
 
+def evaluate(y_true, y_pred):
+    dice_score = dice_coefficient(y_true, y_pred)
+    iou_score = iou(y_true, y_pred)
+    precision_m = Precision()
+    precision_m.update_state(y_true, y_pred)
+    recall_m = Recall()
+    recall_m.update_state(y_true, y_pred)
+    
+    print("Mean dice score:", dice_score.numpy())
+    print("Mean IoU:", iou_score.numpy())
+    print("Mean precision:", precision_m.result().numpy())
+    print("Mean recall:", recall_m.result().numpy())
+
+
 def make_and_save_prediction(model, data_dir, save_dir):
     """
     Make a prediction for a sample using a trained model
@@ -119,8 +138,8 @@ def make_and_save_prediction(model, data_dir, save_dir):
         model
         data_dir
         save_dir
-        save_name
     """
+
     f = h5py.File(data_dir, 'r')
     test = f['test']
     x = np.array(test['x'])
@@ -136,9 +155,12 @@ def make_and_save_prediction(model, data_dir, save_dir):
     
     f.close()
 
+    evaluate(y, y_pred)
+
     for idx in range(x.shape[0]):
         name = names[idx].decode('utf-8')
         name = name.split('.')[0]
+        name = name[0:17]
         path = os.path.join(save_dir, name + ".png")
 
         label = np.squeeze(y[idx], axis=-1)
@@ -147,19 +169,19 @@ def make_and_save_prediction(model, data_dir, save_dir):
         # display
         fig, ax = plt.subplots(1, 3, figsize=(24, 6))
         fig.patch.set_facecolor('white')
-        fig.suptitle(name, fontsize=16)
+        fig.suptitle(name, fontsize=18, fontweight='bold')
 
         # label
         ax[1].pcolormesh(xAxis, -yAxis, label, shading='auto', cmap='magma')
-        ax[1].title.set_text("Ground Truth")
+        ax[1].set_title("Ground Truth", fontsize=14, fontweight='bold')
         ax[1].axis('off')
         # prediction
         ax[2].pcolormesh(xAxis, -yAxis, prediction, shading='auto', cmap='magma')
-        ax[2].title.set_text("Prediction")
+        ax[2].set_title("Output", fontsize=14, fontweight='bold')
         ax[2].axis('off')
         # displacement
         ax[0].pcolormesh(xAxis, -yAxis, displacement, shading='auto')
-        ax[0].title.set_text("Standardized Displacement")
+        ax[0].set_title("Standardized Displacement", fontsize=14, fontweight='bold')
         ax[0].axis('off')
         plt.savefig(path)
 
@@ -187,10 +209,13 @@ def make_and_save_prediction_full_cascade(model, ROI_model, data_dir, save_dir):
 
     # make prediction using predicted ROI mask
     y_pred = model.predict([x, ROI_pred])
+
+    evaluate(y, y_pred)
     
     for idx in range(x.shape[0]):
         name = names[idx].decode('utf-8')
         name = name.split('.')[0]
+        name = name[0:17]
         path = os.path.join(save_dir, name + ".png")
 
         label = np.squeeze(y[idx], axis=-1)
@@ -199,19 +224,19 @@ def make_and_save_prediction_full_cascade(model, ROI_model, data_dir, save_dir):
         # display
         fig, ax = plt.subplots(1, 3, figsize=(24, 6))
         fig.patch.set_facecolor('white')
-        fig.suptitle(name, fontsize=16)
+        fig.suptitle(name, fontsize=18, fontweight='bold')
 
         # label
         ax[1].pcolormesh(xAxis, -yAxis, label, shading='auto', cmap='magma')
-        ax[1].title.set_text("Ground Truth")
+        ax[1].set_title("Ground Truth", fontsize=14, fontweight='bold')
         ax[1].axis('off')
         # prediction
         ax[2].pcolormesh(xAxis, -yAxis, prediction, shading='auto', cmap='magma')
-        ax[2].title.set_text("Prediction")
+        ax[2].set_title("Output", fontsize=14, fontweight='bold')
         ax[2].axis('off')
         # displacement
         ax[0].pcolormesh(xAxis, -yAxis, displacement, shading='auto')
-        ax[0].title.set_text("Standardized Displacement")
+        ax[0].set_title("Standardized Displacement", fontsize=14, fontweight='bold')
         ax[0].axis('off')
         plt.savefig(path)
 
@@ -237,7 +262,7 @@ if __name__ == '__main__':
     architecture = config.MODEL_TYPE
 
     # name of a trained model
-    model_name = '20220423-183927_cascade_unet_concat_vent.h5'
+    model_name = '20220427-183517_unet_blood.h5'
     model_path = os.path.join(config.TRAINED_MODELS_DIR, model_name)
     model = load_model(model_path, compile=False)
 
@@ -246,19 +271,22 @@ if __name__ == '__main__':
     else:
         data_dir = os.path.join(config.PROCESSED_DATA_DIR, objective + '_displacementNorm_data.hdf5')
 
-    save_dir = os.path.join(config.INFERENCE_DIR, 
-                            datetime.now().strftime('%Y%m%d-%H%M%S') + '_' + architecture + '_' + objective)
-
     print("Making prediction for", objective, "using model", model_name, "with data", data_dir)
-    if not os.path.isdir(save_dir):
-        os.makedirs(save_dir)
 
-    if FULL_CASCADE:
-        ROI_model_name = ''
+    if config.FULL_CASCADE:
+        print("Full cascade = yes")
+        ROI_model_name = '20220426-235354_unet_plus_plus_brain.h5'
         ROI_model_path = os.path.join(config.TRAINED_MODELS_DIR, ROI_model_name)
         ROI_model = load_model(ROI_model_path, compile=False)
         save_dir = os.path.join(config.INFERENCE_DIR, 
                                 datetime.now().strftime('%Y%m%d-%H%M%S') + '_full_' + architecture + '_' + objective)
+        if not os.path.isdir(save_dir):
+            os.makedirs(save_dir)
         make_and_save_prediction_full_cascade(model, ROI_model, data_dir, save_dir)
     else:
+        print("Full cascade = no")
+        save_dir = os.path.join(config.INFERENCE_DIR, 
+                            datetime.now().strftime('%Y%m%d-%H%M%S') + '_' + architecture + '_' + objective)
+        if not os.path.isdir(save_dir):
+            os.makedirs(save_dir)
         make_and_save_prediction(model, data_dir, save_dir)

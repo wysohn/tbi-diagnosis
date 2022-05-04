@@ -89,11 +89,6 @@ def train(model, stage, hdf5_file: str, checkpoint_dir: str, log_dir: str, batch
             patience=5
         ),
     ]
-    '''
-    EarlyStopping(
-            monitor='val_dice_coefficient',
-            patience=10
-        )'''
     
     # test or validate
     if stage == 'test':
@@ -102,6 +97,7 @@ def train(model, stage, hdf5_file: str, checkpoint_dir: str, log_dir: str, batch
         model.fit(
             training_generator,
             validation_data=validation_generator,
+            batch_size=batch_size,
             callbacks=callback_list,
             epochs=epochs
         )
@@ -156,11 +152,6 @@ def train_cascade(model, stage, hdf5_file: str, checkpoint_dir: str, log_dir: st
             patience=5
         )
     ]
-    '''
-    EarlyStopping(
-            monitor='val_dice_coefficient',
-            patience=10
-        )'''
     
     # validate or test
     if stage == 'test':
@@ -168,6 +159,7 @@ def train_cascade(model, stage, hdf5_file: str, checkpoint_dir: str, log_dir: st
         validation_generator = Cascade_DataGenerator(dataset['test'], batch_size)
         model.fit(training_generator,
                 validation_data=validation_generator,
+                batch_size=batch_size,
                 callbacks=callback_list,
                 epochs=epochs)
     
@@ -221,10 +213,10 @@ if __name__ == '__main__':
     K.clear_session()
     model = create_segmentation_model(input_height=256,
                                       input_width=80, 
-                                      filters=16, 
+                                      filters=32, 
                                       architecture=architecture, 
                                       level=4,
-                                      dropout_rate=0.5)
+                                      dropout_rate=0.3)
 
     plot_model(model)
 
@@ -239,7 +231,7 @@ if __name__ == '__main__':
     # enter 'validate' to validate on 20% of the training set
     # enter 'test' to test on unseen data
     stage = input("Enter training mode ('validate' or 'test'): ")
-    batch_size = 32
+    batch_size = 30
     epochs = 100
 
     if config.MODEL_TYPE == 'cascade_unet_conv' or config.MODEL_TYPE == 'cascade_unet_concat':

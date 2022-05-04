@@ -17,11 +17,18 @@ from tensorflow.keras.metrics import (
     Recall,
     Precision
 )
+from tensorflow.python.keras.callbacks import (
+    ModelCheckpoint, 
+    TensorBoard, 
+    LambdaCallback,
+    ReduceLROnPlateau,
+    EarlyStopping
+)
 from tensorflow.keras.optimizers import Adam
 from keras import Model
 from statistics import mean, pstdev
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 
 def cross_validation(architecture,
@@ -98,10 +105,24 @@ def cross_validation(architecture,
         print("Training for fold", fold_no, "....")
 
         if config.MODEL_TYPE == 'cascade_unet_conv' or config.MODEL_TYPE == 'cascade_unet_concat':
-            history = model.fit([x[train], ROI[train]], y[train], batch_size=batch_size, callbacks=callback_list, epochs=epochs, verbose=0)
+            history = model.fit([x[train], ROI[train]], 
+                                y[train],
+                                validation_data=([x[test], ROI[test]], y[test]),
+                                batch_size=batch_size, 
+                                callbacks=callback_list, 
+                                epochs=epochs, 
+                                verbose=1
+                                )
             score = model.evaluate([x[test], ROI[test]], y[test], verbose=0)
         else:
-            history = model.fit(x[train], y[train], batch_size=batch_size, callbacks=callback_list, epochs=epochs, verbose=0)
+            history = model.fit(x[train], 
+                                y[train],
+                                validation_data=(x[test], y[test]),
+                                batch_size=batch_size, 
+                                callbacks=callback_list, 
+                                epochs=epochs, 
+                                verbose=1
+                                )
             score = model.evaluate(x[test], y[test], verbose=0)
 
         loss_per_fold.append(score[0])
@@ -113,7 +134,9 @@ def cross_validation(architecture,
         fold_no += 1
     
     f.close()
-    
+
+    print("10-fold cross validation result for", config.MODEL_TYPE, "with n =", start_filters,
+            "dropout rate =", dropout, "batch size = ", batch_size)
     print("Mean loss = %f, stdev = %f" %(mean(loss_per_fold), pstdev(loss_per_fold)))
     print("Mean dice = %f, stdev = %f" %(mean(dice_per_fold), pstdev(dice_per_fold)))
     print("Mean iou = %f, stdev = %f" %(mean(iou_per_fold), pstdev(iou_per_fold)))
@@ -126,11 +149,11 @@ def cross_validation(architecture,
 
 
 if __name__ == '__main__':
-    batch_size = 32
-    filters = 32
-    dropout = 0.5
+    batch_size = 30
+    filters = 16
+    dropout = 0.1
     loss_fn = 'soft_dice_loss'
-    epochs = 30
+    epochs = 100
     kfold = 10
 
     mode = config.DATA_MODE
@@ -152,4 +175,5 @@ if __name__ == '__main__':
     else:
         data_dir = os.path.join(config.PROCESSED_DATA_DIR, objective + '_displacementNorm_data.hdf5')
 
+    print("Perform 10-fold cross validation for", architecture, "with data", data_dir)
     cross_validation(architecture, batch_size, filters, dropout, loss_fn, epochs, kfold, data_dir)

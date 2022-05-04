@@ -17,12 +17,12 @@ from tensorflow.python.keras.callbacks import (
     EarlyStopping
 )
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 
 # setup hyperparameter experiment
-HP_FILTERS = hp.HParam('filters', hp.Discrete([8, 16, 32, 64]))
-HP_BATCH_SIZE = hp.HParam('batch size', hp.Discrete([10, 20, 30, 32, 64]))
+HP_FILTERS = hp.HParam('filters', hp.Discrete([8, 16, 32]))
+HP_BATCH_SIZE = hp.HParam('batch size', hp.Discrete([10, 20, 30, 32]))
 HP_DROPOUT = hp.HParam('drop out', hp.Discrete([0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7]))
 METRIC = 'dice_coefficient'
 
@@ -34,12 +34,16 @@ METRIC = 'dice_coefficient'
 mode = config.DATA_MODE
 if mode == 0:
     objective = 'skull'
+    epochs = 60
 elif mode == 1:
     objective = 'blood'
+    epochs = 80
 elif mode == 2:
     objective = 'brain'
+    epochs = 50
 elif mode == 3:
     objective = 'vent'
+    epochs = 70
 else:
     raise ValueError("Enter a valid mode")
 # where to save results
@@ -86,8 +90,6 @@ def train_test_model(hdf5_file, hparams):
         )
     ]
 
-    epochs = 60
-
     # train and evaluate the model
     if config.MODEL_TYPE == 'cascade_unet_conv' or config.MODEL_TYPE == 'cascade_unet_concat':
         ROI = np.array(dev['ROI'])
@@ -95,16 +97,18 @@ def train_test_model(hdf5_file, hparams):
 
         model.fit(
             [X_train, ROI_train], 
-            Y_train, 
+            Y_train,
+            validation_data=([X_test, ROI_test], Y_test),
             callbacks=callback_list, 
             batch_size=hparams[HP_BATCH_SIZE], 
             epochs=epochs
         )
-        _, dice, model.evaluate([X_train, ROI_train], Y_train)
+        _, dice, = model.evaluate([X_test, ROI_test], Y_test)
     else:
         model.fit(
             X_train, 
-            Y_train, 
+            Y_train,
+            validation_data=(X_test, Y_test),
             callbacks=callback_list,
             batch_size=hparams[HP_BATCH_SIZE], 
             epochs=epochs
