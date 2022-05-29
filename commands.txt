@@ -1,0 +1,7 @@
+MODEL_TYPE="unet" \
+PROCESSED_DATA_DIR="../" \
+TARGET_FILE="blood_displacementNorm_data_frame9.hdf5" \
+CHECKPOINT_DIR="./checkpoints" \
+TENSORFLOW_LOG_DIR="./logs" \
+TRAINED_MODELS_DIR="./model_outputs" \
+python3 ./src/train.py
