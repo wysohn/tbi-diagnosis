@@ -27,7 +27,7 @@ CHECKPOINT_DIR = str(os.getenv("CHECKPOINT_DIR"))
     #   mode 1 = blood
     #   mode 2 = brain
     #   mode 3 = ventricle
-DATA_MODE = int(os.getenv('DATA_MODE'))
+DATA_MODE = int(os.getenv('DATA_MODE')) if os.getenv('DATA_MODE') else None
 
 # where to store hyperparameter experiments
 HYPERPARAM = str(os.getenv('HYPERPARAM'))
