@@ -1,4 +1,4 @@
-import keras
+import tensorflow.keras
 import tensorflow as tf
 from tensorflow.keras import backend as K
 from tensorflow.python.keras.callbacks import ModelCheckpoint, TensorBoard, LambdaCallback
@@ -17,7 +17,7 @@ from tensorflow.keras.layers import (
     BatchNormalization
 )
 from tensorflow.keras.optimizers import Adam
-from keras import Model
+from tensorflow.keras import Model
 from tensorflow.keras import models
 from losses import *
 from generator import *

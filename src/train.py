@@ -35,7 +35,7 @@ from tensorflow.keras.metrics import (
 )
 from tensorflow.keras.layers import concatenate
 from tensorflow.keras.optimizers import Adam
-from keras import Model
+from tensorflow.keras import Model
 from statistics import mean, pstdev
 from unet import *
 from losses import *
