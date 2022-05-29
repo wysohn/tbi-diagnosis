@@ -185,28 +185,35 @@ def train_cascade(model, stage, hdf5_file: str, checkpoint_dir: str, log_dir: st
 
 
 if __name__ == '__main__':
-    # objective:
-    #   mode 0 = skull
-    #   mode 1 = blood
-    #   mode 2 = brain
-    #   mode 3 = ventricle
-    mode = config.DATA_MODE
-    if mode == 0:
-        objective = 'skull'
-    elif mode == 1:
-        objective = 'blood'
-    elif mode == 2:
-        objective = 'brain'
-    elif mode == 3:
-        objective = 'vent'
-    else:
-        raise ValueError("Enter a valid mode")
+    # # objective:
+    # #   mode 0 = skull
+    # #   mode 1 = blood
+    # #   mode 2 = brain
+    # #   mode 3 = ventricle
+    # mode = config.DATA_MODE
+    # if mode == 0:
+    #     objective = 'skull'
+    # elif mode == 1:
+    #     objective = 'blood'
+    # elif mode == 2:
+    #     objective = 'brain'
+    # elif mode == 3:
+    #     objective = 'vent'
+    # else:
+    #     raise ValueError("Enter a valid mode")
 
-    if architecture == 'cascade_unet_conv' or architecture == 'cascade_unet_concat':
-        dataFile = objective + '_cascade_displacementNorm_data.hdf5'
-    else:
-        dataFile = objective + '_displacementNorm_data.hdf5'
+    # if architecture == 'cascade_unet_conv' or architecture == 'cascade_unet_concat':
+    #     dataFile = objective + '_cascade_displacementNorm_data.hdf5'
+    # else:
+    #     dataFile = objective + '_displacementNorm_data.hdf5'
 
+    assert(config.TARGET_FILE)
+    assert(config.MODEL_TYPE)
+    assert(config.CHECKPOINT_DIR)
+    assert(config.TENSORFLOW_LOG_DIR)
+    assert(config.TRAINED_MODELS_DIR)
+
+    dataFile = config.TARGET_FILE
     hdf5_dir = os.path.join(config.PROCESSED_DATA_DIR, dataFile)
 
     print("Training for", objective, "with data", dataFile, "and model", architecture)
