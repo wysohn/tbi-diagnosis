@@ -6,8 +6,11 @@ dotenv.load_dotenv()
 # Path to raw data
 RAW_DATA_DIR = str(os.getenv("RAW_DATA_DIR"))
 
-# Path to processed numpy matrices
+# Path to processed numpy matrices (where hdf5 files are stored)
 PROCESSED_DATA_DIR = str(os.getenv("PROCESSED_DATA_DIR"))
+
+# Name of the target hdf5 file to be used for training/testing
+TARGET_FILE = str(os.getenv("TARGET_FILE"))
 
 # Path to trained models
 TRAINED_MODELS_DIR = str(os.getenv("TRAINED_MODELS_DIR"))
