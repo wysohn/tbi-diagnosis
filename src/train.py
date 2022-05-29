@@ -216,7 +216,7 @@ if __name__ == '__main__':
     dataFile = config.TARGET_FILE
     hdf5_dir = os.path.join(config.PROCESSED_DATA_DIR, dataFile)
 
-    print("Training for", objective, "with data", dataFile, "and model", architecture)
+    print("Training for with data", dataFile, "and model", architecture)
     K.clear_session()
     model = create_segmentation_model(input_height=256,
                                       input_width=80, 
