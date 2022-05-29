@@ -255,7 +255,7 @@ if __name__ == '__main__':
             epochs=epochs
         )
     
-    model_saved_name = datetime.now().strftime('%Y%m%d-%H%M%S') + '_' + architecture + '_' + objective +'.h5'
+    model_saved_name = datetime.now().strftime('%Y%m%d-%H%M%S') + '_' + architecture + '_' + dataFile +'.h5'
     save_path = os.path.join(config.TRAINED_MODELS_DIR, model_saved_name)
 
     model.save(save_path)

@@ -1,6 +1,5 @@
 numpy
 h5py
-tensorflow
 tensorboard
 tensorflow-gpu
 Jupyter
