@@ -3,6 +3,8 @@ import dotenv
 
 dotenv.load_dotenv()
 
+CUDA_VISIBLE_DEVICES = str(os.getenv("CUDA_VISIBLE_DEVICES"))
+
 # Path to raw data
 RAW_DATA_DIR = str(os.getenv("RAW_DATA_DIR"))
 

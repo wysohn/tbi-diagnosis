@@ -43,11 +43,6 @@ from metrics import *
 from tensorflow.keras.utils import plot_model
 from sklearn.model_selection import train_test_split
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-
-architecture = config.MODEL_TYPE
-
-
 def train(model, stage, hdf5_file: str, checkpoint_dir: str, log_dir: str, batch_size:int, epochs=50):
     """
     Trains UNet model with data contained in given HDF5 file and saves
@@ -89,7 +84,7 @@ def train(model, stage, hdf5_file: str, checkpoint_dir: str, log_dir: str, batch
             patience=5
         ),
     ]
-    
+
     # test or validate
     if stage == 'test':
         training_generator = DataGenerator(dataset['dev'], batch_size)
@@ -215,21 +210,28 @@ if __name__ == '__main__':
 
     print("Training for with data", dataFile, "and model", architecture)
     K.clear_session()
-    model = create_segmentation_model(input_height=256,
-                                      input_width=80, 
-                                      filters=32, 
-                                      architecture=architecture, 
-                                      level=4,
-                                      dropout_rate=0.3)
+
+    # use both GPU
+    print("Cuda visible devices:", config.CUDA_VISIBLE_DEVICES)
+    print("Devices:", tf.config.list_physical_devices())
+    strategy = tf.distribute.MirroredStrategy()
+    
+    with strategy.scope():
+        model = create_segmentation_model(input_height=256,
+                                        input_width=80, 
+                                        filters=32, 
+                                        architecture=architecture, 
+                                        level=4,
+                                        dropout_rate=0.3)
+
+        model.compile(
+            optimizer=Adam(learning_rate=0.001), 
+            loss=soft_dice_loss(),
+            #loss=combo_loss(alpha=0.7, beta=0.5),
+            metrics=[dice_coefficient, iou, Recall(), Precision()]
+        )
 
     plot_model(model)
-
-    model.compile(
-        optimizer=Adam(learning_rate=0.001), 
-        loss=soft_dice_loss(),
-        #loss=combo_loss(alpha=0.7, beta=0.5),
-        metrics=[dice_coefficient, iou, Recall(), Precision()]
-    )
 
     # get the stage of the training from console: 
     # enter 'validate' to validate on 20% of the training set

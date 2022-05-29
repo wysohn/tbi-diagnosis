@@ -1,3 +1,4 @@
+CUDA_VISIBLE_DEVICES="0,1" \
 MODEL_TYPE="unet" \
 PROCESSED_DATA_DIR="../" \
 TARGET_FILE="blood_displacementNorm_data_frame9.hdf5" \
