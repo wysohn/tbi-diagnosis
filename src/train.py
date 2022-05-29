@@ -213,6 +213,7 @@ if __name__ == '__main__':
     assert(config.TENSORFLOW_LOG_DIR)
     assert(config.TRAINED_MODELS_DIR)
 
+    architecture = config.MODEL_TYPE
     dataFile = config.TARGET_FILE
     hdf5_dir = os.path.join(config.PROCESSED_DATA_DIR, dataFile)
 
@@ -241,7 +242,7 @@ if __name__ == '__main__':
     batch_size = 30
     epochs = 100
 
-    if config.MODEL_TYPE == 'cascade_unet_conv' or config.MODEL_TYPE == 'cascade_unet_concat':
+    if architecture == 'cascade_unet_conv' or architecture == 'cascade_unet_concat':
         train_cascade(model, 
             stage=stage,
             hdf5_file=hdf5_dir,
