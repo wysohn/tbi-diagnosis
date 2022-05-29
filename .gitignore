@@ -6,6 +6,7 @@ trained_models/
 __pycache__
 checkpoints
 logs
+model_outputs
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
