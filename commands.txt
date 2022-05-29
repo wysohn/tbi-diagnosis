@@ -6,5 +6,5 @@ CHECKPOINT_DIR="./checkpoints" \
 TENSORFLOW_LOG_DIR="./logs" \
 TRAINED_MODELS_DIR="./model_outputs" \
 BATCH_SIZE="128" \
-EPOCHS="30" \
+EPOCHS="100" \
 python3 ./src/train.py
