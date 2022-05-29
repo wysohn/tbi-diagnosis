@@ -6,8 +6,8 @@ import math
 import cmath
 import time
 import matplotlib
-import keras
 import tensorflow as tf
+from tensorflow import keras 
 from tensorflow.keras import backend as K 
 from sklearn.model_selection import KFold
 import h5py
