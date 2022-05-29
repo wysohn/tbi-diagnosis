@@ -14,6 +14,9 @@ PROCESSED_DATA_DIR = str(os.getenv("PROCESSED_DATA_DIR"))
 # Name of the target hdf5 file to be used for training/testing
 TARGET_FILE = str(os.getenv("TARGET_FILE"))
 
+# Name of the model file in the TRAINED_MODELS_DIR to be used for performance evaluation
+MODEL_NAME = str(os.getenv("MODEL_NAME"))
+
 # Path to trained models
 TRAINED_MODELS_DIR = str(os.getenv("TRAINED_MODELS_DIR"))
 

@@ -8,3 +8,13 @@ TRAINED_MODELS_DIR="./model_outputs" \
 BATCH_SIZE="128" \
 EPOCHS="100" \
 python3 ./src/train.py
+
+CUDA_VISIBLE_DEVICES="0,1" \
+RAW_DATA_DIR="../dataset_re" \
+INFERENCE_DIR="./inference_outputs" \
+PROCESSED_DATA_DIR="../" \
+TARGET_FILE="blood_displacementNorm_data_frame9.hdf5" \
+MODEL_NAME="20220529-154928_unet_blood_displacementNorm_data_frame9.hdf5.h5" \
+TENSORFLOW_LOG_DIR="./logs" \
+TRAINED_MODELS_DIR="./model_outputs" \
+python3 ./src/predict.py

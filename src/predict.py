@@ -17,8 +17,6 @@ from tensorflow.keras.metrics import (
     Precision
 )
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
-
 # extract generic axis information
 axisPath = config.PROCESSED_DATA_DIR
 rand_input_file = os.path.join(config.RAW_DATA_DIR, 'DoD001','DoD001_Ter030_LC5_Displacement_Normalized_3.mat')
@@ -242,36 +240,37 @@ def make_and_save_prediction_full_cascade(model, ROI_model, data_dir, save_dir):
 
 
 if __name__ == '__main__':
-    # objective:
-    #   mode 0 = skull
-    #   mode 1 = blood
-    #   mode 2 = brain
-    #   mode 3 = ventricle
-    mode = config.DATA_MODE
-    if mode == 0:
-        objective = 'skull'
-    elif mode == 1:
-        objective = 'blood'
-    elif mode == 2:
-        objective = 'brain'
-    elif mode == 3:
-        objective = 'vent'
-    else:
-        raise ValueError("Enter a valid mode")
-    
-    architecture = config.MODEL_TYPE
+    # # objective:
+    # #   mode 0 = skull
+    # #   mode 1 = blood
+    # #   mode 2 = brain
+    # #   mode 3 = ventricle
+    # mode = config.DATA_MODE
+    # if mode == 0:
+    #     objective = 'skull'
+    # elif mode == 1:
+    #     objective = 'blood'
+    # elif mode == 2:
+    #     objective = 'brain'
+    # elif mode == 3:
+    #     objective = 'vent'
+    # else:
+    #     raise ValueError("Enter a valid mode")
 
     # name of a trained model
-    model_name = '20220427-183517_unet_blood.h5'
+    model_name = config.MODEL_NAME
     model_path = os.path.join(config.TRAINED_MODELS_DIR, model_name)
     model = load_model(model_path, compile=False)
 
-    if config.MODEL_TYPE == 'cascade_unet_conv' or config.MODEL_TYPE == 'cascade_unet_concat':
-        data_dir = os.path.join(config.PROCESSED_DATA_DIR, objective + '_cascade_displacementNorm_data.hdf5')
-    else:
-        data_dir = os.path.join(config.PROCESSED_DATA_DIR, objective + '_displacementNorm_data.hdf5')
+    dataFile = config.TARGET_FILE
+    data_dir = os.path.join(config.PROCESSED_DATA_DIR, dataFile)
 
-    print("Making prediction for", objective, "using model", model_name, "with data", data_dir)
+    # if architecture == 'cascade_unet_conv' or architecture == 'cascade_unet_concat':
+    #     data_dir = os.path.join(config.PROCESSED_DATA_DIR, objective + '_cascade_displacementNorm_data.hdf5')
+    # else:
+    #     data_dir = os.path.join(config.PROCESSED_DATA_DIR, objective + '_displacementNorm_data.hdf5')
+
+    print("Making prediction using model", model_name, "with data", data_dir)
 
     if config.FULL_CASCADE:
         print("Full cascade = yes")
@@ -279,14 +278,14 @@ if __name__ == '__main__':
         ROI_model_path = os.path.join(config.TRAINED_MODELS_DIR, ROI_model_name)
         ROI_model = load_model(ROI_model_path, compile=False)
         save_dir = os.path.join(config.INFERENCE_DIR, 
-                                datetime.now().strftime('%Y%m%d-%H%M%S') + '_full_' + architecture + '_' + objective)
+                                datetime.now().strftime('%Y%m%d-%H%M%S') + '_full_' + dataFile)
         if not os.path.isdir(save_dir):
             os.makedirs(save_dir)
         make_and_save_prediction_full_cascade(model, ROI_model, data_dir, save_dir)
     else:
         print("Full cascade = no")
         save_dir = os.path.join(config.INFERENCE_DIR, 
-                            datetime.now().strftime('%Y%m%d-%H%M%S') + '_' + architecture + '_' + objective)
+                            datetime.now().strftime('%Y%m%d-%H%M%S') + '_' + dataFile)
         if not os.path.isdir(save_dir):
             os.makedirs(save_dir)
         make_and_save_prediction(model, data_dir, save_dir)
