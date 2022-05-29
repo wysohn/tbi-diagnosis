@@ -35,6 +35,11 @@ DATA_MODE = int(os.getenv('DATA_MODE')) if os.getenv('DATA_MODE') else None
 # where to store hyperparameter experiments
 HYPERPARAM = str(os.getenv('HYPERPARAM'))
 
+# hyper parameters
+BATCH_SIZE = int(os.getenv('BATCH_SIZE')) if os.getenv('BATCH_SIZE') else None
+
+EPOCHS = int(os.getenv('EPOCHS')) if os.getenv('EPOCHS') else None
+
 # the type of model
     # unet
     # unet_plus_plus

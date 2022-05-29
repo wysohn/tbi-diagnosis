@@ -207,15 +207,11 @@ if __name__ == '__main__':
     # else:
     #     dataFile = objective + '_displacementNorm_data.hdf5'
 
-    assert(config.TARGET_FILE)
-    assert(config.MODEL_TYPE)
-    assert(config.CHECKPOINT_DIR)
-    assert(config.TENSORFLOW_LOG_DIR)
-    assert(config.TRAINED_MODELS_DIR)
-
     architecture = config.MODEL_TYPE
     dataFile = config.TARGET_FILE
     hdf5_dir = os.path.join(config.PROCESSED_DATA_DIR, dataFile)
+    batch_size = config.BATCH_SIZE
+    epochs = config.EPOCHS
 
     print("Training for with data", dataFile, "and model", architecture)
     K.clear_session()
@@ -239,8 +235,6 @@ if __name__ == '__main__':
     # enter 'validate' to validate on 20% of the training set
     # enter 'test' to test on unseen data
     stage = input("Enter training mode ('validate' or 'test'): ")
-    batch_size = 30
-    epochs = 100
 
     if architecture == 'cascade_unet_conv' or architecture == 'cascade_unet_concat':
         train_cascade(model, 
