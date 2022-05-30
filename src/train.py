@@ -219,7 +219,7 @@ if __name__ == '__main__':
     with strategy.scope():
         model = create_segmentation_model(input_height=256,
                                         input_width=80, 
-                                        filters=32, 
+                                        filters=config.NUM_FILTERS, 
                                         architecture=architecture, 
                                         level=4,
                                         dropout_rate=config.DROPOUT_RATE)

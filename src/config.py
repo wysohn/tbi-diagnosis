@@ -47,6 +47,8 @@ EPOCHS = int(os.getenv('EPOCHS')) if os.getenv('EPOCHS') else None
 
 DROPOUT_RATE = float(os.getenv('DROPOUT_RATE')) if os.getenv('DROPOUT_RATE') else None
 
+NUM_FILTERS = int(os.getenv('NUM_FILTERS')) if os.getenv('NUM_FILTERS') else None
+
 # the type of model
     # unet
     # unet_plus_plus
