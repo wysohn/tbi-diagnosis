@@ -6,8 +6,8 @@ import math
 import cmath
 import time
 import matplotlib
-import keras
 import tensorflow as tf
+from tensorflow import keras 
 from tensorflow.keras import backend as K 
 from sklearn.model_selection import KFold
 import h5py
@@ -35,18 +35,13 @@ from tensorflow.keras.metrics import (
 )
 from tensorflow.keras.layers import concatenate
 from tensorflow.keras.optimizers import Adam
-from keras import Model
+from tensorflow.keras import Model
 from statistics import mean, pstdev
 from unet import *
 from losses import *
 from metrics import *
 from tensorflow.keras.utils import plot_model
 from sklearn.model_selection import train_test_split
-
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-
-architecture = config.MODEL_TYPE
-
 
 def train(model, stage, hdf5_file: str, checkpoint_dir: str, log_dir: str, batch_size:int, epochs=50):
     """
@@ -89,7 +84,7 @@ def train(model, stage, hdf5_file: str, checkpoint_dir: str, log_dir: str, batch
             patience=5
         ),
     ]
-    
+
     # test or validate
     if stage == 'test':
         training_generator = DataGenerator(dataset['dev'], batch_size)
@@ -185,56 +180,65 @@ def train_cascade(model, stage, hdf5_file: str, checkpoint_dir: str, log_dir: st
 
 
 if __name__ == '__main__':
-    # objective:
-    #   mode 0 = skull
-    #   mode 1 = blood
-    #   mode 2 = brain
-    #   mode 3 = ventricle
-    mode = config.DATA_MODE
-    if mode == 0:
-        objective = 'skull'
-    elif mode == 1:
-        objective = 'blood'
-    elif mode == 2:
-        objective = 'brain'
-    elif mode == 3:
-        objective = 'vent'
-    else:
-        raise ValueError("Enter a valid mode")
+    # # objective:
+    # #   mode 0 = skull
+    # #   mode 1 = blood
+    # #   mode 2 = brain
+    # #   mode 3 = ventricle
+    # mode = config.DATA_MODE
+    # if mode == 0:
+    #     objective = 'skull'
+    # elif mode == 1:
+    #     objective = 'blood'
+    # elif mode == 2:
+    #     objective = 'brain'
+    # elif mode == 3:
+    #     objective = 'vent'
+    # else:
+    #     raise ValueError("Enter a valid mode")
 
-    if architecture == 'cascade_unet_conv' or architecture == 'cascade_unet_concat':
-        dataFile = objective + '_cascade_displacementNorm_data.hdf5'
-    else:
-        dataFile = objective + '_displacementNorm_data.hdf5'
+    # if architecture == 'cascade_unet_conv' or architecture == 'cascade_unet_concat':
+    #     dataFile = objective + '_cascade_displacementNorm_data.hdf5'
+    # else:
+    #     dataFile = objective + '_displacementNorm_data.hdf5'
 
+    architecture = config.MODEL_TYPE
+    dataFile = config.TARGET_FILE
     hdf5_dir = os.path.join(config.PROCESSED_DATA_DIR, dataFile)
+    batch_size = config.BATCH_SIZE
+    epochs = config.EPOCHS
 
-    print("Training for", objective, "with data", dataFile, "and model", architecture)
+    print("Training for with data", dataFile, "and model", architecture)
     K.clear_session()
-    model = create_segmentation_model(input_height=256,
-                                      input_width=80, 
-                                      filters=32, 
-                                      architecture=architecture, 
-                                      level=4,
-                                      dropout_rate=0.3)
+
+    # use both GPU
+    print("Cuda visible devices:", config.CUDA_VISIBLE_DEVICES)
+    print("Devices:", tf.config.list_physical_devices())
+    strategy = tf.distribute.MirroredStrategy()
+    
+    with strategy.scope():
+        model = create_segmentation_model(input_height=256,
+                                        input_width=80, 
+                                        filters=32, 
+                                        architecture=architecture, 
+                                        level=4,
+                                        dropout_rate=0.3)
+
+        model.compile(
+            optimizer=Adam(learning_rate=0.001), 
+            loss=soft_dice_loss(),
+            #loss=combo_loss(alpha=0.7, beta=0.5),
+            metrics=[dice_coefficient, iou, Recall(), Precision()]
+        )
 
     plot_model(model)
-
-    model.compile(
-        optimizer=Adam(learning_rate=0.001), 
-        loss=soft_dice_loss(),
-        #loss=combo_loss(alpha=0.7, beta=0.5),
-        metrics=[dice_coefficient, iou, Recall(), Precision()]
-    )
 
     # get the stage of the training from console: 
     # enter 'validate' to validate on 20% of the training set
     # enter 'test' to test on unseen data
     stage = input("Enter training mode ('validate' or 'test'): ")
-    batch_size = 30
-    epochs = 100
 
-    if config.MODEL_TYPE == 'cascade_unet_conv' or config.MODEL_TYPE == 'cascade_unet_concat':
+    if architecture == 'cascade_unet_conv' or architecture == 'cascade_unet_concat':
         train_cascade(model, 
             stage=stage,
             hdf5_file=hdf5_dir,
@@ -253,7 +257,7 @@ if __name__ == '__main__':
             epochs=epochs
         )
     
-    model_saved_name = datetime.now().strftime('%Y%m%d-%H%M%S') + '_' + architecture + '_' + objective +'.h5'
+    model_saved_name = datetime.now().strftime('%Y%m%d-%H%M%S') + '_' + architecture + '_' + dataFile +'.h5'
     save_path = os.path.join(config.TRAINED_MODELS_DIR, model_saved_name)
 
     model.save(save_path)

@@ -1,0 +1,11 @@
+numpy
+h5py
+tensorboard
+tensorflow-gpu
+Jupyter
+keras
+pydot
+matplotlib
+opencv-python
+scikit-learn
+scipy

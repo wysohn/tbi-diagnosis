@@ -4,6 +4,10 @@ trained_models/
 .ipynb_checkpoints/
 .DS_Store
 __pycache__
+checkpoints
+logs
+model_outputs
+inference_outputs
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
