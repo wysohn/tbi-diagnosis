@@ -74,10 +74,10 @@ def train(model, stage, hdf5_file: str, checkpoint_dir: str, log_dir: str, batch
             log_dir=log_dir, 
             write_images=True
         ),
-        ModelCheckpoint(
-            weights_file, 
-            verbose=1
-        ),
+        # ModelCheckpoint(
+        #     weights_file, 
+        #     verbose=1
+        # ),
         ReduceLROnPlateau(
             monitor='val_loss',
             factor=0.1,
@@ -222,7 +222,7 @@ if __name__ == '__main__':
                                         filters=32, 
                                         architecture=architecture, 
                                         level=4,
-                                        dropout_rate=0.3)
+                                        dropout_rate=config.DROPOUT_RATE)
 
         model.compile(
             optimizer=Adam(learning_rate=0.001), 

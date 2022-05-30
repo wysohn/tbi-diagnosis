@@ -45,6 +45,8 @@ BATCH_SIZE = int(os.getenv('BATCH_SIZE')) if os.getenv('BATCH_SIZE') else None
 
 EPOCHS = int(os.getenv('EPOCHS')) if os.getenv('EPOCHS') else None
 
+DROPOUT_RATE = float(os.getenv('DROPOUT_RATE')) if os.getenv('DROPOUT_RATE') else None
+
 # the type of model
     # unet
     # unet_plus_plus

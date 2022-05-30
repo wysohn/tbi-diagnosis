@@ -7,6 +7,7 @@ TENSORFLOW_LOG_DIR="./logs" \
 TRAINED_MODELS_DIR="./model_outputs" \
 BATCH_SIZE="128" \
 EPOCHS="100" \
+DROPOUT_RATE="0.0" \
 python3 ./src/train.py
 
 CUDA_VISIBLE_DEVICES="0,1" \
