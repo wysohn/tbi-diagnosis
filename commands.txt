@@ -1,14 +1,14 @@
-CUDA_VISIBLE_DEVICES="0,1" \
+CUDA_VISIBLE_DEVICES="0" \
 MODEL_TYPE="unet" \
 PROCESSED_DATA_DIR="../" \
-TARGET_FILE="blood_displacementNorm_data_frame9.hdf5" \
+TARGET_FILE="blood_displacementNorm_data_frame7.hdf5" \
 CHECKPOINT_DIR="./checkpoints" \
 TENSORFLOW_LOG_DIR="./logs" \
 TRAINED_MODELS_DIR="./model_outputs" \
-BATCH_SIZE="32" \
+BATCH_SIZE="20" \
 EPOCHS="100" \
 DROPOUT_RATE="0.1" \
-NUM_FILTERS="16" \
+NUM_FILTERS="32" \
 python3 ./src/train.py
 
 CUDA_VISIBLE_DEVICES="0,1" \
